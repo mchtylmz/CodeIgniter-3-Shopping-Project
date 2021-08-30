@@ -8,3 +8,7 @@ git branch -M main
 git remote add origin https://github.com/mchtylmz/CodeIgniter-3-Shopping-Project.git
 git push -u origin main
 ```
+
+```sh
+This project not yet finish
+```
