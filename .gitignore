@@ -8,7 +8,10 @@ assets/*
 !application/index.html
 
 application/core/*
+application/config/autoload.php
+application/config/config.php
 application/config/database.php
+application/config/routes.php
 
 application/cache/*
 !application/cache/index.html
