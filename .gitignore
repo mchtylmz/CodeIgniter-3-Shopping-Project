@@ -5,6 +5,8 @@ application/*
 assets/*
 #-------------------------
 
+!application/index.html
+
 application/core/*
 application/config/database.php
 
@@ -14,8 +16,8 @@ application/cache/*
 application/logs/*
 !application/logs/index.html
 
-application/libraries/*v
-application/third_party/*v
+application/libraries/*
+application/third_party/*
 
 !application/*/.htaccess
 !application/*/index.html
