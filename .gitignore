@@ -1,7 +1,11 @@
 .DS_Store
 
 #-------------------------
-application/*
+application/config/*
+application/controllers/*
+application/helpers/*
+application/models/*
+application/views/*
 assets/*
 #-------------------------
 

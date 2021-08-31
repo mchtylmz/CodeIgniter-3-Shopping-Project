@@ -1,0 +1,25 @@
+body {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#checkout-form table td {
+    vertical-align: top;
+}
+
+#checkout-form .expire-date {
+	border-collapse:collapse;
+}
+
+#checkout-form .expire-date td {
+	padding:0;
+}
+
+#checkout-form .expire-date td:nth-child(2) {
+  padding-left:7px;
+}
+
+#checkout-form label.error {
+    color: #ff0000;
+    display: block;
+    font-size: 11px;
+}
