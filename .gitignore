@@ -5,7 +5,6 @@ application/config/*
 application/controllers/*
 application/helpers/*
 application/models/*
-application/views/*
 assets/*
 #-------------------------
 
