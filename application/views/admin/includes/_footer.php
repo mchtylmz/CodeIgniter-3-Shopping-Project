@@ -149,6 +149,38 @@
     });
     var sweetalert_ok = "<?= trans("ok"); ?>";
     var sweetalert_cancel = "<?= trans("cancel"); ?>";
+
+    // change_status_for_selected_products
+    function change_status_for_selected_products(status, message) {
+        swal({
+            text: message,
+            icon: "warning",
+            buttons: true,
+            buttons: [sweetalert_cancel, sweetalert_ok],
+            dangerMode: true,
+        }).then(function (willAction) {
+            if (willAction) {
+                var product_ids = [];
+                $("input[name='checkbox-table']:checked").each(function () {
+                    product_ids.push(this.value);
+                });
+                var data = {
+                    'product_ids': product_ids,
+                    'status': status
+                };
+                data[csfr_token_name] = $.cookie(csfr_cookie_name);
+                $.ajax({
+                    type: "POST",
+                    url: base_url + "ajax_controller/change_status_products",
+                    data: data,
+                    success: function (response) {
+                        location.reload();
+                    }
+                });
+            }
+        });
+    };
 </script>
+<script>var mc20bt99_config = {base_url: "<?= base_url(); ?>", lang_base_url: "<?= lang_base_url(); ?>", sys_lang_id: "<?= $this->selected_lang->id; ?>", thousands_separator: "<?= $this->thousands_separator; ?>", csfr_token_name: "<?= $this->security->get_csrf_token_name(); ?>", csfr_cookie_name: "<?= $this->config->item('csrf_cookie_name'); ?>", txt_all: "<?= trans("all"); ?>", txt_no_results_found: "<?= trans("no_results_found"); ?>", sweetalert_ok: "<?= trans("ok"); ?>", sweetalert_cancel: "<?= trans("cancel"); ?>", msg_accept_terms: "<?= trans("msg_accept_terms"); ?>", cart_route: "<?= !empty($this->routes) && !empty($this->routes->cart) ? $this->routes->cart : ''; ?>", slider_fade_effect: "<?= ($this->general_settings->slider_effect == "fade") ? 1 : 0; ?>", is_recaptcha_enabled: "<?= !empty($recaptcha_status) && $recaptcha_status == true ? "true" : "false" ?>", rtl: <?= $this->rtl == "true" ? true : "false" ?>};if(mc20bt99_config.rtl==1){mc20bt99_config.rtl=true;}</script>
 </body>
 </html>

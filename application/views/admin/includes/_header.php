@@ -218,7 +218,7 @@
                 </li>
                 */ ?>
                 <li class="header"><?php echo trans("products"); ?></li>
-                <li class="treeview<?php is_admin_nav_active(['products', 'special-offers', 'pending-products', 'hidden-products', 'expired-products', 'drafts', 'deleted-products', 'product-details', 'sold-products']); ?>">
+                <li class="treeview<?php is_admin_nav_active(['products', 'special-offers', 'nostock-products', 'pending-products', 'hidden-products', 'expired-products', 'drafts', 'deleted-products', 'product-details', 'sold-products']); ?>">
                     <a href="#">
                         <i class="fa fa-shopping-basket angle-left" aria-hidden="true"></i>
                         <span><?php echo trans("products"); ?></span>
@@ -229,13 +229,14 @@
                         <?php /*
                         <li class="nav-special-offers"><a href="<?php echo admin_url(); ?>special-offers"> <?php echo trans("special_offers"); ?></a></li>
                         <li class="nav-pending-products"><a href="<?php echo admin_url(); ?>pending-products"> <?php echo trans("pending_products"); ?></a></li>
-                        <li class="nav-hidden-products"><a href="<?php echo admin_url(); ?>hidden-products"> <?php echo trans("hidden_products"); ?></a></li>
                         */ ?>
                         <?php if ($this->general_settings->membership_plans_system == 1): ?>
                             <li class="nav-expired-products"><a href="<?php echo admin_url(); ?>expired-products"> <?php echo trans("expired_products"); ?></a></li>
                         <?php endif; ?>
                         <li class="nav-sold-products"><a href="<?php echo admin_url(); ?>sold-products"> <?php echo trans("sold_products"); ?></a></li>
-                        <li class="nav-drafts"><a href="<?php echo admin_url(); ?>drafts"> <?php echo trans("drafts"); ?></a></li>
+                        <li class="nav-stock-products"><a href="<?php echo admin_url(); ?>nostock-products"> <?php echo trans("nostock_products"); ?></a></li>
+                        <li class="nav-drafts"><a href="<?php echo admin_url(); ?>drafts"> <?php echo trans("drafts_products"); ?></a></li>
+                        <li class="nav-hidden-products"><a href="<?php echo admin_url(); ?>hidden-products"> <?php echo trans("hidden_products"); ?></a></li>
                         <li class="nav-deleted-products"><a href="<?php echo admin_url(); ?>deleted-products"> <?php echo trans("deleted_products"); ?></a></li>
                         <?php /*
                         <li><a href="<?php echo generate_dash_url("add_product"); ?>" target="_blank"> <?php echo trans("add_product"); ?></a></li>
@@ -464,14 +465,17 @@
                 </li>
                 */ ?>
                 <?php if (active_nebimv3()): ?>
-                <li class="header text-uppercase"><?php echo trans("logs"); ?></li>
-                <li class="treeview<?php is_admin_nav_active(['nebim-logs', 'queue-logs']); ?>">
+                <li class="header text-uppercase">Nebim</li>
+                <li class="treeview<?php is_admin_nav_active(['nebim-logs', 'queue-logs', 'nebim-products', 'manuel-sync', 'image-sync']); ?>">
                     <a href="#">
                         <i class="fa fa-align-left"></i>
-                        <span><?php echo trans("nebim_logs"); ?></span>
+                        <span><?php echo trans("nebim_actions"); ?></span>
                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                     </a>
                     <ul class="treeview-menu">
+                        <li class="nav-products"><a href="<?php echo admin_url(); ?>nebim-products"> <?php echo trans("nebim_products"); ?></a></li>
+                        <li class="nav-manuel"><a href="<?php echo admin_url(); ?>manuel-sync"> <?php echo trans("manuel_sync"); ?></a></li>
+                        <li class="nav-img-logs"><a href="<?php echo admin_url(); ?>image-sync"> <?php echo trans("image_sync"); ?></a></li>
                         <li class="nav-nebim-logs"><a href="<?php echo admin_url(); ?>nebim-logs"> <?php echo trans("procedure_logs"); ?></a></li>
                         <li class="nav-queue-logs"><a href="<?php echo admin_url(); ?>queue-logs"> <?php echo trans("queue_logs"); ?></a></li>
                     </ul>

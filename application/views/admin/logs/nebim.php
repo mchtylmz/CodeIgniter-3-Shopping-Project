@@ -1,5 +1,9 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-
+<style media="screen">
+  tr,th,td {
+    text-align: center !important;
+  }
+</style>
 <div class="box">
     <div class="box-header with-border">
         <div class="left">
@@ -17,89 +21,83 @@
             <div class="col-sm-12">
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped">
+                      <div class="row table-filter-container">
+                          <div class="col-sm-12">
+                              <?php echo form_open('', ['method' => 'GET']); ?>
+
+                              <div class="item-table-filter">
+                                  <label><?php echo trans("log_procedure"); ?></label>
+                                  <input name="name" class="form-control" placeholder="...." type="text" value="<?php echo html_escape($this->input->get('name', true)); ?>" <?php echo ($this->rtl == true) ? 'dir="rtl"' : ''; ?>>
+                              </div>
+
+                              <div class="item-table-filter" style="width: 120px; min-width: 120px;">
+                                  <label><?php echo trans("status"); ?></label>
+                                  <select name="status" class="form-control">
+                                      <option value="">Tümü</option>
+                                      <option value="1" <?php echo ($this->input->get('status', true) == '1') ? 'selected' : ''; ?>>Başarılı</option>
+                                      <option value="2" <?php echo ($this->input->get('status', true) == '2') ? 'selected' : ''; ?>>Başarısız</option>
+                                  </select>
+                              </div>
+
+                              <div class="item-table-filter">
+                                  <label><?php echo trans("search"); ?></label>
+                                  <input name="q" class="form-control" placeholder="...." type="search" value="<?php echo html_escape($this->input->get('q', true)); ?>" <?php echo ($this->rtl == true) ? 'dir="rtl"' : ''; ?>>
+                              </div>
+
+                              <input type="hidden" name="user" value="<?=$this->input->get('user', true)?>">
+                              <div class="item-table-filter md-top-10" style="width: 65px; min-width: 65px;">
+                                  <label style="display: block">&nbsp;</label>
+                                  <button type="submit" class="btn bg-purple"><?php echo trans("filter"); ?></button>
+                              </div>
+                              <?php echo form_close(); ?>
+                          </div>
+                      </div>
                         <thead>
                         <tr role="row">
                             <th width="20"><?php echo trans("id"); ?></th>
-                            <th><?php echo trans("image"); ?></th>
-                            <th><?php echo trans("username"); ?></th>
-                            <th><?php echo trans("email"); ?></th>
-                            <th><?php echo trans("status"); ?></th>
-                            <th><?php echo str_replace(":", "", trans("last_seen")); ?></th>
-                            <th><?php echo trans("date"); ?></th>
-                            <th class="max-width-120"><?php echo trans("options"); ?></th>
+                            <th><?php echo trans("log_procedure"); ?></th>
+                            <th><?php echo trans("log_data"); ?></th>
+                            <th><?php echo trans("log_response"); ?></th>
+                            <th><?php echo trans("update"); ?></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($users as $user): ?>
+                        <?php foreach ($nebim_logs as $log): ?>
                             <tr>
                                 <td>
-                                  <?php echo html_escape($user->id); ?>
-                                  <?php if ($user->nebim_code): ?>
-                                    <br> <?php echo html_escape($user->nebim_code); ?>
+                                  <?=$log->import?>
+                                </td>
+                                <td>
+                                    <?=$log->name?>
+                                </td>
+                                <td>
+                                  <?php if ($log->data): ?>
+                                      <?php if (strpos($log->data, "Exception") !== false || strpos($log->data,"error") !== false): ?>
+                                        <label class="label label-danger"><i class="fa fa-times"></i></label>
+                                      <?php else: ?>
+                                        <label class="label label-success"><i class="fa fa-check"></i></label>
+                                      <?php endif; ?>
+                                  <?php else: ?>
+                                      <label class="label label-warning"><i class="fa fa-square"></i></label>
                                   <?php endif; ?>
                                 </td>
                                 <td>
-                                    <a href="<?php echo generate_profile_url($user->slug); ?>" target="_blank" class="table-link">
-                                        <img src="<?php echo get_user_avatar($user); ?>" alt="user" class="img-responsive" style="width: 50px;">
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="<?php echo generate_profile_url($user->slug); ?>" target="_blank" class="table-link"><?php echo html_escape($user->username); ?></a>
-                                </td>
-                                <td>
-                                    <?php echo html_escape($user->email);
-                                    if ($user->email_status == 1): ?>
-                                        <small class="text-success">(<?php echo trans("confirmed"); ?>)</small>
+                                  <?php if ($log->response): ?>
+                                    <?php if (strpos($log->response, "Exception") !== false || strpos($log->response,"error") !== false): ?>
+                                      <label class="label label-danger"><i class="fa fa-times"></i></label>
                                     <?php else: ?>
-                                        <small class="text-danger">(<?php echo trans("unconfirmed"); ?>)</small>
+                                      <label class="label label-success"><i class="fa fa-check"></i></label>
                                     <?php endif; ?>
+                                  <?php else: ?>
+                                      <label class="label label-warning"><i class="fa fa-square"></i></label>
+                                  <?php endif; ?>
                                 </td>
-                                <td>
-                                    <?php if ($user->banned == 0): ?>
-                                        <label class="label label-success"><?php echo trans('active'); ?></label>
-                                    <?php else: ?>
-                                        <label class="label label-danger"><?php echo trans('banned'); ?></label>
-                                    <?php endif; ?>
-                                </td>
-                                <td><?php echo time_ago($user->last_seen); ?></td>
-                                <td><?php echo formatted_date($user->created_at); ?></td>
-                                <td>
-                                    <div class="dropdown">
-                                        <button class="btn bg-purple dropdown-toggle btn-select-option"
-                                                type="button"
-                                                data-toggle="dropdown"><?php echo trans('select_option'); ?>
-                                            <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu options-dropdown">
-                                            <li>
-                                                <a href="javascript:void(0)" onclick="open_close_user_shop(<?php echo $user->id; ?>,'');"><i class="fa fa-cart-plus option-icon"></i><?php echo trans('open_user_shop'); ?></a>
-                                            </li>
-                                            <li>
-                                                <?php if ($user->email_status != 1): ?>
-                                                    <a href="javascript:void(0)" onclick="confirm_user_email(<?php echo $user->id; ?>);"><i class="fa fa-check option-icon"></i><?php echo trans('confirm_user_email'); ?></a>
-                                                <?php endif; ?>
-                                            </li>
-                                            <li>
-                                                <?php if ($user->banned == 0): ?>
-                                                    <a href="javascript:void(0)" onclick="ban_remove_ban_user(<?php echo $user->id; ?>);"><i class="fa fa-stop-circle option-icon"></i><?php echo trans('ban_user'); ?></a>
-                                                <?php else: ?>
-                                                    <a href="javascript:void(0)" onclick="ban_remove_ban_user(<?php echo $user->id; ?>);"><i class="fa fa-circle option-icon"></i><?php echo trans('remove_user_ban'); ?></a>
-                                                <?php endif; ?>
-                                            </li>
-                                            <li>
-                                                <a href="<?php echo admin_url(); ?>edit-user/<?php echo $user->id; ?>"><i class="fa fa-edit option-icon"></i><?php echo trans('edit_user'); ?></a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0)" onclick="delete_item('membership_controller/delete_user_post','<?php echo $user->id; ?>','<?php echo trans("confirm_user"); ?>');"><i class="fa fa-trash option-icon"></i><?php echo trans('delete'); ?></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </td>
+                                <td><?php echo formatted_date($log->created_at); ?></td>
                             </tr>
                         <?php endforeach; ?>
                         </tbody>
                     </table>
-                    <?php if (empty($users)): ?>
+                    <?php if (empty($nebim_logs)): ?>
                         <p class="text-center text-muted"><?= trans("no_records_found"); ?></p>
                     <?php endif; ?>
                 </div>

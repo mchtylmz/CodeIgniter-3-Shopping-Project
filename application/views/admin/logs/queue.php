@@ -1,5 +1,9 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-
+<style media="screen">
+  tr, td:not(.text-left), th:not(.text-left) {
+    text-align: center;
+  }
+</style>
 <div class="box">
     <div class="box-header with-border">
         <div class="left">
@@ -17,89 +21,145 @@
             <div class="col-sm-12">
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped">
+                      <div class="row table-filter-container">
+                          <div class="col-sm-12">
+                              <?php echo form_open('', ['method' => 'GET']); ?>
+
+                              <div class="item-table-filter" style="width: 132px; min-width: 132px;">
+                                  <label><?php echo trans("queue_method"); ?></label>
+                                  <select name="method" class="form-control">
+                                      <option value="">Tümü</option>
+                                      <option value="user_id" <?php echo ($this->input->get('method', true) == 'user_id') ? 'selected' : ''; ?>>Kullanıcı</option>
+                                      <option value="order_id" <?php echo ($this->input->get('method', true) == 'order_id') ? 'selected' : ''; ?>>Sipariş</option>
+                                  </select>
+                              </div>
+
+                              <div class="item-table-filter" style="width: 132px; min-width: 132px;">
+                                  <label><?php echo trans("status"); ?></label>
+                                  <select name="status" class="form-control">
+                                      <option value="">Tümü</option>
+                                      <option value="1" <?=$this->input->get('status', true) == '1' ? 'selected' : ''?>>waiting</option>
+                                      <option value="2" <?=$this->input->get('status', true) == '2' ? 'selected' : ''?>>processing</option>
+                                      <option value="3" <?=$this->input->get('status', true) == '3' ? 'selected' : ''?>>complete</option>
+                                      <option value="4" <?=$this->input->get('status', true) == '4' ? 'selected' : ''?>>failed</option>
+                                      <option value="5" <?=$this->input->get('status', true) == '5' ? 'selected' : ''?>>pass</option>
+                                  </select>
+                              </div>
+
+                              <div class="item-table-filter" style="min-width: 180px;">
+                                  <label><?php echo trans("search"); ?></label>
+                                  <input name="q" class="form-control" placeholder="...." type="search" value="<?php echo html_escape($this->input->get('q', true)); ?>" <?php echo ($this->rtl == true) ? 'dir="rtl"' : ''; ?>>
+                              </div>
+
+                              <input type="hidden" name="user" value="<?=$this->input->get('user', true)?>">
+                              <div class="item-table-filter md-top-10" style="width: 65px; min-width: 65px;">
+                                  <label style="display: block">&nbsp;</label>
+                                  <button type="submit" class="btn bg-purple"><?php echo trans("filter"); ?></button>
+                              </div>
+                              <?php echo form_close(); ?>
+                          </div>
+                      </div>
                         <thead>
                         <tr role="row">
                             <th width="20"><?php echo trans("id"); ?></th>
-                            <th><?php echo trans("image"); ?></th>
-                            <th><?php echo trans("username"); ?></th>
-                            <th><?php echo trans("email"); ?></th>
+                            <th><?php echo trans("queue_method"); ?></th>
+                            <th class="text-left"><?php echo trans("queue_detail"); ?></th>
+                            <th><?php echo trans("queue_attempt"); ?></th>
                             <th><?php echo trans("status"); ?></th>
-                            <th><?php echo str_replace(":", "", trans("last_seen")); ?></th>
-                            <th><?php echo trans("date"); ?></th>
-                            <th class="max-width-120"><?php echo trans("options"); ?></th>
+                            <th><?php echo trans("queue_worked_at"); ?></th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($users as $user): ?>
+                        <?php foreach ($nebim_queues as $que): ?>
                             <tr>
+                                <td><?=$que->id?></td>
                                 <td>
-                                  <?php echo html_escape($user->id); ?>
-                                  <?php if ($user->nebim_code): ?>
-                                    <br> <?php echo html_escape($user->nebim_code); ?>
+                                    <?php if ($que->method == 'user_id'): ?>
+                                      Kullanıcı
+                                    <?php elseif ($que->method == 'order_id'): ?>
+                                      Sipariş
+                                    <?php else: echo $que->method; endif; ?>
+                                </td>
+                                <td class="text-left">
+                                    <?php if ($que->method == 'user_id' && $user = get_user($que->user_id)): ?>
+                                      <?php echo html_escape($user->username); ?>
+                                      <br>
+                                      <?php echo html_escape($user->email); ?>
+                                    <?php endif; ?>
+                                    <?php if ($que->method == 'order_id' && $order = ger_order($que->order_id)): ?>
+                                      <a href="<?php echo admin_url(); ?>order-details/<?php echo html_escape($order->id); ?>" class="table-link">
+                                        #<?php echo html_escape($order->order_number); ?>
+                                      </a>
+                                    <?php endif; ?>
+                                </td>
+                                <td><?=$que->attempt?></td>
+                                <td>
+                                    <?php
+                                    /*
+                                    * 1 => waiting
+                                    * 2 => processing
+                                    * 3 => complete
+                                    * 4 => failed
+                                    * 5 => pass
+                                    */
+                                    switch ($que->status) {
+                                      case '2':
+                                        $class = 'warning';
+                                        $status = 'processing';
+                                        break;
+                                      case '3':
+                                        $class = 'success';
+                                        $status = 'complete';
+                                        break;
+                                      case '4':
+                                        $class = 'danger';
+                                        $status = 'failed';
+                                        break;
+                                      case '5':
+                                        $status = 'pass';
+                                        break;
+                                      default:
+                                        $class = 'warning';
+                                        $status = 'waiting';
+                                        break;
+                                    } ?>
+                                    <label class="label label-<?=$class ?? 'default'?>"><?=$status?></label>
+                                </td>
+                                <td><?php echo formatted_date($que->worked_at); ?></td>
+                                <td>
+                                  <?php if ($que->status <= '2'): ?>
+                                    <button class="btn btn-sm btn-success" type="button" onclick="runQueue('<?=$que->id?>')">
+                                         Çalıştır
+                										</button>
                                   <?php endif; ?>
-                                </td>
-                                <td>
-                                    <a href="<?php echo generate_profile_url($user->slug); ?>" target="_blank" class="table-link">
-                                        <img src="<?php echo get_user_avatar($user); ?>" alt="user" class="img-responsive" style="width: 50px;">
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="<?php echo generate_profile_url($user->slug); ?>" target="_blank" class="table-link"><?php echo html_escape($user->username); ?></a>
-                                </td>
-                                <td>
-                                    <?php echo html_escape($user->email);
-                                    if ($user->email_status == 1): ?>
-                                        <small class="text-success">(<?php echo trans("confirmed"); ?>)</small>
-                                    <?php else: ?>
-                                        <small class="text-danger">(<?php echo trans("unconfirmed"); ?>)</small>
-                                    <?php endif; ?>
-                                </td>
-                                <td>
-                                    <?php if ($user->banned == 0): ?>
-                                        <label class="label label-success"><?php echo trans('active'); ?></label>
-                                    <?php else: ?>
-                                        <label class="label label-danger"><?php echo trans('banned'); ?></label>
-                                    <?php endif; ?>
-                                </td>
-                                <td><?php echo time_ago($user->last_seen); ?></td>
-                                <td><?php echo formatted_date($user->created_at); ?></td>
-                                <td>
-                                    <div class="dropdown">
-                                        <button class="btn bg-purple dropdown-toggle btn-select-option"
-                                                type="button"
-                                                data-toggle="dropdown"><?php echo trans('select_option'); ?>
-                                            <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu options-dropdown">
-                                            <li>
-                                                <a href="javascript:void(0)" onclick="open_close_user_shop(<?php echo $user->id; ?>,'');"><i class="fa fa-cart-plus option-icon"></i><?php echo trans('open_user_shop'); ?></a>
-                                            </li>
-                                            <li>
-                                                <?php if ($user->email_status != 1): ?>
-                                                    <a href="javascript:void(0)" onclick="confirm_user_email(<?php echo $user->id; ?>);"><i class="fa fa-check option-icon"></i><?php echo trans('confirm_user_email'); ?></a>
-                                                <?php endif; ?>
-                                            </li>
-                                            <li>
-                                                <?php if ($user->banned == 0): ?>
-                                                    <a href="javascript:void(0)" onclick="ban_remove_ban_user(<?php echo $user->id; ?>);"><i class="fa fa-stop-circle option-icon"></i><?php echo trans('ban_user'); ?></a>
-                                                <?php else: ?>
-                                                    <a href="javascript:void(0)" onclick="ban_remove_ban_user(<?php echo $user->id; ?>);"><i class="fa fa-circle option-icon"></i><?php echo trans('remove_user_ban'); ?></a>
-                                                <?php endif; ?>
-                                            </li>
-                                            <li>
-                                                <a href="<?php echo admin_url(); ?>edit-user/<?php echo $user->id; ?>"><i class="fa fa-edit option-icon"></i><?php echo trans('edit_user'); ?></a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0)" onclick="delete_item('membership_controller/delete_user_post','<?php echo $user->id; ?>','<?php echo trans("confirm_user"); ?>');"><i class="fa fa-trash option-icon"></i><?php echo trans('delete'); ?></a>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                  <button class="btn btn-sm bg-purple" type="button" data-toggle="modal" data-target="#detail_<?php echo $que->id; ?>">
+                                      <?php echo trans('select_option'); ?>
+              										</button>
+                                  <!-- Modal -->
+                                  <div class="modal fade" id="detail_<?php echo $que->id; ?>" tabindex="-1" role="dialog" aria-hidden="true">
+                                      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                          <div class="modal-content modal-custom">
+                                              <div class="modal-body" style="text-align:left !important">
+                                                <h5><?php echo trans("log_response"); ?></h5>
+                                                <pre><?php print_r(@json_decode($que->response, true)); ?></pre>
+                                                <hr>
+                                                <h5><?php echo trans("log_failed_msg"); ?></h5>
+                                                <pre><?php print_r(@json_decode($que->failed_msg, true)); ?></pre>
+                                              </div>
+                                              <div class="modal-footer">
+              						                        <button type="button" class="btn btn-md btn-default" data-dismiss="modal">Kapat</button>
+              						                    </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <!-- Modal -->
                                 </td>
                             </tr>
                         <?php endforeach; ?>
                         </tbody>
                     </table>
-                    <?php if (empty($users)): ?>
+                    <?php if (empty($nebim_queues)): ?>
                         <p class="text-center text-muted"><?= trans("no_records_found"); ?></p>
                     <?php endif; ?>
                 </div>
@@ -110,3 +170,32 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+  function runQueue(id) {
+    swal({
+        text: 'İşlem manuel çalıştıracaktır, devam edilsin mi?',
+        icon: "warning",
+        buttons: [mc20bt99_config.sweetalert_cancel, mc20bt99_config.sweetalert_ok],
+        dangerMode: true,
+    }).then(function (confirm) {
+        if (confirm) {
+          swal({
+              text: 'Lütfen bekleyiniz',
+              icon: "warning",
+              buttons: false
+          });
+          var url = '<?=base_url()?>queue/manuel/' + id;
+          $.get(url, function(data, status){
+            swal({
+                text: data,
+                icon: "success",
+                buttons: false
+            });
+            setTimeout(function() {
+              location.reload();
+            }, 2100);
+          });
+        }
+    });
+  }
+</script>

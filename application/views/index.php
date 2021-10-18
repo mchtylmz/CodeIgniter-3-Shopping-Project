@@ -35,6 +35,8 @@
             <?php endif; ?>
             <?php $this->load->view("product/_index_banners", ['banner_location' => 'featured_products']); ?>
 
+            <?php $this->load->view('product/_index_category_products', ['index_categories' => $index_categories]); ?>
+
             <?php if ($this->general_settings->index_latest_products == 1 && !empty($latest_products)): ?>
                 <div class="col-12 section section-latest-products">
                     <h3 class="title">
@@ -52,8 +54,6 @@
                 </div>
             <?php endif; ?>
             <?php $this->load->view("product/_index_banners", ['banner_location' => 'new_arrivals']); ?>
-
-            <?php $this->load->view('product/_index_category_products', ['index_categories' => $index_categories]); ?>
 
             <div class="col-12">
                 <div class="row-custom row-bn">

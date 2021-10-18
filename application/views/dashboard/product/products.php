@@ -24,7 +24,6 @@
                             <th width="20"><?php echo trans('id'); ?></th>
                             <th><?php echo trans('product'); ?></th>
                             <th><?php echo trans('sku'); ?></th>
-                            <th><?php echo trans('product_type'); ?></th>
                             <th><?php echo trans('category'); ?></th>
                             <?php if (!empty($promote_status)): ?>
                                 <th><?php echo trans('purchased_plan'); ?></th>
@@ -54,7 +53,6 @@
                                         </a>
                                     </td>
                                     <td><?php echo $item->sku; ?></td>
-                                    <td><?php echo trans($item->product_type); ?></td>
                                     <td>
                                         <?php $category = $this->category_model->get_category($item->category_id);
                                         if (!empty($category)) {
@@ -110,4 +108,3 @@
 </div>
 
 <?php $this->load->view('dashboard/product/_modal_pricing'); ?>
-

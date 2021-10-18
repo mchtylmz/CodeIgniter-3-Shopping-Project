@@ -23,6 +23,7 @@
             </select>
         </div>
 
+        <!--
         <div class="item-table-filter">
             <label><?php echo trans("email_status"); ?></label>
             <select name="email_status" class="form-control">
@@ -31,6 +32,7 @@
                 <option value="unconfirmed" <?= input_get('email_status') == 'unconfirmed' ? 'selected' : ''; ?>><?php echo trans("unconfirmed"); ?></option>
             </select>
         </div>
+        -->
 
         <div class="item-table-filter item-table-filter-long">
             <label><?php echo trans("search"); ?></label>

@@ -17,7 +17,8 @@
                                 <label class="control-label"><?php echo trans('label'); ?></label>
                                 <div class="row">
                                   <?php foreach ($this->languages as $language): ?>
-                                      <div class="col-md-4">
+                                      <div class="col-md-3">
+                                        <small><?=$language->name?></small>
                                         <?php if ($language->id == $this->selected_lang->id): ?>
                                             <input type="text" id="input_variation_label" class="form-control form-input input-variation-label" name="label_lang_<?php echo $language->id; ?>" placeholder="<?php echo $language->name; ?>" maxlength="255" required>
                                         <?php else: ?>

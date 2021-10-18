@@ -449,4 +449,3 @@
         $(".colorpicker").colorpicker();
     });
 </script>
-

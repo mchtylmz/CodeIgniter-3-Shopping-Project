@@ -16,7 +16,11 @@
                                 <div class="pull-left">
                                     <strong class="font-500"><?php echo html_escape(get_variation_option_name($option->option_names, $this->selected_lang->id)); ?></strong>
                                     <?php if ($option->is_default != 1): ?>
-                                        <span><?php echo trans("stock"); ?>:&nbsp;<strong><?php echo $option->stock; ?></strong></span>
+                                        <?php if ($option->stock == 9999): ?>
+                                          <span><?php echo trans("option_stock"); ?></span>
+                                        <?php else: ?>
+                                          <span><?php echo trans("stock"); ?>:&nbsp;<strong><?php echo $option->stock; ?></strong></span>
+                                        <?php endif; ?>
                                     <?php endif; ?>
                                     <?php if ($option->is_default == 1): ?>
                                         <label class="label label-success"><?php echo trans("default"); ?></label>

@@ -134,7 +134,7 @@ class CI_DB_mysqli_driver extends CI_DB {
 		$client_flags = ($this->compress === TRUE) ? MYSQLI_CLIENT_COMPRESS : 0;
 		$this->_mysqli = mysqli_init();
 
-		$this->_mysqli->options(MYSQLI_OPT_CONNECT_TIMEOUT, 10);
+		$this->_mysqli->options(MYSQLI_OPT_CONNECT_TIMEOUT, 150);
 
 		if (isset($this->stricton))
 		{
@@ -199,6 +199,9 @@ class CI_DB_mysqli_driver extends CI_DB {
 				);
 			}
 		}
+
+		// $this->query("set session wait_timeout=300");
+
 
 		if ($this->_mysqli->real_connect($hostname, $this->username, $this->password, $this->database, $port, $socket, $client_flags))
 		{

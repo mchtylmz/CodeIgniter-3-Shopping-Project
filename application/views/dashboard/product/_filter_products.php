@@ -1,14 +1,7 @@
 <div class="row table-filter-container">
     <div class="col-sm-12">
         <?php echo form_open($page_url, ['method' => 'GET']); ?>
-        <div class="item-table-filter">
-            <label><?php echo trans('product_type'); ?></label>
-            <select name="product_type" class="form-control custom-select">
-                <option value="" selected><?php echo trans("all"); ?></option>
-                <option value="physical" <?= input_get('product_type') == 'physical' ? 'selected' : ''; ?>><?= trans("physical"); ?></option>
-                <option value="digital" <?= input_get('product_type') == 'digital' ? 'selected' : ''; ?>><?= trans("digital"); ?></option>
-            </select>
-        </div>
+        
         <div class="item-table-filter">
             <label><?php echo trans('category'); ?></label>
             <select id="categories" name="category" class="form-control custom-select" onchange="get_filter_subcategories_dashboard(this.value);">

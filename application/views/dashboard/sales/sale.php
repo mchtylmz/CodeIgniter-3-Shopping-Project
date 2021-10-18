@@ -10,16 +10,12 @@
             <div class="col-sm-12">
                 <div class="line-detail">
                     <span><?php echo trans("status"); ?></span>
-                    <?php $order_status = 1;
-                    foreach ($order_products as $item):
-                        if ($item->order_status != 'completed') {
-                            $order_status = 0;
-                        }
-                    endforeach;
-                    if ($order_status == 1): ?>
-                        <label class="label label-default"><?= trans("completed"); ?></label>
+                    <?php if ($order->status == 1): ?>
+                        <label class="label label-success"><?= trans("completed"); ?></label>
+                    <?php elseif ($order->status == 2): ?>
+                        <label class="label label-danger"><?= trans("cancelled"); ?></label>
                     <?php else: ?>
-                        <label class="label label-success"><?= trans("order_processing"); ?></label>
+                        <label class="label label-default"><?= trans("order_processing"); ?></label>
                     <?php endif; ?>
                     <a href="<?php echo lang_base_url(); ?>invoice/<?php echo $order->order_number; ?>?np=seller" target="_blank" class="btn btn-sm btn-info btn-sale-options btn-view-invoice"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;<?php echo trans('view_invoice'); ?></a>
                 </div>
@@ -303,9 +299,15 @@
                                     <label class="control-label"><?php echo trans('status'); ?></label>
                                     <select id="select_order_status" name="order_status" class="form-control custom-select" data-order-product-id="<?php echo $item->id; ?>">
                                         <?php if ($item->product_type == 'physical'): ?>
+                                            <option value="awaiting_payment" <?php echo ($item->order_status == 'awaiting_payment') ? 'selected' : ''; ?>><?php echo trans("awaiting_payment"); ?></option>
+                                            <option value="payment_received" <?php echo ($item->order_status == 'payment_received') ? 'selected' : ''; ?>><?php echo trans("payment_received"); ?></option>
                                             <option value="order_processing" <?php echo ($item->order_status == 'order_processing') ? 'selected' : ''; ?>><?php echo trans("order_processing"); ?></option>
                                             <option value="shipped" <?php echo ($item->order_status == 'shipped') ? 'selected' : ''; ?>><?php echo trans("shipped"); ?></option>
                                         <?php endif; ?>
+                                        <?php if ($item->buyer_id != 0 && $item->order_status != 'completed'): ?>
+                                            <option value="completed" <?php echo ($item->order_status == 'completed') ? 'selected' : ''; ?>><?php echo trans("completed"); ?></option>
+                                        <?php endif; ?>
+                                        <option value="cancelled" <?php echo ($item->order_status == 'cancelled') ? 'selected' : ''; ?>><?php echo trans("cancelled"); ?></option>
                                     </select>
                                 </div>
                                 <div class="row tracking-number-container <?= $item->order_status != 'shipped' ? 'display-none' : ''; ?>">
@@ -348,4 +350,3 @@ endforeach; ?>
         }
     });
 </script>
-

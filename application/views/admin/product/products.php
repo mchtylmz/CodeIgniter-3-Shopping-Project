@@ -23,7 +23,7 @@
                             <th width="20"><?php echo trans('id'); ?></th>
                             <th><?php echo trans('product'); ?></th>
                             <th><?php echo trans('sku'); ?></th>
-                            <th><?php echo trans('product_type'); ?></th>
+                            <th><?php echo trans('stock'); ?></th>
                             <th><?php echo trans('category'); ?></th>
                             <th><?php echo trans('page_views'); ?></th>
                             <th><?php echo trans('date'); ?></th>
@@ -51,7 +51,7 @@
                                         </a>
                                     </td>
                                     <td><?php echo $item->sku; ?></td>
-                                    <td><?php echo trans($item->product_type); ?></td>
+                                    <td><?= get_product_stock_status($item); ?></td>
                                     <td>
                                         <?php $category = $this->category_model->get_category($item->category_id);
                                         if (!empty($category)) {
@@ -122,6 +122,12 @@
                             </div>
                             <?php if (count($products) > 0): ?>
                                 <div class="pull-left">
+                                    <?php if ($list_type == 'products'): ?>
+                                      <button class="btn btn-sm btn-primary btn-table-delete" onclick="change_status_for_selected_products('draft', '<?php echo trans("confirm_draft_products"); ?>')"><?php echo trans('draft_selected'); ?></button>
+                                    <?php endif; ?>
+                                    <?php if ($list_type == 'hidden_products'): ?>
+                                      <button class="btn btn-sm btn-primary btn-table-delete" onclick="change_status_for_selected_products('publish', '<?php echo trans("confirm_published_products"); ?>')"><?php echo trans('published_selected'); ?></button>
+                                    <?php endif; ?>
                                     <button class="btn btn-sm btn-danger btn-table-delete" onclick="delete_selected_products('<?php echo trans("confirm_products"); ?>');"><?php echo trans('delete'); ?></button>
                                 </div>
                             <?php endif; ?>

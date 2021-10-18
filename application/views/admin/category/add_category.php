@@ -30,12 +30,14 @@
                     </div>
                 <?php endforeach; ?>
 
+                <!--
                 <div class="form-group">
                     <label class="control-label"><?php echo trans("slug"); ?>
                         <small>(<?php echo trans("slug_exp"); ?>)</small>
                     </label>
                     <input type="text" class="form-control" name="slug_lang" placeholder="<?php echo trans("slug"); ?>">
                 </div>
+                -->
 
                 <div class="form-group">
                     <label class="control-label"><?php echo trans('title'); ?> (<?php echo trans('meta_tag'); ?>)</label>

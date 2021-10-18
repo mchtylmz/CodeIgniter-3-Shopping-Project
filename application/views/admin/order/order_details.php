@@ -23,6 +23,8 @@
                             <div class="col-sm-8">
                                 <?php if ($order->status == 1): ?>
                                     <label class="label label-success"><?php echo trans("completed"); ?></label>
+                								<?php elseif ($order->status == 2): ?>
+                										<label class="label label-danger"><?php echo trans("cancelled"); ?></label>
                                 <?php else: ?>
                                     <label class="label label-default"><?php echo trans("order_processing"); ?></label>
                                 <?php endif; ?>
@@ -147,10 +149,17 @@
                                     </div>
                                     <div class="col-sm-8">
                                         <strong class="font-right">
-                                            <a href="<?php echo generate_profile_url($buyer->slug); ?>" target="_blank">
-                                                <?php echo html_escape($buyer->username); ?>
-                                            </a>
+                                            <?php echo html_escape($buyer->username); ?>
                                         </strong>
+                                    </div>
+                                </div>
+
+                                <div class="row row-details">
+                                    <div class="col-xs-12 col-sm-4 col-right">
+                                        <strong> Nebim ID</strong>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <strong class="font-right"><?php echo $buyer->curr_acc_code; ?></strong>
                                     </div>
                                 </div>
 
@@ -361,7 +370,6 @@
                                     <th><?php echo trans('product'); ?></th>
                                     <th><?php echo trans('unit_price'); ?></th>
                                     <th><?php echo trans('quantity'); ?></th>
-                                    <th><?php echo trans('vat'); ?></th>
                                     <th><?php echo trans('shipping_cost'); ?></th>
                                     <th><?php echo trans('total'); ?></th>
                                     <th><?php echo trans('status'); ?></th>
@@ -406,11 +414,6 @@
                                     <td><?php echo price_formatted($item->product_unit_price, $item->product_currency); ?></td>
                                     <td><?php echo $item->product_quantity; ?></td>
                                     <td>
-                                        <?php if ($item->product_vat):
-                                            echo price_formatted($item->product_vat, $item->product_currency); ?>&nbsp;(<?php echo $item->product_vat_rate; ?>%)
-                                        <?php endif; ?>
-                                    </td>
-                                    <td>
                                         <?php if ($item->product_type == 'physical'):
                                             echo price_formatted($item->seller_shipping_cost, $item->product_currency);
                                         endif; ?>
@@ -452,7 +455,7 @@
                                             </div>
                                         <?php endif; ?>
                                     </td>
-                                    <?php if ($item->product_type != "digital"): ?>
+                                    <?php if ($item->product_type != "digital"): /* ?>
                                     <tr class="tr-shipping" style="background-color: #F3F6F9 !important;">
                                         <td colspan="10">
                                             <div class="order-shipping-tracking-number">
@@ -468,7 +471,7 @@
                                             </div>
                                         </td>
                                     </tr>
-                                <?php endif; ?>
+                                <?php */ endif; ?>
                                     </tr>
 
                                 <?php endforeach; ?>
@@ -642,5 +645,3 @@
         }
     }
 </style>
-
-

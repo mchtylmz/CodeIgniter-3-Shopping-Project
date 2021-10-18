@@ -12,14 +12,14 @@
             </select>
         </div>
 
-        <div class="item-table-filter">
+        <!--<div class="item-table-filter">
             <label><?php echo trans('product_type'); ?></label>
             <select name="product_type" class="form-control custom-select">
                 <option value="" selected><?php echo trans("all"); ?></option>
                 <option value="physical" <?= input_get('product_type') == 'physical' ? 'selected' : ''; ?>><?= trans("physical"); ?></option>
                 <option value="digital" <?= input_get('product_type') == 'digital' ? 'selected' : ''; ?>><?= trans("digital"); ?></option>
             </select>
-        </div>
+        </div>-->
 
         <div class="item-table-filter">
             <label><?php echo trans('category'); ?></label>

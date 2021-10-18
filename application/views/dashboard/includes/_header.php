@@ -263,7 +263,6 @@
                             </li>
                         <?php endif; ?>
                     <?php endif; ?>
-                    <?php /*
                     <li class="header"><?php echo trans("settings"); ?></li>
                     <li class="nav-shop-settings">
                         <a href="<?= generate_dash_url("shop_settings"); ?>">
@@ -277,7 +276,6 @@
                             <span><?php echo trans("shipping_settings"); ?></span>
                         </a>
                     </li>
-                    */ ?>
                 </ul>
             </div>
         </section>

@@ -22,7 +22,8 @@
                             <th width="20"><input type="checkbox" class="checkbox-table" id="checkAll"></th>
                             <th width="20"><?php echo trans('id'); ?></th>
                             <th><?php echo trans('product'); ?></th>
-                            <th><?php echo trans('stock'); ?></th>
+                            <th><?php echo trans('sku'); ?></th>
+							              <th><?php echo trans('stock'); ?></th>
                             <th><?php echo trans('category'); ?></th>
                             <th><?php echo trans('date'); ?></th>
                             <th class="max-width-120"><?php echo trans('options'); ?></th>
@@ -39,12 +40,15 @@
                                         <label class="label label-success"><?php echo trans("featured"); ?></label>
                                     <?php endif; ?>
                                     <div class="img-table">
-                                        <img src="<?php echo get_product_image($item->id, 'image_small'); ?>" data-src="" alt="" class="lazyload img-responsive post-image"/>
+                                        <a href="<?php echo generate_product_url($item); ?>" target="_blank">
+                                            <img src="<?php echo get_product_image($item->id, 'image_small'); ?>" data-src="" alt="" class="lazyload img-responsive post-image"/>
+                                        </a>
                                     </div>
-                                    <span target="_blank" class="table-product-title">
+                                    <a href="<?php echo generate_product_url($item); ?>" target="_blank" class="table-product-title">
                                         <?php echo get_product_title($item); ?>
-                                    </span>
+                                    </a>
                                 </td>
+                                <td><?php echo $item->sku; ?></td>
                                 <td><?= get_product_stock_status($item); ?></td>
                                 <td>
                                     <?php $category = $this->category_model->get_category($item->category_id);
@@ -52,6 +56,7 @@
                                         echo html_escape($category->name);
                                     } ?>
                                 </td>
+
                                 <td><?php echo formatted_date($item->created_at); ?></td>
                                 <td>
                                     <div class="dropdown">
@@ -93,8 +98,7 @@
                             </div>
                             <?php if (count($products) > 0): ?>
                                 <div class="pull-left">
-                                    <button class="btn btn-sm btn-primary btn-table-delete" onclick="change_status_for_selected_products('publish', '<?php echo trans("confirm_published_products"); ?>')"><?php echo trans('published_selected'); ?></button>
-                                    <button class="btn btn-sm btn-danger btn-table-delete" onclick="delete_selected_products('<?php echo trans("confirm_products"); ?>');"><?php echo trans('delete'); ?></button>
+                                    <button class="btn btn-sm btn-danger btn-table-delete" onclick="delete_selected_products_permanently('<?php echo trans("confirm_products"); ?>');"><?php echo trans('delete'); ?></button>
                                 </div>
                             <?php endif; ?>
                         </div>

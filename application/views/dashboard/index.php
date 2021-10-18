@@ -54,7 +54,7 @@
 </div>
 <?php if ($this->is_sale_active): ?>
     <div class="row">
-        <?php if (!empty($active_sales_count) || !empty($completed_sales_count)): ?>
+        <?php if (!empty($total_sales_count)): ?>
             <div class="col-lg-4 col-sm-12 col-xs-12">
                 <div class="box box-primary box-sm index-box">
                     <div class="box-header with-border">
@@ -125,6 +125,8 @@
                                     <td>
                                         <?php if ($item->status == 1):
                                             echo trans("completed");
+                                        elseif ($item->status == 2):
+                                            echo trans("cancelled");
                                         else:
                                             echo trans("order_processing");
                                         endif; ?>
@@ -209,7 +211,7 @@
     </div>
 </div>
 
-<?php if (!empty($active_sales_count) || !empty($completed_sales_count)): ?>
+<?php if (!empty($total_sales_count)): ?>
     <script>
         //total sales
         var ctx = document.getElementById('chart_sales').getContext('2d');
@@ -218,13 +220,15 @@
             data: {
                 labels: [
                     "<?= trans("active_sales"); ?> (<?= !empty($active_sales_count) ? $active_sales_count : 0; ?>)",
-                    "<?= trans("completed_sales"); ?> (<?= !empty($completed_sales_count) ? $completed_sales_count : 0; ?>)"
+                    "<?= trans("completed_sales"); ?> (<?= !empty($completed_sales_count) ? $completed_sales_count : 0; ?>)",
+                    "<?= trans("cancelled"); ?> (<?= !empty($cancelled_sales_count) ? $cancelled_sales_count : 0; ?>)"
                 ],
                 datasets: [{
-                    data: [<?= !empty($active_sales_count) ? $active_sales_count : 0; ?>, <?= !empty($completed_sales_count) ? $completed_sales_count : 0; ?>],
+                    data: [<?= !empty($active_sales_count) ? $active_sales_count : 0; ?>, <?= !empty($completed_sales_count) ? $completed_sales_count : 0; ?>, <?= !empty($cancelled_sales_count) ? $cancelled_sales_count : 0; ?>],
                     backgroundColor: [
                         '#1BC5BD',
-                        '#6993FF'
+                        '#6993FF',
+                        '#ED1B24',
                     ],
                 }]
             },

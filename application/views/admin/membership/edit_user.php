@@ -58,12 +58,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label><?php echo trans('slug'); ?></label>
-                    <input type="text" class="form-control form-input"
-                           name="slug" placeholder="<?php echo trans('slug'); ?>"
-                           value="<?php echo html_escape($user->slug); ?>" <?php echo ($this->rtl == true) ? 'dir="rtl"' : ''; ?>>
-                </div>
-                <div class="form-group">
                     <label><?php echo trans('first_name'); ?></label>
                     <input type="text" class="form-control form-input"
                            name="first_name" placeholder="<?php echo trans('first_name'); ?>"
@@ -81,6 +75,14 @@
                            name="phone_number" placeholder="<?php echo trans('phone_number'); ?>"
                            value="<?php echo html_escape($user->phone_number); ?>" <?php echo ($this->rtl == true) ? 'dir="rtl"' : ''; ?>>
                 </div>
+                <?php /*
+                <div class="form-group">
+                    <label><?php echo trans('slug'); ?></label>
+                    <input type="text" class="form-control form-input"
+                           name="slug" placeholder="<?php echo trans('slug'); ?>"
+                           value="<?php echo html_escape($user->slug); ?>" <?php echo ($this->rtl == true) ? 'dir="rtl"' : ''; ?>>
+                </div>
+
                 <div class="form-group">
                     <label><?php echo trans('shop_name'); ?></label>
                     <input type="text" class="form-control form-input"
@@ -160,6 +162,12 @@
                     <input type="text" class="form-control form-input" name="youtube_url"
                            placeholder="<?php echo trans('youtube_url'); ?>" value="<?php echo html_escape($user->youtube_url); ?>" <?php echo ($this->rtl == true) ? 'dir="rtl"' : ''; ?>>
                 </div>
+                */ ?>
+
+                <?php if ($user->role == 'admin'): ?>
+                  <hr>
+
+                <?php endif; ?>
 
                 <hr>
                 <div class="form-group">

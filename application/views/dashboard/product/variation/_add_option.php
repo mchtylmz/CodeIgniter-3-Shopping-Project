@@ -43,13 +43,18 @@
                         <?php if (count($this->languages) <= 1): ?>
                             <input type="text" id="input_variation_option_name" class="form-control form-input input-variation-option" name="option_name_<?php echo $this->selected_lang->id; ?>" maxlength="255">
                         <?php else: ?>
-                            <?php foreach ($this->languages as $language): ?>
-                                <?php if ($language->id == $this->selected_lang->id): ?>
-                                    <input type="text" id="input_variation_option_name" class="form-control form-input input-variation-option" name="option_name_<?php echo $language->id; ?>" placeholder="<?php echo $language->name; ?>" maxlength="255">
-                                <?php else: ?>
-                                    <input type="text" class="form-control form-input input-variation-option" name="option_name_<?php echo $language->id; ?>" placeholder="<?php echo $language->name . ' (' . trans("optional") . ')'; ?>" maxlength="255">
-                                <?php endif; ?>
-                            <?php endforeach; ?>
+                            <div class="row">
+                              <?php foreach ($this->languages as $language): ?>
+                                  <div class="col-md-3">
+                                    <small><?=$language->name?></small>
+                                    <?php if ($language->id == $this->selected_lang->id): ?>
+                                        <input type="text" id="input_variation_option_name" class="form-control form-input input-variation-option" name="option_name_<?php echo $language->id; ?>" placeholder="<?php echo $language->name; ?>" maxlength="255">
+                                    <?php else: ?>
+                                        <input type="text" class="form-control form-input input-variation-option" name="option_name_<?php echo $language->id; ?>" placeholder="<?php echo $language->name . ' (' . trans("optional") . ')'; ?>" maxlength="255">
+                                    <?php endif; ?>
+                                  </div>
+                              <?php endforeach; ?>
+                            </div>
                         <?php endif; ?>
                     <?php endif; ?>
                 </div>
@@ -84,6 +89,16 @@
                         <?php endif; ?>
                     </div>
                 </div>
+
+                <?php /*
+                <div class="form-group">
+                    <label class="control-label"><?php echo trans('barcode'); ?></label>
+                    <div class="position-relative">
+                        <input type="text" name="barcode" id="input_barcode" class="form-control form-input" placeholder="<?php echo trans("barcode"); ?>" maxlength="100" required>
+                        <button type="button" class="btn btn-default btn-generate-sku" onclick="$('#input_barcode').val(generateUniqueString());"><?= trans("generate"); ?></button>
+                    </div>
+                </div>
+                */ ?>
 
                 <?php if ($variation->use_different_price == 1): ?>
                     <div class="form-group hide-if-default">

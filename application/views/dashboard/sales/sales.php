@@ -68,10 +68,12 @@
                                             endif; ?>
                                         </td>
                                         <td>
-                                            <?php if ($active_page == "sales"): ?>
-                                                <label class="label label-success"><?= trans("order_processing"); ?></label>
+                                            <?php if ($sale->status == 1): ?>
+                                              <label class="label label-success"><?= trans("completed"); ?></label>
+                                            <?php elseif ($sale->status == 2): ?>
+                                              <label class="label label-danger"><?= trans("cancelled"); ?></label>
                                             <?php else: ?>
-                                                <label class="label label-default"><?= trans("completed"); ?></label>
+                                              <label class="label label-default"><?= trans("order_processing"); ?></label>
                                             <?php endif; ?>
                                         </td>
                                         <td><?php echo date("Y-m-d / h:i", strtotime($sale->created_at)); ?></td>
@@ -107,4 +109,3 @@
         </div>
     </div><!-- /.box-body -->
 </div>
-

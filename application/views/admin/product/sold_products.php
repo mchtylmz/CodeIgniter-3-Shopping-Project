@@ -23,7 +23,7 @@
                             <th width="20"><?php echo trans('id'); ?></th>
                             <th><?php echo trans('product'); ?></th>
                             <th><?php echo trans('sku'); ?></th>
-                            <th><?php echo trans('product_type'); ?></th>
+                            <th><?php echo trans('stock'); ?></th>
                             <th><?php echo trans('category'); ?></th>
                             <th><?php echo trans('date'); ?></th>
                             <th class="max-width-120"><?php echo trans('options'); ?></th>
@@ -49,7 +49,7 @@
                                     </a>
                                 </td>
                                 <td><?php echo $item->sku; ?></td>
-								<td><?php echo trans($item->product_type); ?></td>
+                                <td><?= get_product_stock_status($item); ?></td>
                                 <td>
                                     <?php $category = $this->category_model->get_category($item->category_id);
                                     if (!empty($category)) {

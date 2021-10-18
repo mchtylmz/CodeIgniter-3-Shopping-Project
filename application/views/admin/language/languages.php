@@ -144,9 +144,11 @@ $ed_langs[] = array("short" => "cy", "name" => "Welsh"); ?>
                                                     <li>
                                                         <a href="<?php echo admin_url(); ?>update-language/<?php echo html_escape($item->id); ?>"><i class="fa fa-edit option-icon"></i><?php echo trans('edit'); ?></a>
                                                     </li>
+                                                    <?php /*
                                                     <li>
                                                         <a href="javascript:void(0)" onclick="delete_item('language_controller/delete_language_post','<?php echo $item->id; ?>','<?php echo trans("confirm_language"); ?>');"><i class="fa fa-trash option-icon"></i><?php echo trans('delete'); ?></a>
                                                     </li>
+                                                    */ ?>
                                                 </ul>
                                             </div>
                                         </td>

@@ -44,20 +44,26 @@
                     </div>
                   </div>
                 </div> <!-- row -->
-
+                <?php
+                $filter_curr = array_filter($this->currencies, function ($item) {
+                  return $item->status == '1';
+                });
+                if (count($filter_curr) >= 2): ?>
                 <div class="form-group">
-                    <label class="control-label"><?php echo trans('language'); ?></label>
-                    <?php $coupon_lang = old('lang') ?? ($coupon->lang ?? ''); ?>
-                    <select name="lang" class="form-control" required>
-                      <option value=""><?php echo trans('language'); ?>....</option>
+                    <label class="control-label"><?php echo trans('currency'); ?></label>
+                    <?php $coupon_currency = old('currency') ?? ($coupon->currency ?? ''); ?>
+                    <select name="currency" class="form-control" required>
+                      <option value=""><?php echo trans('currency'); ?>....</option>
                       <?php if ($languages = get_languages()): ?>
-                        <?php foreach ($languages as $key => $lang): ?>
-                          <option value="<?=$lang->short_form?>" <?php echo ($coupon_lang == $lang->short_form) ? 'selected' : ''; ?>><?=$lang->name?></option>
+                        <?php foreach ($this->currencies as $key => $curr): ?>
+                          <option value="<?=$curr->code?>" <?php echo ($coupon_currency == $curr->code) ? 'selected' : ''; ?>>
+                            (<?=$lang->code?>) <?=$lang->name?>
+                          </option>
                         <?php endforeach; ?>
                       <?php endif; ?>
                     </select>
                 </div>
-
+                <?php endif; ?>
 
                 <div class="form-group">
                     <label class="control-label"><?php echo trans('date'); ?></label>
@@ -118,7 +124,9 @@
                                    aria-describedby="example1_info">
                                 <thead>
                                 <tr role="row">
-                                    <th><?php echo trans('language'); ?></th>
+                                  <?php if (count($filter_curr) >= 2): ?>
+                                    <th><?php echo trans('currency'); ?></th>
+                                  <?php endif; ?>
                                     <th><?php echo trans('coupon_code'); ?></th>
                                     <th><?php echo trans('discount'); ?></th>
                                     <th><?php echo trans('status'); ?></th>
@@ -129,7 +137,9 @@
                                 <tbody>
                                 <?php foreach ($coupons as $key => $coupon): ?>
                                     <tr>
-                                        <td><?php echo html_escape($coupon->lang); ?></td>
+                                      <?php if (count($filter_curr) >= 2): ?>
+                                        <td><?php echo html_escape($coupon->currency); ?></td>
+                                      <?php endif; ?>
                                         <td><?php echo html_escape($coupon->code); ?></td>
                                         <td>
                                           <?=$coupon->type == 'percent' ? 'Yüzde':'Miktar'?> - <?php echo $coupon->discount; ?>
