@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Home Left Sidebar - Slider Revolution</title>
+    <meta name="description" content="Slider Revolution Example"/>
+    <meta name="keywords" content="fullscreen image, grid layout, flexbox grid, transition"/>
+    <meta name="author" content="ThemePunch"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- LOAD JQUERY LIBRARY -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js"></script>
+
+    <!-- LOADING FONTS AND ICONS -->
+
+
+    <link rel="stylesheet" type="text/css" href="fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css">
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome/css/font-awesome.css">
+
+    <!-- REVOLUTION STYLE SHEETS -->
+    <link rel="stylesheet" type="text/css" href="css/rs6.css">
+    <!-- REVOLUTION LAYERS STYLES -->
+    <!-- REVOLUTION JS FILES -->
+    <script type="text/javascript" src="js/revolution.tools.min.js"></script>
+    <script type="text/javascript" src="js/rs6.min.js"></script>
+
+    <script type="text/javascript">function setREVStartSize(a) {
+        try {
+            var b, c = document.getElementById(a.c).parentNode.offsetWidth;
+            if (c = 0 === c || isNaN(c) ? window.innerWidth : c, a.tabw = void 0 === a.tabw ? 0 : parseInt(a.tabw), a.thumbw = void 0 === a.thumbw ? 0 : parseInt(a.thumbw), a.tabh = void 0 === a.tabh ? 0 : parseInt(a.tabh), a.thumbh = void 0 === a.thumbh ? 0 : parseInt(a.thumbh), a.tabhide = void 0 === a.tabhide ? 0 : parseInt(a.tabhide), a.thumbhide = void 0 === a.thumbhide ? 0 : parseInt(a.thumbhide), a.mh = void 0 === a.mh || "" == a.mh ? 0 : a.mh, "fullscreen" === a.layout || "fullscreen" === a.l) b = Math.max(a.mh, window.innerHeight); else {
+                for (var d in a.gw = Array.isArray(a.gw) ? a.gw : [a.gw], a.rl) (void 0 === a.gw[d] || 0 === a.gw[d]) && (a.gw[d] = a.gw[d - 1]);
+                for (var d in a.gh = void 0 === a.el || "" === a.el || Array.isArray(a.el) && 0 == a.el.length ? a.gh : a.el, a.gh = Array.isArray(a.gh) ? a.gh : [a.gh], a.rl) (void 0 === a.gh[d] || 0 === a.gh[d]) && (a.gh[d] = a.gh[d - 1]);
+                var e, f = Array(a.rl.length), g = 0;
+                for (var d in a.tabw = a.tabhide >= c ? 0 : a.tabw, a.thumbw = a.thumbhide >= c ? 0 : a.thumbw, a.tabh = a.tabhide >= c ? 0 : a.tabh, a.thumbh = a.thumbhide >= c ? 0 : a.thumbh, a.rl) f[d] = a.rl[d] < window.innerWidth ? 0 : a.rl[d];
+                for (var d in e = f[0], f) e > f[d] && 0 < f[d] && (e = f[d], g = d);
+                var h = c > a.gw[g] + a.tabw + a.thumbw ? 1 : (c - (a.tabw + a.thumbw)) / a.gw[g];
+                b = a.gh[g] * h + (a.tabh + a.thumbh)
+            }
+            void 0 === window.rs_init_css && (window.rs_init_css = document.head.appendChild(document.createElement("style"))), document.getElementById(a.c).height = b, window.rs_init_css.innerHTML += "#" + a.c + "_wrapper { height: " + b + "px }"
+        } catch (a) {
+            console.log("Failure at Presize of Slider:" + a)
+        }
+    };</script>
+</head>
+
+
+<!-- START Home Left Sidebar REVOLUTION SLIDER 6.1.0 -->
+<p class="rs-p-wp-fix"></p>
+<rs-module-wrap id="rev_slider_7_1_wrapper" data-alias="home-left-sidebar" data-source="gallery"
+                style="background:transparent;padding:0;margin:0px auto;margin-top:0;margin-bottom:0;max-width:">
+    <rs-module id="rev_slider_7_1" style="display:none;" data-version="6.1.0">
+        <rs-slides>
+            <rs-slide data-key="rs-20" data-title="New Arrival" data-thumb="assets/s6a-100x50.jpg" data-duration="7000"
+                      data-anim="ei:d;eo:d;s:300,500;r:,0;t:3dcurtain-vertical;sl:d,d;" data-p1="Next SS Preview">
+                <img src="assets/s6a.jpg" data-bg="p:55% 50%;" class="rev-slidebg" data-no-retina>
+
+                <rs-layer
+                        id="slider-7-slide-20-layer-1"
+                        data-type="text"
+                        data-color="#f68872"
+                        data-rsp_ch="on"
+                        data-xy="xo:200px,50px,50px,50px;yo:288px,238px,238px,188px;"
+                        data-text="s:14;l:14;ls:1px;a:inherit;"
+                        data-frame_0="x:-50px;tp:600;"
+                        data-frame_1="tp:600;e:Power4.easeInOut;st:200;sp:500;sR:200;"
+                        data-frame_999="x:-50px;o:0;tp:600;st:w;sp:500;sR:6300;"
+                        style="z-index:5;"
+                >NEXT ARRIVAL
+                </rs-layer>
+                <rs-layer
+                        id="slider-7-slide-20-layer-2"
+                        data-type="text"
+                        data-color="#222222"
+                        data-rsp_ch="on"
+                        data-xy="xo:195px,45px,45px,45px;yo:315px,265px,265px,215px;"
+                        data-text="s:60;l:72,72,72,60;fw:700;a:inherit;"
+                        data-frame_0="x:-50px;tp:600;"
+                        data-frame_1="tp:600;st:400;sp:500;sR:400;"
+                        data-frame_999="x:-50px;o:0;tp:600;st:w;sp:500;sR:6100;"
+                        style="z-index:6;"
+                >Light Nylon <br>
+                    Outerwear
+                </rs-layer>
+                <a
+                        id="slider-7-slide-20-layer-3"
+                        class="rs-layer rev-btn"
+                        href="http://demo3.drfuri.com/supro/shop/" target="_self"
+                        data-type="button"
+                        data-color="#222222"
+                        data-xy="xo:200px,50px,50px,50px;yo:636px,583px,583px,533px;"
+                        data-text="s:12;l:12;ls:1px;fw:700;a:inherit;"
+                        data-rsp_bd="off"
+                        data-padding="b:5;"
+                        data-border="bos:solid;boc:#222222;bow:0px,0,2px,0;"
+                        data-frame_0="x:-50px;tp:600;"
+                        data-frame_1="tp:600;st:800;sp:500;sR:800;"
+                        data-frame_999="x:-50px;o:0;tp:600;st:w;sp:500;sR:5700;"
+                        data-frame_hover="c:#000;bgc:rgba(255,255,255,0);boc:#222;bor:0px,0px,0px,0px;bos:solid;bow:0,0,2px,0;oX:50;oY:50;sp:0;"
+                        style="z-index:7;background-color:rgba(0,0,0,0);cursor:pointer;outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;"
+                >DISCOVER MORE
+                </a>
+                <rs-layer
+                        id="slider-7-slide-20-layer-5"
+                        data-type="text"
+                        data-color="#222222"
+                        data-rsp_ch="on"
+                        data-xy="xo:200px,50px,50px,50px;yo:60px;"
+                        data-text="s:12;l:12;ls:1px;a:inherit;"
+                        data-frame_0="tp:600;"
+                        data-frame_1="tp:600;st:0;sp:500;"
+                        data-frame_999="o:0;tp:600;st:w;sp:500;sR:6500;"
+                        style="z-index:8;"
+                >WELCOME TO SUPRO
+                </rs-layer>
+                <rs-layer
+                        id="slider-7-slide-20-layer-6"
+                        data-type="text"
+                        data-color="#222222"
+                        data-rsp_ch="on"
+                        data-xy="x:r,r,l,l;xo:50px;y:t,t,b,b;yo:60px,60px,100px,100px;"
+                        data-text="s:16;l:16;a:inherit;"
+                        data-frame_0="tp:600;"
+                        data-frame_1="tp:600;st:0;sp:500;"
+                        data-frame_999="o:0;tp:600;st:w;sp:500;sR:6500;"
+                        style="z-index:9;font-style:italic;"
+                >01/03
+                </rs-layer>
+                <rs-layer
+                        id="slider-7-slide-20-layer-7"
+                        data-type="text"
+                        data-color="#222222"
+                        data-rsp_ch="on"
+                        data-xy="xo:200px,50px,50px,50px;yo:490px,440px,440px,390px;"
+                        data-text="s:16;l:30;a:inherit;"
+                        data-frame_0="x:-50px;tp:600;"
+                        data-frame_1="tp:600;st:600;sp:500;sR:600;"
+                        data-frame_999="x:-50px;o:0;tp:600;st:w;sp:500;sR:5900;"
+                        style="z-index:10;"
+                >Casual line <br>
+                    Nylon mix fabric<br>
+                    Buttoned collar
+                </rs-layer>
+            </rs-slide>
+            <rs-slide data-key="rs-21" data-title="Special Price" data-thumb="assets/s6b-100x50.jpg"
+                      data-duration="7000" data-anim="ei:d;eo:d;s:800,500;r:,0;t:slotslide-vertical,boxfade;sl:d,d;"
+                      data-p1="Next SS Preview">
+                <img src="assets/s6b.jpg" data-bg="p:65% 50%;" class="rev-slidebg" data-no-retina>
+
+                <rs-layer
+                        id="slider-7-slide-21-layer-1"
+                        data-type="text"
+                        data-color="#f68872"
+                        data-rsp_ch="on"
+                        data-xy="xo:200px,50px,50px,50px;yo:288px,238px,238px,188px;"
+                        data-text="s:14;l:14;ls:1px;a:inherit;"
+                        data-frame_0="x:-50px;tp:600;"
+                        data-frame_1="tp:600;e:Power4.easeInOut;st:200;sp:500;sR:200;"
+                        data-frame_999="x:-50px;o:0;tp:600;st:w;sp:500;sR:6300;"
+                        style="z-index:5;"
+                >SPECIAL PRICE
+                </rs-layer>
+                <rs-layer
+                        id="slider-7-slide-21-layer-2"
+                        data-type="text"
+                        data-color="#222222"
+                        data-rsp_ch="on"
+                        data-xy="xo:195px,45px,45px,45px;yo:315px,265px,265px,215px;"
+                        data-text="s:60;l:72;fw:700;a:inherit;"
+                        data-frame_0="x:-50px;tp:600;"
+                        data-frame_1="tp:600;st:400;sp:500;sR:400;"
+                        data-frame_999="x:-50px;o:0;tp:600;st:w;sp:500;sR:6100;"
+                        style="z-index:6;"
+                >Nylon Blend <br>
+                    Jacket
+                </rs-layer>
+                <a
+                        id="slider-7-slide-21-layer-3"
+                        class="rs-layer rev-btn"
+                        href="http://demo3.drfuri.com/supro/shop/" target="_self"
+                        data-type="button"
+                        data-color="#222222"
+                        data-xy="xo:200px,50px,50px,50px;yo:636px,586px,586px,536px;"
+                        data-text="s:12;l:12;ls:1px;fw:700;a:inherit;"
+                        data-rsp_bd="off"
+                        data-padding="b:5;"
+                        data-border="bos:solid;boc:#222222;bow:0px,0,2px,0;"
+                        data-frame_0="x:-50px;tp:600;"
+                        data-frame_1="tp:600;st:800;sp:500;sR:800;"
+                        data-frame_999="x:-50px;o:0;tp:600;st:w;sp:500;sR:5700;"
+                        data-frame_hover="c:#000;bgc:rgba(255,255,255,0);boc:#222;bor:0px,0px,0px,0px;bos:solid;bow:0,0,2px,0;oX:50;oY:50;sp:0;"
+                        style="z-index:7;background-color:rgba(0,0,0,0);cursor:pointer;outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;"
+                >DISCOVER MORE
+                </a>
+                <rs-layer
+                        id="slider-7-slide-21-layer-5"
+                        data-type="text"
+                        data-color="#222222"
+                        data-rsp_ch="on"
+                        data-xy="xo:200px,50px,50px,50px;yo:60px;"
+                        data-text="s:12;l:12;ls:1px;a:inherit;"
+                        data-frame_0="tp:600;"
+                        data-frame_1="tp:600;st:0;sp:500;"
+                        data-frame_999="o:0;tp:600;st:w;sp:500;sR:6500;"
+                        style="z-index:8;"
+                >WELCOME TO SUPRO
+                </rs-layer>
+                <rs-layer
+                        id="slider-7-slide-21-layer-6"
+                        data-type="text"
+                        data-color="#222222"
+                        data-rsp_ch="on"
+                        data-xy="x:r,r,l,l;xo:50px;y:t,t,b,b;yo:60px,60px,100px,100px;"
+                        data-text="s:16;l:16;a:inherit;"
+                        data-frame_0="tp:600;"
+                        data-frame_1="tp:600;st:0;sp:500;"
+                        data-frame_999="o:0;tp:600;st:w;sp:500;sR:6500;"
+                        style="z-index:9;font-style:italic;"
+                >02/03
+                </rs-layer>
+                <rs-layer
+                        id="slider-7-slide-21-layer-7"
+                        data-type="text"
+                        data-color="#222222"
+                        data-rsp_ch="on"
+                        data-xy="xo:200px,50px,50px,50px;yo:490px,440px,440px,390px;"
+                        data-text="s:16;l:30;a:inherit;"
+                        data-frame_0="x:-50px;tp:600;"
+                        data-frame_1="tp:600;st:600;sp:500;sR:600;"
+                        data-frame_999="x:-50px;o:0;tp:600;st:w;sp:500;sR:5900;"
+                        style="z-index:10;"
+                >Casual line <br>
+                    Nylon mix fabric<br>
+                    Waterproof fabric
+                </rs-layer>
+            </rs-slide>
+            <rs-slide data-key="rs-22" data-title="Trending" data-thumb="assets/s6c-100x50.jpg" data-duration="7000"
+                      data-anim="ei:d;eo:d;s:500,800;r:,0;t:boxslide,slotslide-horizontal;sl:d,d;"
+                      data-p1="Next SS Preview">
+                <img src="assets/s6c.jpg" class="rev-slidebg" data-no-retina>
+
+                <rs-layer
+                        id="slider-7-slide-22-layer-1"
+                        data-type="text"
+                        data-color="#f68872"
+                        data-rsp_ch="on"
+                        data-xy="xo:200px,50px,50px,50px;yo:288px,238px,238px,188px;"
+                        data-text="s:14;l:14;ls:1px;a:inherit;"
+                        data-frame_0="x:-50px;tp:600;"
+                        data-frame_1="tp:600;e:Power4.easeInOut;st:200;sp:500;sR:200;"
+                        data-frame_999="x:-50px;o:0;tp:600;st:w;sp:500;sR:6300;"
+                        style="z-index:5;"
+                >TRENDING NOW
+                </rs-layer>
+                <rs-layer
+                        id="slider-7-slide-22-layer-2"
+                        data-type="text"
+                        data-color="#222222"
+                        data-rsp_ch="on"
+                        data-xy="xo:195px,45px,45px,45px;yo:315px,265px,265px,216px;"
+                        data-text="s:60;l:72;fw:700;a:inherit;"
+                        data-frame_0="x:-50px;tp:600;"
+                        data-frame_1="tp:600;st:400;sp:500;sR:400;"
+                        data-frame_999="x:-50px;o:0;tp:600;st:w;sp:500;sR:6100;"
+                        style="z-index:6;"
+                >Regular <br>
+                    Cotton Shirt
+                </rs-layer>
+                <a
+                        id="slider-7-slide-22-layer-3"
+                        class="rs-layer rev-btn"
+                        href="http://demo3.drfuri.com/supro/shop/" target="_self"
+                        data-type="button"
+                        data-color="#222222"
+                        data-xy="xo:200px,50px,50px,50px;yo:636px,586px,586px,538px;"
+                        data-text="s:12;l:12;ls:1px;fw:700;a:inherit;"
+                        data-rsp_bd="off"
+                        data-padding="b:5;"
+                        data-border="bos:solid;boc:#222222;bow:0px,0,2px,0;"
+                        data-frame_0="x:-50px;tp:600;"
+                        data-frame_1="tp:600;st:800;sp:500;sR:800;"
+                        data-frame_999="x:-50px;o:0;tp:600;st:w;sp:500;sR:5700;"
+                        data-frame_hover="c:#000;bgc:rgba(255,255,255,0);boc:#222;bor:0px,0px,0px,0px;bos:solid;bow:0,0,2px,0;oX:50;oY:50;sp:0;"
+                        style="z-index:7;background-color:rgba(0,0,0,0);cursor:pointer;outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;"
+                >DISCOVER MORE
+                </a>
+                <rs-layer
+                        id="slider-7-slide-22-layer-5"
+                        data-type="text"
+                        data-color="#222222"
+                        data-rsp_ch="on"
+                        data-xy="xo:200px,50px,50px,50px;yo:60px;"
+                        data-text="s:12;l:12;ls:1px;a:inherit;"
+                        data-frame_0="tp:600;"
+                        data-frame_1="tp:600;st:0;sp:500;"
+                        data-frame_999="o:0;tp:600;st:w;sp:500;sR:6500;"
+                        style="z-index:8;"
+                >WELCOME TO SUPRO
+                </rs-layer>
+                <rs-layer
+                        id="slider-7-slide-22-layer-6"
+                        data-type="text"
+                        data-color="#222222"
+                        data-rsp_ch="on"
+                        data-xy="x:r,r,l,l;xo:50px;y:t,t,b,b;yo:60px,60px,100px,100px;"
+                        data-text="s:16;l:16;a:inherit;"
+                        data-frame_0="tp:600;"
+                        data-frame_1="tp:600;st:0;sp:500;"
+                        data-frame_999="o:0;tp:600;st:w;sp:500;sR:6500;"
+                        style="z-index:9;font-style:italic;"
+                >03/03
+                </rs-layer>
+                <rs-layer
+                        id="slider-7-slide-22-layer-7"
+                        data-type="text"
+                        data-color="#222222"
+                        data-rsp_ch="on"
+                        data-xy="xo:200px,50px,50px,50px;yo:490px,440px,440px,390px;"
+                        data-text="s:16;l:30;a:inherit;"
+                        data-frame_0="x:-50px;tp:600;"
+                        data-frame_1="tp:600;st:600;sp:500;sR:600;"
+                        data-frame_999="x:-50px;o:0;tp:600;st:w;sp:500;sR:5900;"
+                        style="z-index:10;"
+                >Casual line <br>
+                    Nylon mix fabric<br>
+                    Waterproof fabric
+                </rs-layer>
+            </rs-slide>
+        </rs-slides>
+        <rs-progress class="rs-bottom" style="visibility: hidden !important;"></rs-progress>
+    </rs-module>
+</rs-module-wrap>
+<!-- END REVOLUTION SLIDER -->
+
+<script type="text/javascript">
+    var revapi7,
+        tpj;
+    jQuery(function() {
+        tpj = jQuery;
+        if (tpj("#rev_slider_7_1").revolution == undefined) {
+            revslider_showDoubleJqueryError("#rev_slider_7_1");
+        } else {
+            revapi7 = tpj("#rev_slider_7_1").show().revolution({
+                jsFileLocation: "js/",
+                visibilityLevels: "1240,1024,778,480",
+                gridwidth: "1570,1024,778,480",
+                gridheight: "960,768,960,720",
+                minHeight: "",
+                spinner: "spinner0",
+                responsiveLevels: "1240,1024,778,480",
+                disableProgressBar: "on",
+                navigation: {
+                    mouseScrollNavigation: false,
+                    onHoverStop: false,
+                    touch: {
+                        touchenabled: true,
+                        touchOnDesktop: true
+                    },
+                    bullets: {
+                        enable: true,
+                        tmp: "<span class=\"tp-bullet-image\"></span><span class=\"tp-bullet-title\"></span>",
+                        style: "supro-nav-dark",
+                        hide_onmobile: true,
+                        hide_under: 1200,
+                        h_align: "left",
+                        h_offset: 200,
+                        v_offset: 55
+                    },
+                    tabs: {
+                        enable: true,
+                        tmp: "",
+                        style: "supro-nav-dark-2",
+                        hide_onmobile: true,
+                        hide_under: 768,
+                        h_align: "right",
+                        v_align: "center",
+                        h_offset: 50,
+                        direction: "vertical",
+                        space: 5,
+                        width: 110,
+                        height: 30,
+                        wrapper_padding: 0,
+                        wrapper_color: "transparent",
+                        visibleAmount: 0
+                    }
+                },
+                fallbacks: {
+                    allowHTML5AutoPlayOnAndroid: true
+                },
+            });
+        }
+
+    });
+</script>
+<!-- STYLE -->
+<style type="text/css">.supro-nav-dark .tp-bullet {
+    width: 8px;
+    height: 8px;
+    background-color: transparent;
+    border-radius: 50%;
+    border: 1px solid #bbbbbb;
+    transition: 0.5s
+}
+
+.supro-nav-dark .tp-bullet.selected, .supro-nav-dark .tp-bullet:hover {
+    border-color: #222;
+    background-color: #222
+}</style><!-- /STYLE -->
+
+<body>
+</body>
+
+</html>
+		

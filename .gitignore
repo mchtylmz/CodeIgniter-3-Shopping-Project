@@ -1,11 +1,9 @@
 .DS_Store
 
 #-------------------------
-application/config/*
 application/controllers/*
 application/helpers/*
 application/models/*
-assets/*
 #-------------------------
 
 !application/index.html
@@ -23,7 +21,6 @@ application/logs/*
 !application/logs/index.html
 
 application/libraries/*
-application/third_party/*
 
 !application/*/.htaccess
 !application/*/index.html

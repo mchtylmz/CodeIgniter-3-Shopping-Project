@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Home Full Slider - Slider Revolution</title>
+    <meta name="description" content="Slider Revolution Example"/>
+    <meta name="keywords" content="fullscreen image, grid layout, flexbox grid, transition"/>
+    <meta name="author" content="ThemePunch"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- LOAD JQUERY LIBRARY -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js"></script>
+
+    <!-- LOADING FONTS AND ICONS -->
+
+
+    <link rel="stylesheet" type="text/css" href="fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css">
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome/css/font-awesome.css">
+
+    <!-- REVOLUTION STYLE SHEETS -->
+    <link rel="stylesheet" type="text/css" href="css/rs6.css">
+    <!-- REVOLUTION LAYERS STYLES -->
+    <!-- REVOLUTION JS FILES -->
+    <script type="text/javascript" src="js/revolution.tools.min.js"></script>
+    <script type="text/javascript" src="js/rs6.min.js"></script>
+
+    <script type="text/javascript">
+        function setREVStartSize(a) {
+            try {
+                var b, c = document.getElementById(a.c).parentNode.offsetWidth;
+                if (c = 0 === c || isNaN(c) ? window.innerWidth : c, a.tabw = void 0 === a.tabw ? 0 : parseInt(a.tabw), a.thumbw = void 0 === a.thumbw ? 0 : parseInt(a.thumbw), a.tabh = void 0 === a.tabh ? 0 : parseInt(a.tabh), a.thumbh = void 0 === a.thumbh ? 0 : parseInt(a.thumbh), a.tabhide = void 0 === a.tabhide ? 0 : parseInt(a.tabhide), a.thumbhide = void 0 === a.thumbhide ? 0 : parseInt(a.thumbhide), a.mh = void 0 === a.mh || "" == a.mh ? 0 : a.mh, "fullscreen" === a.layout || "fullscreen" === a.l) b = Math.max(a.mh, window.innerHeight); else {
+                    for (var d in a.gw = Array.isArray(a.gw) ? a.gw : [a.gw], a.rl) (void 0 === a.gw[d] || 0 === a.gw[d]) && (a.gw[d] = a.gw[d - 1]);
+                    for (var d in a.gh = void 0 === a.el || "" === a.el || Array.isArray(a.el) && 0 == a.el.length ? a.gh : a.el, a.gh = Array.isArray(a.gh) ? a.gh : [a.gh], a.rl) (void 0 === a.gh[d] || 0 === a.gh[d]) && (a.gh[d] = a.gh[d - 1]);
+                    var e, f = Array(a.rl.length), g = 0;
+                    for (var d in a.tabw = a.tabhide >= c ? 0 : a.tabw, a.thumbw = a.thumbhide >= c ? 0 : a.thumbw, a.tabh = a.tabhide >= c ? 0 : a.tabh, a.thumbh = a.thumbhide >= c ? 0 : a.thumbh, a.rl) f[d] = a.rl[d] < window.innerWidth ? 0 : a.rl[d];
+                    for (var d in e = f[0], f) e > f[d] && 0 < f[d] && (e = f[d], g = d);
+                    var h = c > a.gw[g] + a.tabw + a.thumbw ? 1 : (c - (a.tabw + a.thumbw)) / a.gw[g];
+                    b = a.gh[g] * h + (a.tabh + a.thumbh)
+                }
+                void 0 === window.rs_init_css && (window.rs_init_css = document.head.appendChild(document.createElement("style"))), document.getElementById(a.c).height = b, window.rs_init_css.innerHTML += "#" + a.c + "_wrapper { height: " + b + "px }"
+            } catch (a) {
+                console.log("Failure at Presize of Slider:" + a)
+            }
+        };
+    </script>
+</head>
+
+
+<!-- START Home Full Slider REVOLUTION SLIDER 6.1.0 --><p class="rs-p-wp-fix"></p>
+<rs-module-wrap id="rev_slider_5_1_wrapper" data-alias="home-full-slider" data-source="gallery"
+                style="background:transparent;padding:0;">
+    <rs-module id="rev_slider_5_1" style="display:none;" data-version="6.1.0">
+        <rs-slides>
+            <rs-slide data-key="rs-14" data-title="Eames LCW Chair Red Stained" data-thumb="assets/s8-100x50.jpg"
+                      data-duration="7000" data-anim="ei:d;eo:d;s:600;r:0;t:fade;sl:d;" data-p1="NEW NOW">
+                <img src="assets/s8.jpg" class="rev-slidebg" data-no-retina>
+
+                <rs-layer
+                        id="slider-5-slide-14-layer-1"
+                        data-type="text"
+                        data-color="#6d5af5"
+                        data-rsp_ch="on"
+                        data-xy="xo:375px,70px,70px,40px;yo:275px,210px,110px,100px;"
+                        data-text="s:12;l:12;ls:1px;a:inherit;"
+                        data-frame_0="y:-50px;tp:600;"
+                        data-frame_1="tp:600;st:200;sp:500;sR:200;"
+                        data-frame_999="y:-50px;o:0;tp:600;st:w;sp:500;sR:6300;"
+                        style="z-index:5;"
+                >NEW NOW
+                </rs-layer>
+                <rs-layer
+                        id="slider-5-slide-14-layer-2"
+                        data-type="text"
+                        data-rsp_ch="on"
+                        data-xy="xo:370px,65px,65px,35px;yo:305px,240px,140px,130px;"
+                        data-text="s:60,60,60,48;l:70,70,70,48;fw:700;a:inherit;"
+                        data-frame_0="y:-50px;tp:600;"
+                        data-frame_1="tp:600;st:400;sp:500;sR:400;"
+                        data-frame_999="y:-50px;o:0;tp:600;st:w;sp:500;sR:6100;"
+                        style="z-index:6;"
+                >Eames LCW Chair <br>
+                    Red Stained
+                </rs-layer>
+                <rs-layer
+                        id="slider-5-slide-14-layer-3"
+                        data-type="text"
+                        data-rsp_ch="on"
+                        data-xy="xo:375px,70px,70px,40px;yo:475px,410px,310px,260px;"
+                        data-text="s:16;l:30;a:inherit;"
+                        data-frame_0="y:50px;tp:600;"
+                        data-frame_1="tp:600;st:600;sp:500;sR:600;"
+                        data-frame_999="y:50px;o:0;tp:600;st:w;sp:500;sR:5900;"
+                        style="z-index:7;"
+                >This stunning red ash chair from Vitra has <br>
+                    matured into an iconic piece of furniture.
+                </rs-layer>
+                <a
+                        id="slider-5-slide-14-layer-4"
+                        class="rs-layer rev-btn"
+                        href="http://demo3.drfuri.com/supro/shop/" target="_self"
+                        data-type="button"
+                        data-color="#f54b35"
+                        data-xy="xo:375px,70px,70px,40px;yo:595px,530px,430px,350px;"
+                        data-text="s:14;l:14;ls:1px;fw:700;a:inherit;"
+                        data-rsp_bd="off"
+                        data-padding="b:6;"
+                        data-border="bos:solid;boc:#f54b35;bow:0,0,2px,0;bor:0%,0%,0%,0%;"
+                        data-frame_0="y:50px;tp:600;"
+                        data-frame_1="tp:600;st:800;sp:500;sR:800;"
+                        data-frame_999="y:50px;o:0;tp:600;st:w;sp:500;sR:5700;"
+                        data-frame_hover="c:#f54b35;bgc:rgba(135,187,214,0);boc:#f54b35;bor:0px,0px,0px,0px;bos:solid;bow:0,0,2px,0;oX:50;oY:50;sp:0;"
+                        style="z-index:8;background-color:rgba(135,187,214,0);cursor:pointer;outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;"
+                >DISCOVER NOW
+                </a>
+                <rs-layer
+                        id="slider-5-slide-14-layer-6"
+                        data-type="image"
+                        data-rsp_ch="on"
+                        data-xy="x:r,r,l,l;xo:375px,40px,70px,40px;yo:168px,150px,520px,420px;"
+                        data-text="l:22;a:inherit;"
+                        data-dim="w:470,376px,313px,204px;h:552px,442px,368px,240px;"
+                        data-frame_0="x:50px;tp:600;"
+                        data-frame_1="tp:600;st:400;sp:500;sR:400;"
+                        data-frame_999="x:50px;o:0;tp:600;st:w;sp:500;sR:6100;"
+                        style="z-index:9;"
+                ><img src="assets/s5h.png" width="470" height="552" data-no-retina>
+                </rs-layer>
+            </rs-slide>
+            <rs-slide data-key="rs-15" data-title="Painted Beech Songbird" data-thumb="assets/s8-100x50.jpg"
+                      data-duration="7000" data-anim="ei:d;eo:d;s:600;r:0;t:fade;sl:d;" data-p1="TRENDY">
+                <img src="assets/s8.jpg" class="rev-slidebg" data-no-retina>
+                <rs-layer
+                        id="slider-5-slide-15-layer-1"
+                        data-type="text"
+                        data-color="#6d5af5"
+                        data-rsp_ch="on"
+                        data-xy="xo:375px,70px,70px,40px;yo:275px,210px,110px,110px;"
+                        data-text="s:12;l:12;ls:1px;a:inherit;"
+                        data-frame_0="y:-50px;tp:600;"
+                        data-frame_1="tp:600;st:200;sp:500;sR:200;"
+                        data-frame_999="y:-50px;o:0;tp:600;st:w;sp:500;sR:6300;"
+                        style="z-index:5;"
+                >TRENDY
+                </rs-layer>
+                <rs-layer
+                        id="slider-5-slide-15-layer-2"
+                        data-type="text"
+                        data-rsp_ch="on"
+                        data-xy="xo:370px,65px,65px,40px;yo:305px,240px,140px,130px;"
+                        data-text="s:60,60,60,48;l:70,70,70,48;fw:700;a:inherit;"
+                        data-frame_0="y:-50px;tp:600;"
+                        data-frame_1="tp:600;st:400;sp:500;sR:400;"
+                        data-frame_999="y:-50px;o:0;tp:600;st:w;sp:500;sR:6100;"
+                        style="z-index:6;"
+                >Painted Beech <br>
+                    Songbird
+                </rs-layer>
+                <rs-layer
+                        id="slider-5-slide-15-layer-3"
+                        data-type="text"
+                        data-rsp_ch="on"
+                        data-xy="xo:375px,70px,70px,40px;yo:475px,410px,310px,260px;"
+                        data-text="s:16;l:30;a:inherit;"
+                        data-frame_0="y:50px;tp:600;"
+                        data-frame_1="tp:600;st:600;sp:500;sR:600;"
+                        data-frame_999="y:50px;o:0;tp:600;st:w;sp:500;sR:5900;"
+                        style="z-index:7;"
+                >Add whimsy and charm to any space with this <br>
+                    Pop Songbird from Kay Bojesen.
+                </rs-layer>
+                <a
+                        id="slider-5-slide-15-layer-4"
+                        class="rs-layer rev-btn"
+                        href="http://demo3.drfuri.com/supro/shop/" target="_self"
+                        data-type="button"
+                        data-color="#f54b35"
+                        data-xy="xo:375px,70px,70px,40px;yo:595px,535px,435px,350px;"
+                        data-text="s:14;l:14;ls:1px;fw:700;a:inherit;"
+                        data-rsp_bd="off"
+                        data-padding="b:6;"
+                        data-border="bos:solid;boc:#f54b35;bow:0,0,2px,0;bor:0%,0%,0%,0%;"
+                        data-frame_0="y:50px;tp:600;"
+                        data-frame_1="tp:600;st:800;sp:500;sR:800;"
+                        data-frame_999="y:50px;o:0;tp:600;st:w;sp:500;sR:5700;"
+                        data-frame_hover="c:#f54b35;bgc:rgba(135,187,214,0);boc:#f54b35;bor:0px,0px,0px,0px;bos:solid;bow:0,0,2px,0;oX:50;oY:50;sp:0;"
+                        style="z-index:8;background-color:rgba(135,187,214,0);cursor:pointer;outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;"
+                >DISCOVER NOW
+                </a>
+                <rs-layer
+                        id="slider-5-slide-15-layer-6"
+                        data-type="image"
+                        data-rsp_ch="on"
+                        data-xy="x:r,r,l,l;xo:375px,70px,70px,40px;yo:198px,180px,520px,420px;"
+                        data-text="l:22;a:inherit;"
+                        data-dim="w:470px,391px,391px,255px;h:442,368px,368px,240px;"
+                        data-frame_0="x:50px;tp:600;"
+                        data-frame_1="tp:600;st:400;sp:500;sR:400;"
+                        data-frame_999="x:50px;o:0;tp:600;st:w;sp:500;sR:6100;"
+                        style="z-index:9;"
+                ><img src="assets/s8b.png" width="470" height="442" data-no-retina>
+                </rs-layer>
+            </rs-slide>
+            <rs-slide data-key="rs-16" data-title="Loop Walnut Side Table" data-thumb="assets/s8-100x50.jpg"
+                      data-duration="7000" data-anim="ei:d;eo:d;s:600;r:0;t:fade;sl:d;" data-p1="EXCLUSIVE">
+                <img src="assets/s8.jpg" class="rev-slidebg" data-no-retina>
+                <rs-layer
+                        id="slider-5-slide-16-layer-1"
+                        data-type="text"
+                        data-color="#6d5af5"
+                        data-rsp_ch="on"
+                        data-xy="xo:375px,70px,70px,40px;yo:275px,210px,110px,100px;"
+                        data-text="s:12;l:12;ls:1px;a:inherit;"
+                        data-frame_0="y:-50px;tp:600;"
+                        data-frame_1="tp:600;st:200;sp:500;sR:200;"
+                        data-frame_999="y:-50px;o:0;tp:600;st:w;sp:500;sR:6300;"
+                        style="z-index:5;"
+                >EXCLUSIVE
+                </rs-layer>
+                <rs-layer
+                        id="slider-5-slide-16-layer-2"
+                        data-type="text"
+                        data-rsp_ch="on"
+                        data-xy="xo:370px,65px,65px,35px;yo:305px,240px,140px,130px;"
+                        data-text="s:60,60,60,48;l:70,70,70,48;fw:700;a:inherit;"
+                        data-frame_0="y:-50px;tp:600;"
+                        data-frame_1="tp:600;st:400;sp:500;sR:400;"
+                        data-frame_999="y:-50px;o:0;tp:600;st:w;sp:500;sR:6100;"
+                        style="z-index:6;"
+                >Loop Walnut <br>
+                    Side Table
+                </rs-layer>
+                <rs-layer
+                        id="slider-5-slide-16-layer-3"
+                        data-type="text"
+                        data-rsp_ch="on"
+                        data-xy="xo:375px,70px,70px,40px;yo:475px,410px,310px,260px;"
+                        data-text="s:16;l:30;a:inherit;"
+                        data-frame_0="y:50px;tp:600;"
+                        data-frame_1="tp:600;st:600;sp:500;sR:600;"
+                        data-frame_999="y:50px;o:0;tp:600;st:w;sp:500;sR:5900;"
+                        style="z-index:7;"
+                >Announce your love for vintage furnishings <br>
+                    with the marriage of angles and curves.
+                </rs-layer>
+                <a
+                        id="slider-5-slide-16-layer-4"
+                        class="rs-layer rev-btn"
+                        href="http://demo3.drfuri.com/supro/shop/" target="_self"
+                        data-type="button"
+                        data-color="#f54b35"
+                        data-xy="xo:375px,70px,70px,40px;yo:595px,535px,435px,350px;"
+                        data-text="s:14;l:14;ls:1px;fw:700;a:inherit;"
+                        data-rsp_bd="off"
+                        data-padding="b:6;"
+                        data-border="bos:solid;boc:#f54b35;bow:0,0,2px,0;bor:0%,0%,0%,0%;"
+                        data-frame_0="y:50px;tp:600;"
+                        data-frame_1="tp:600;st:800;sp:500;sR:800;"
+                        data-frame_999="y:50px;o:0;tp:600;st:w;sp:500;sR:5700;"
+                        data-frame_hover="c:#f54b35;bgc:rgba(135,187,214,0);boc:#f54b35;bor:0px,0px,0px,0px;bos:solid;bow:0,0,2px,0;oX:50;oY:50;sp:0;"
+                        style="z-index:8;background-color:rgba(135,187,214,0);cursor:pointer;outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;"
+                >DISCOVER NOW
+                </a>
+                <rs-layer
+                        id="slider-5-slide-16-layer-6"
+                        data-type="image"
+                        data-rsp_ch="on"
+                        data-xy="x:r,r,l,l;xo:375px,70px,70px,40px;yo:255px,191px,520px,420px;"
+                        data-text="l:22;a:inherit;"
+                        data-dim="w:470px,440px,440px,287px;h:393,368px,368px,240px;"
+                        data-frame_0="x:50px;tp:600;"
+                        data-frame_1="tp:600;st:400;sp:500;sR:400;"
+                        data-frame_999="x:50px;o:0;tp:600;st:w;sp:500;sR:6100;"
+                        style="z-index:9;"
+                ><img src="assets/s8c.png" width="470" height="393" data-no-retina>
+                </rs-layer>
+            </rs-slide>
+        </rs-slides>
+        <rs-progress class="rs-bottom" style="visibility: hidden !important;"></rs-progress>
+    </rs-module>
+
+</rs-module-wrap>
+<script type="text/javascript">
+        if (typeof revslider_showDoubleJqueryError === "undefined") {
+            function revslider_showDoubleJqueryError(sliderID) {
+                var err = "<div class='rs_error_message_box'>";
+                err += "<div class='rs_error_message_oops'>Oops...</div>";
+                err += "<div class='rs_error_message_content'>";
+                err += "You have some jquery.js library include that comes after the Slider Revolution files js inclusion.<br>";
+                err += "To fix this, you can:<br>&nbsp;&nbsp;&nbsp; 1. Set 'Module General Options' ->  'jQuery & OutPut Filters' -> 'Put JS to Body' to on";
+                err += "<br>&nbsp;&nbsp;&nbsp; 2. Find the double jQuery.js inclusion and remove it";
+                err += "</div>";
+                err += "</div>";
+                jQuery(sliderID).show().html(err);
+            }
+        }
+    </script>
+<!-- END REVOLUTION SLIDER -->
+
+<script type="text/javascript">
+
+
+</script>
+<!-- STYLE -->
+<style type="text/css">.supro-nav-light-2 {
+    color: #bbbbbb
+}
+
+.supro-nav-light-2.tparrows {
+    background: transparent
+}
+
+.supro-nav-light-2:before {
+    display: none
+}
+
+.supro-nav-light-2 i {
+    font-size: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: 0.5s
+}
+
+.supro-nav-light-2:hover, .supro-nav-light-2:focus {
+    color: #fff
+}
+
+.supro-nav-light-2.tp-leftarrow .right-arrow {
+    display: none
+}
+
+.supro-nav-light-2.tp-rightarrow .left-arrow {
+    display: none
+}</style><!-- /STYLE -->
+
+<body>
+</body>
+
+</html>
+		
