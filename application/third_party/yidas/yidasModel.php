@@ -547,7 +547,7 @@ class yidasModel extends CI_Model implements \ArrayAccess
      *  $this->Model->find()->where('id', 123);
      *  $this->Model->findOne();
      */
-    public static function findOne($condition=[])
+    public static function findOne($condition=null)
     {
         $instance = (isset($this)) ? $this : new static;
 

@@ -3,6 +3,7 @@
   tr, td:not(.text-left), th:not(.text-left) {
     text-align: center;
   }
+  .progress {margin-bottom: 0px;}
   .progress, .progress-bar  {height: 32px; line-height: 32px; font-size: 16.5px}
   .progress-bar-animated {animation: progress-bar-stripes 0.4s linear infinite !important;}
   h3 {margin: 0 !important;}
@@ -17,7 +18,7 @@
   #import_content .col-sm-12 {
     line-height: 16.5px !important;
     font-size: 14.5px !important;
-    margin-bottom: 10px;
+    padding: 4px 0;
     border-bottom: solid 1px rgba(0,0,0,0.1);
     display: flex;
     align-items: center;
@@ -32,6 +33,7 @@
     color: black;
     padding: 1.5px 2px;
     margin-right: 5px;
+    margin-left: 5px;
   }
   #import_content .col-sm-12 span.type.red {
     background-color: red;
@@ -62,13 +64,16 @@
 
 <div class="box" id="import_div" style="display:none">
     <div class="box box-primary">
-      <div class="box-header" style="background-color: #eee; padding-top: 10px; font-size: 16px;">
+      <div class="box-header" style="background-color: #eee; padding-top: 10px; padding-bottom: 10px; font-size: 16px;">
         Aktarım Durumu : <span id="div_percent">0 %</span>
       </div>
       <!-- /.progress -->
       <div class="progress import_progress" style="display:none">
         <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" id="progressbar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
       </div> <!-- /.progress -->
+      <div class="box-header" style="background-color: #eee; padding-top: 8px; padding-bottom: 8px; font-size: 16px;">
+        <span id="isuccess">0</span> Başarılı, <span id="ierror">0</span> Başarısız
+      </div> <!-- box-header -->
       <div class="box-body row" id="import_content">
 
       </div> <!-- import_content -->
@@ -85,6 +90,10 @@ var import_progress = $('.import_progress');
 var progressbar = $('#progressbar');
 var uptime = $('#uptime');
 var box_error = $('#box_error');
+var div_success = $('#isuccess');
+var div_error = $('#ierror');
+var c_success = 0;
+var c_error = 0;
 async function getAllProducts() {
   Kronometre.baslat();
   box_error.hide().html('');
@@ -119,10 +128,10 @@ async function startImport() {
   add_import_content('İçe aktarma işlemleri başladı, işlem tamamlanıncaya kadar sayfayı kapatmayınız!.', 'AKTARMA');
   import_progress.show();
   //  parseInt(nebim_getproducts_count)
-  for (var index = 1; index <= 10; index++) {
+  for (var index = 1; index <= 5; index++) {
      window.variation_images = null;
      var now_index = (index - 1) * 9;
-     var max_index = 10 * 9;
+     var max_index = 5 * 9;
      progress_change(index, now_index, max_index);
      try {
        await import_product(index);
@@ -142,7 +151,8 @@ async function startImport() {
   // Taslak
   add_import_content('Aktarılmayan ürünler taslak olarak güncelleniyor..', 'TASLAK', '#ee7600');
   change_products_status();
-  await sleep(2500);
+  await sleep(2100);
+  write_import_file();
 
   setTimeout(function() {
     add_import_content('İçe aktarma işlemleri tamamlandı!.', 'AKTARMA');
@@ -166,14 +176,22 @@ async function import_product(index = 1) {
     success: function(response) {
       if (response.status == 'success') {
         window.variation_images = response.images;
-      }// if response
+      } // if response
       add_import_content('SKU: ' + response.model_kodu + ' >> ' + response.message, 'URUN', (response.status == 'success' ? 'green':'red'));
       return response;
     }
   });
 }
+
 function add_import_content(text, type = 'AKTARMA', color = 'black') {
-  import_content.prepend('<div class="col-sm-12"><span class="type '+color+'">'+type+': </span><span style="color:'+color+'">'+text+'</span></div>');
+  if (color == 'green') {
+    c_success++;
+    div_success.text(c_success);
+  } else if (color == 'red') {
+    c_error++;
+    div_error.text(c_error);
+  }
+  import_content.prepend('<div class="col-sm-12">'+current_time()+' <span class="type '+color+'">'+type+': </span><span style="color:'+color+'">'+text+'</span></div>');
 }
 function progress_change(index, now_index, total) {
   var progress = (((now_index + 1) * 100) / total).toFixed(1);
@@ -183,6 +201,20 @@ function progress_change(index, now_index, total) {
 }
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
+}
+function current_time() {
+  var currentdate = new Date();
+  return currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds();
+}
+function write_import_file() {
+  $.ajax({
+    url: "<?=base_url()?>ajax_controller/nebim_import_log_file",
+    type: 'POST',
+    data: {
+      import_html: $('#import_content').html()
+    },
+    dataType: 'json'
+  });
 }
 function change_products_status() {
   $.ajax({

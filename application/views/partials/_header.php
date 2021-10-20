@@ -69,6 +69,12 @@ foreach ($this->languages as $language): ?>
     <link rel="stylesheet" href="<?= base_url(); ?>assets/css/rtl-1.8.min.css">
 <?php endif; ?>
 <?= $this->general_settings->custom_css_codes; ?>
+<style media="screen">
+  .nav-top .nav-top-left .logo a img {
+    max-width: 150px;
+    width: inherit;
+  }
+</style>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
