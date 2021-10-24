@@ -128,10 +128,10 @@ async function startImport() {
   add_import_content('İçe aktarma işlemleri başladı, işlem tamamlanıncaya kadar sayfayı kapatmayınız!.', 'AKTARMA');
   import_progress.show();
   //  parseInt(nebim_getproducts_count)
-  for (var index = 1; index <= 5; index++) {
+  for (var index = 1; index <= 100; index++) {
      window.variation_images = null;
      var now_index = (index - 1) * 9;
-     var max_index = 5 * 9;
+     var max_index = 100 * 9;
      progress_change(index, now_index, max_index);
      try {
        await import_product(index);
@@ -177,7 +177,7 @@ async function import_product(index = 1) {
       if (response.status == 'success') {
         window.variation_images = response.images;
       } // if response
-      add_import_content('SKU: ' + response.model_kodu + ' >> ' + response.message, 'URUN', (response.status == 'success' ? 'green':'red'));
+      add_import_content('SKU: ' + response.model_kodu + ' ' + response.options + ' >> ' + response.message, 'URUN', (response.status == 'success' ? 'green':'red'));
       return response;
     }
   });

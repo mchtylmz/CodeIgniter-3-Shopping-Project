@@ -92,12 +92,16 @@ foreach ($this->languages as $language): ?>
                 <div class="nav-top">
                     <div class="container">
                         <div class="row align-items-center">
-                            <div class="col-md-8 nav-top-left">
+                            <div class="col-md-3 nav-top-left" style="flex: 0 0 25%; max-width: 25%;">
                                 <div class="row-align-items-center">
                                     <div class="logo">
                                         <a href="<?php echo lang_base_url(); ?>"><img src="<?php echo get_logo($this->general_settings); ?>" alt="logo"></a>
                                     </div>
-                                    <div class="top-search-bar<?= $this->general_settings->multi_vendor_system != 1 ? ' top-search-bar-single-vendor' : ''; ?>">
+                                </div>
+                            </div>
+                            <div class="col-md-6 nav-top-left" style="flex: 0 0 50%; max-width: 50%;">
+                                <div class="row-align-items-center">
+                                    <div class="top-search-bar<?= $this->general_settings->multi_vendor_system != 1 ? ' top-search-bar-single-vendor' : ''; ?>" style="width: calc(100% - 100px);">
                                         <?php echo form_open(generate_url('search'), ['id' => 'form_validate_search', 'class' => 'form_search_main', 'method' => 'get']); ?>
                                         <?php if ($this->general_settings->multi_vendor_system == 1): ?>
                                             <div class="left">
@@ -135,7 +139,7 @@ foreach ($this->languages as $language): ?>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 nav-top-right">
+                            <div class="col-md-3 nav-top-right" style="flex: 0 0 25%; max-width: 25%;">
                                 <ul class="nav align-items-center">
                                     <?php if ($this->is_sale_active): ?>
                                         <li class="nav-item nav-item-cart li-main-nav-right">
@@ -161,7 +165,7 @@ foreach ($this->languages as $language): ?>
                                             </a>
                                         </li>
                                     <?php endif; ?>
-                                    <?php if ($this->auth_check): ?>
+                                    <?php /* if ($this->auth_check): ?>
                                         <?php if (is_multi_vendor_active()): ?>
                                             <li class="nav-item m-r-0"><a href="<?php echo generate_dash_url("add_product"); ?>" class="btn btn-md btn-custom btn-sell-now m-r-0"><?= trans("sell_now"); ?></a></li>
                                         <?php endif; ?>
@@ -169,7 +173,7 @@ foreach ($this->languages as $language): ?>
                                         <?php if (is_multi_vendor_active()): ?>
                                             <li class="nav-item m-r-0"><a href="javascript:void(0)" class="btn btn-md btn-custom btn-sell-now m-r-0" data-toggle="modal" data-target="#loginModal"><?= trans("sell_now"); ?></a></li>
                                         <?php endif; ?>
-                                    <?php endif; ?>
+                                    <?php endif; */ ?>
                                 </ul>
                             </div>
                         </div>
@@ -265,10 +269,10 @@ foreach ($this->languages as $language): ?>
                         <!-- include message block -->
                         <div id="result-login" class="font-size-13"></div>
                         <div class="form-group">
-                            <input type="email" name="email" class="form-control auth-form-input" placeholder="<?php echo trans("email_address"); ?>" maxlength="255" required>
+                            <input type="email" name="email" class="form-control auth-form-input" placeholder="<?php echo trans("email_address"); ?>" autocomplete="off" maxlength="255" required>
                         </div>
                         <div class="form-group">
-                            <input type="password" name="password" class="form-control auth-form-input" placeholder="<?php echo trans("password"); ?>" minlength="4" maxlength="255" required>
+                            <input type="password" name="password" class="form-control auth-form-input" placeholder="<?php echo trans("password"); ?>" autocomplete="off" minlength="4" maxlength="255" required>
                         </div>
                         <div class="form-group text-right">
                             <a href="<?php echo generate_url("forgot_password"); ?>" class="link-forgot-password"><?php echo trans("forgot_password"); ?></a>

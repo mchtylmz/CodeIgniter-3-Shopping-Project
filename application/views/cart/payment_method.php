@@ -46,14 +46,14 @@
                                                     if (!empty($gateways)):
                                                         foreach ($gateways as $gateway):?>
                                                             <li>
-                                                                <div class="option-payment">
-                                                                    <div class="list-left">
+                                                                <div class="option-payment" style="display: flex; align-items: center; justify-content: space-between;">
+                                                                    <div class="list-left" style="width: auto; min-width: 184px">
                                                                         <div class="custom-control custom-radio">
                                                                             <input type="radio" class="custom-control-input" id="option_<?= $gateway->id; ?>" name="payment_option" value="<?= html_escape($gateway->name_key); ?>" required <?= $i == 0 ? 'checked' : ''; ?>>
-                                                                            <label class="custom-control-label label-payment-option" for="option_<?= $gateway->id; ?>"><?= html_escape($gateway->name); ?></label>
+                                                                            <label class="custom-control-label label-payment-option" for="option_<?= $gateway->id; ?>"><?= $gateway->name_key == 'paynet' ? trans('pay_credit_card'):html_escape($gateway->name); ?></label>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="list-right">
+                                                                    <div class="list-right pt-1">
                                                                         <label for="option_<?= $gateway->id; ?>">
                                                                             <?php $logos = @explode(',', $gateway->logos);
                                                                             if (!empty($logos) && item_count($logos) > 0):

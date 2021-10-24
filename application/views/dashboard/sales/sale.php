@@ -8,6 +8,12 @@
     <div class="box-body">
         <div class="row m-b-30">
             <div class="col-sm-12">
+              <?php if (active_nebimv3()): ?>
+                <div class="line-detail">
+                    <span>Nebim <?= trans("order_number"); ?></span>
+                    <strong class="font-600"><?= $order->nebim_order ?></strong>
+                </div>
+              <?php endif; ?>
                 <div class="line-detail">
                     <span><?php echo trans("status"); ?></span>
                     <?php if ($order->status == 1): ?>
@@ -162,12 +168,17 @@
                                                     <?php echo html_escape($item->product_title); ?>
                                                 </a>
                                                 <p class="m-b-15">
-                                                    <span><?php echo trans("seller"); ?>:</span>
-                                                    <?php $seller = get_user($item->seller_id); ?>
-                                                    <?php if (!empty($seller)): ?>
-                                                        <a href="<?php echo generate_profile_url($seller->slug); ?>" target="_blank" class="table-product-title">
-                                                            <strong class="font-600"><?php echo get_shop_name($seller); ?></strong>
-                                                        </a>
+                                                    <?php if (active_nebimv3()): ?>
+                                                      <span><?php echo trans("barcode"); ?>:</span>
+                                                      <strong class="font-600"><?php echo $item->variation_option_barcodes ?></strong>
+                                                    <?php else: ?>
+                                                      <span><?php echo trans("seller"); ?>:</span>
+                                                      <?php $seller = get_user($item->seller_id); ?>
+                                                      <?php if (!empty($seller)): ?>
+                                                          <a href="<?php echo generate_profile_url($seller->slug); ?>" target="_blank" class="table-product-title">
+                                                              <strong class="font-600"><?php echo get_shop_name($seller); ?></strong>
+                                                          </a>
+                                                      <?php endif; ?>
                                                     <?php endif; ?>
                                                 </p>
                                                 <p><span class="span-product-dtl-table"><?php echo trans("unit_price"); ?>:</span><?php echo price_formatted($item->product_unit_price, $item->product_currency); ?></p>
@@ -201,7 +212,8 @@
                                         endif; ?>
                                     </td>
                                 </tr>
-                                <?php if ($item->product_type != "digital"): ?>
+                                <?php /*
+                                if ($item->product_type != "digital"): ?>
                                 <tr class="tr-shipping">
                                     <td colspan="4">
                                         <div class="order-shipping-tracking-number">
@@ -220,7 +232,7 @@
                                 <tr class="tr-shipping-seperator">
                                     <td colspan="4"></td>
                                 </tr>
-                            <?php endif;
+                            <?php endif; */
                             endif;
                         endforeach; ?>
                         </tbody>

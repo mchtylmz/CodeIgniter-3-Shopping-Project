@@ -14,16 +14,24 @@
                         <?php foreach ($variation_options as $option): ?>
                             <li>
                                 <div class="pull-left">
-                                    <strong class="font-500"><?php echo html_escape(get_variation_option_name($option->option_names, $this->selected_lang->id)); ?></strong>
+                                    <strong class="font-500">
+                                      <?php if ($option->parent_id):
+                                        echo get_parent_variation_option_name($option->parent_id, $this->selected_lang->id) .' - ';
+                                      endif; ?>
+                                      <?php echo html_escape(get_variation_option_name($option->option_names, $this->selected_lang->id)); ?>
+                                    </strong>
                                     <?php if ($option->is_default != 1): ?>
                                         <?php if ($option->stock == 9999): ?>
                                           <span><?php echo trans("option_stock"); ?></span>
                                         <?php else: ?>
-                                          <span><?php echo trans("stock"); ?>:&nbsp;<strong><?php echo $option->stock; ?></strong></span>
+                                          <span><?php echo trans("stock"); ?>:<strong><?php echo $option->stock; ?></strong></span>
                                         <?php endif; ?>
                                     <?php endif; ?>
                                     <?php if ($option->is_default == 1): ?>
                                         <label class="label label-success"><?php echo trans("default"); ?></label>
+                                    <?php endif; ?>
+                                    <?php if ($option->parent_id != 0 && active_nebimv3()): ?>
+                                      <span><?php echo trans("barcode"); ?>: <?php echo $option->barcode; ?></span>
                                     <?php endif; ?>
                                 </div>
                                 <div class="pull-right">

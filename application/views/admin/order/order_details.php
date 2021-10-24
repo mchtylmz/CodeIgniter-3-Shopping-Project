@@ -31,6 +31,7 @@
                             </div>
                         </div>
 
+                        <!--
                         <div class="row row-details">
                             <div class="col-xs-12 col-sm-4 col-right">
                                 <strong> <?php echo trans("order_id"); ?></strong>
@@ -39,6 +40,7 @@
                                 <strong class="font-right"><?php echo $order->id; ?></strong>
                             </div>
                         </div>
+                        -->
                         <div class="row row-details">
                             <div class="col-xs-12 col-sm-4 col-right">
                                 <strong> <?php echo trans("order_number"); ?></strong>
@@ -47,6 +49,16 @@
                                 <strong class="font-right"><?php echo $order->order_number; ?></strong>
                             </div>
                         </div>
+                        <?php if (active_nebimv3()): ?>
+                          <div class="row row-details">
+                              <div class="col-xs-12 col-sm-4 col-right">
+                                  <strong> Nebim <?php echo trans("order_number"); ?></strong>
+                              </div>
+                              <div class="col-sm-8">
+                                  <strong class="font-right"><?php echo $order->nebim_order; ?></strong>
+                              </div>
+                          </div>
+                        <?php endif; ?>
 
                         <div class="row row-details">
                             <div class="col-xs-12 col-sm-4 col-right">
@@ -154,14 +166,16 @@
                                     </div>
                                 </div>
 
-                                <div class="row row-details">
-                                    <div class="col-xs-12 col-sm-4 col-right">
-                                        <strong> Nebim ID</strong>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <strong class="font-right"><?php echo $buyer->curr_acc_code; ?></strong>
-                                    </div>
-                                </div>
+                                <?php if (active_nebimv3()): ?>
+                                  <div class="row row-details">
+                                      <div class="col-xs-12 col-sm-4 col-right">
+                                          <strong> Nebim ID</strong>
+                                      </div>
+                                      <div class="col-sm-8">
+                                          <strong class="font-right"><?php echo $buyer->curr_acc_code; ?></strong>
+                                      </div>
+                                  </div>
+                                <?php endif; ?>
 
                                 <div class="row row-details">
                                     <div class="col-xs-12 col-sm-4 col-right">
@@ -374,7 +388,9 @@
                                     <th><?php echo trans('total'); ?></th>
                                     <th><?php echo trans('status'); ?></th>
                                     <th><?php echo trans('updated'); ?></th>
-                                    <th class="max-width-120"><?php echo trans('options'); ?></th>
+                                    <?php if (active_nebimv3()): ?>
+                                      <th class="max-width-120"><?php echo trans('options'); ?></th>
+                                    <?php endif; ?>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -402,12 +418,17 @@
                                             <?php echo html_escape($item->product_title); ?>
                                         </a>
                                         <p>
-                                            <span><?php echo trans("by"); ?></span>
-                                            <?php $seller = get_user($item->seller_id); ?>
-                                            <?php if (!empty($seller)): ?>
-                                                <a href="<?php echo generate_profile_url($seller->slug); ?>" target="_blank" class="table-product-title">
-                                                    <strong><?php echo html_escape($seller->username); ?></strong>
-                                                </a>
+                                            <?php if (active_nebimv3()): ?>
+                                              <span><?php echo trans("barcode"); ?></span>
+                                              <strong><?php echo html_escape($item->variation_option_barcodes); ?></strong>
+                                            <?php else: ?>
+                                              <span><?php echo trans("by"); ?></span>
+                                              <?php $seller = get_user($item->seller_id); ?>
+                                              <?php if (!empty($seller)): ?>
+                                                  <a href="<?php echo generate_profile_url($seller->slug); ?>" target="_blank" class="table-product-title">
+                                                      <strong><?php echo html_escape($seller->username); ?></strong>
+                                                  </a>
+                                              <?php endif; ?>
                                             <?php endif; ?>
                                         </p>
                                     </td>
@@ -436,6 +457,7 @@
                                             echo time_ago($item->updated_at);
                                         endif; ?>
                                     </td>
+                                    <?php if (active_nebimv3()): ?>
                                     <td>
                                         <?php if (($item->product_type == 'digital' && $item->order_status != 'completed') || $item->product_type == 'physical'): ?>
                                             <div class="dropdown">
@@ -455,6 +477,7 @@
                                             </div>
                                         <?php endif; ?>
                                     </td>
+                                    <?php endif; ?>
                                     <?php if ($item->product_type != "digital"): /* ?>
                                     <tr class="tr-shipping" style="background-color: #F3F6F9 !important;">
                                         <td colspan="10">

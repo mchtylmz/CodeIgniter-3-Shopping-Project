@@ -60,7 +60,7 @@
                 <select name="parent_id" class="form-control custom-select">
                     <option value=""><?php echo trans("none"); ?></option>
                     <?php if (!empty($product_variations)):
-                        foreach ($product_variations as $item):
+                        foreach ($product_variations as $item): if ($item->id == $variation->id) continue;
                             if ($item->variation_type == "dropdown"): ?>
                                 <option value="<?php echo $item->id; ?>" <?php echo ($variation->parent_id == $item->id) ? 'selected' : ''; ?>><?php echo $item->id . " - " . html_escape(get_variation_label($item->label_names, $this->selected_lang->id)) . ' - ' . trans($item->variation_type); ?></option>
                             <?php endif;
@@ -137,4 +137,3 @@
         <button type="submit" class="btn btn-md btn-secondary btn-variation float-right"><?php echo trans("save_changes"); ?></button>
     </div>
 </div>
-

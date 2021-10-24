@@ -16,14 +16,15 @@
 		</div>
 
 		<div class="row">
+			<!--
 			<div class="col-sm-12 col-md-3">
 				<div class="row-custom">
-					<!-- load profile nav -->
 					<?php $this->load->view("order/_order_tabs"); ?>
 				</div>
 			</div>
+			-->
 
-			<div class="col-sm-12 col-md-9">
+			<div class="col-sm-12 col-md-12">
 				<div class="row-custom">
 					<div class="profile-tab-content">
 						<!-- include message block -->
@@ -99,4 +100,3 @@
 	</div>
 </div>
 <!-- Wrapper End-->
-

@@ -161,7 +161,7 @@ async function get_product_image(product_id) {
     },
     success: function(response) {
       window.variation_images = response.images;
-      add_import_content('SKU: ' + response.model_kodu + ' >> ' + response.message, 'URUN', 'green');
+      add_import_content('SKU: ' + response.model_kodu + ' ' + response.options + ' >> ' + response.message, 'URUN', 'green');
       return response;
     }
   });

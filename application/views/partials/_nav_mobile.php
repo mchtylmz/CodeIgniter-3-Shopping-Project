@@ -1,16 +1,27 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 <div id="navMobile" class="nav-mobile">
     <div class="nav-mobile-sc">
-        <div class="nav-mobile-inner">
+        <div class="nav-mobile-inner pt-2">
             <div class="row">
-                <div class="col-sm-12 mobile-nav-buttons">
-                    <?php if (is_multi_vendor_active()):
+                <div class="col-sm-12 mobile-nav-buttons mb-1">
+                    <?php /* if (is_multi_vendor_active()):
                         if ($this->auth_check): ?>
                             <a href="<?= generate_dash_url("add_product"); ?>" class="btn btn-md btn-custom btn-block"><?= trans("sell_now"); ?></a>
                         <?php else: ?>
                             <a href="javascript:void(0)" class="btn btn-md btn-custom btn-block close-menu-click" data-toggle="modal" data-target="#loginModal"><?php echo trans("sell_now"); ?></a>
                         <?php endif;
-                    endif; ?>
+                    endif; */ ?>
+                    <?php if ($this->general_settings->multilingual_system == 1 && count($this->languages) > 1): ?>
+                      <ul class="mobile-language-options mb-1">
+                          <?php foreach ($this->languages as $language): ?>
+                              <li class="mb-1">
+                                  <a href="<?= convert_url_by_language($language); ?>" class="dropdown-item <?php echo ($language->id == $this->selected_lang->id) ? 'selected' : ''; ?>">
+                                      <?= html_escape($language->name); ?>
+                                  </a>
+                              </li>
+                          <?php endforeach; ?>
+                      </ul>
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="row">
@@ -149,7 +160,7 @@
                             </li>
                         <?php endif; ?>
 
-                        <?php if (!empty($this->currencies)): ?>
+                        <?php if ($this->payment_settings->currency_converter == 1 && !empty($this->currencies)): ?>
                             <li class="nav-item dropdown language-dropdown currency-dropdown currency-dropdown-mobile">
                                 <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-toggle="dropdown">
                                     <?= $this->selected_currency->code; ?>&nbsp;(<?= $this->selected_currency->symbol; ?>)<i class="icon-arrow-down"></i>
@@ -165,23 +176,6 @@
                                     endforeach; ?>
                                 </ul>
                                 <?php echo form_close(); ?>
-                            </li>
-                        <?php endif; ?>
-
-                        <?php if ($this->general_settings->multilingual_system == 1 && count($this->languages) > 1): ?>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <?php echo trans("language"); ?>
-                                </a>
-                                <ul class="mobile-language-options">
-                                    <?php foreach ($this->languages as $language): ?>
-                                        <li>
-                                            <a href="<?= convert_url_by_language($language); ?>" class="dropdown-item <?php echo ($language->id == $this->selected_lang->id) ? 'selected' : ''; ?>">
-                                                <?= html_escape($language->name); ?>
-                                            </a>
-                                        </li>
-                                    <?php endforeach; ?>
-                                </ul>
                             </li>
                         <?php endif; ?>
                     </ul>

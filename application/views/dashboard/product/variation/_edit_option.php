@@ -74,6 +74,7 @@
                         <div class="col-sm-6 hide-if-default <?php echo ($variation_option->is_default == 1) ? "display-none" : ""; ?>">
                             <label class="control-label"><?php echo trans('stock'); ?></label>
                             <input type="number" name="option_stock" class="form-control form-input" value="<?php echo $variation_option->stock; ?>" min="0">
+                            <small>9999, alt seçeneklere bağlı olarak yorumlanır.</small>
                         </div>
                         <?php if ($variation->variation_type != "dropdown" && $variation->option_display_type == "color"): ?>
                             <div class="col-sm-6">

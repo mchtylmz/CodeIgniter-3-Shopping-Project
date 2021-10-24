@@ -165,7 +165,7 @@
                         </li>
                     <?php endif; ?>
                     */ ?>
-                    <li class="treeview<?php is_admin_nav_active(['products', 'pending-products', 'hidden-products', 'expired-products', 'sold-products', 'drafts']); ?>">
+                    <li class="treeview<?php is_admin_nav_active(['products', 'pending-products', 'hidden-products', 'expired-products', 'sold-products', 'drafts', 'nostock_products']); ?>">
                         <a href="#">
                             <i class="fa fa-shopping-basket"></i>
                             <span><?php echo trans("products"); ?></span>
@@ -176,8 +176,8 @@
                             <?php if ($this->general_settings->membership_plans_system == 1): ?>
                                 <li class="nav-expired-products"><a href="<?= generate_dash_url("expired_products"); ?>"><?= trans("expired_products"); ?></a></li>
                             <?php endif; ?>
-                            <li class="nav-sold-products"><a href="<?= generate_dash_url("sold_products"); ?>"><?= trans("sold_products"); ?></a></li>
-                            <li class="nav-drafts"><a href="<?= generate_dash_url("drafts"); ?>"><?= trans("drafts"); ?></a></li>
+                            <li class="nav-hidden-products"><a href="<?php echo generate_dash_url('hidden_products'); ?>"> <?php echo trans("hidden_products"); ?></a></li>
+                            <li class="nav-stock-products"><a href="<?php echo generate_dash_url('nostock_products'); ?>"> <?php echo trans("nostock_products"); ?></a></li>
                         </ul>
                     </li>
                     <?php if ($this->is_sale_active): ?>
@@ -193,13 +193,13 @@
                                 <li class="nav-completed-sales"><a href="<?= generate_dash_url("completed_sales"); ?>"><?= trans("completed_sales"); ?></a></li>
                             </ul>
                         </li>
+                        <?php /*
                         <li class="nav-earnings">
                             <a href="<?= generate_dash_url("earnings"); ?>">
                                 <i class="fa fa-money"></i>
                                 <span><?php echo trans("earnings"); ?></span>
                             </a>
                         </li>
-                        <?php /*
                         <li class="treeview<?php is_admin_nav_active(['withdraw-money', 'payouts', 'set-payout-account']); ?>">
                             <a href="#">
                                 <i class="fa fa-credit-card-alt" style="font-size: 14px;"></i>
@@ -263,19 +263,22 @@
                             </li>
                         <?php endif; ?>
                     <?php endif; ?>
-                    <li class="header"><?php echo trans("settings"); ?></li>
-                    <li class="nav-shop-settings">
-                        <a href="<?= generate_dash_url("shop_settings"); ?>">
-                            <i class="fa fa-cog"></i>
-                            <span><?php echo trans("shop_settings"); ?></span>
-                        </a>
-                    </li>
-                    <li class="nav-shipping-settings">
-                        <a href="<?= generate_dash_url("shipping_settings"); ?>">
-                            <i class="fa fa-truck"></i>
-                            <span><?php echo trans("shipping_settings"); ?></span>
-                        </a>
-                    </li>
+
+                    <?php if (!active_nebimv3() || $this->auth_user->id == 1): ?>
+                      <li class="header"><?php echo trans("settings"); ?></li>
+                      <li class="nav-shop-settings">
+                          <a href="<?= generate_dash_url("shop_settings"); ?>">
+                              <i class="fa fa-cog"></i>
+                              <span><?php echo trans("shop_settings"); ?></span>
+                          </a>
+                      </li>
+                      <li class="nav-shipping-settings">
+                          <a href="<?= generate_dash_url("shipping_settings"); ?>">
+                              <i class="fa fa-truck"></i>
+                              <span><?php echo trans("shipping_settings"); ?></span>
+                          </a>
+                      </li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </section>

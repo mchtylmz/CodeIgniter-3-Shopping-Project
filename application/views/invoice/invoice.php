@@ -89,8 +89,12 @@
                                     <table class="table">
                                         <thead>
                                         <tr>
-                                            <th class="border-0 font-weight-bold"><?php echo trans("seller"); ?></th>
-                                            <th class="border-0 font-weight-bold"><?php echo trans("product_id"); ?></th>
+                                            <?php if (active_nebimv3()): ?>
+                                              <th class="border-0 font-weight-bold"><?php echo trans("barcode"); ?></th>
+                                            <?php else: ?>
+                                              <th class="border-0 font-weight-bold"><?php echo trans("seller"); ?></th>
+                                              <th class="border-0 font-weight-bold"><?php echo trans("product_id"); ?></th>
+                                            <?php endif; ?>
                                             <th class="border-0 font-weight-bold"><?php echo trans("description"); ?></th>
                                             <th class="border-0 font-weight-bold"><?php echo trans("quantity"); ?></th>
                                             <th class="border-0 font-weight-bold"><?php echo trans("unit_price"); ?></th>
@@ -141,8 +145,12 @@
                                                                 $sale_total += $order_product->product_total_price;
                                                             endif; ?>
                                                             <tr style="font-size: 15px;">
-                                                                <td><?php echo html_escape($seller); ?></td>
-                                                                <td><?php echo $order_product->product_id; ?></td>
+                                                                <?php if (active_nebimv3()): ?>
+                                                                  <td><?php echo $order_product->variation_option_barcodes; ?></td>
+                                                                <?php else: ?>
+                                                                  <td><?php echo html_escape($seller); ?></td>
+                                                                  <td><?php echo $order_product->product_id; ?></td>
+                                                                <?php endif; ?>
                                                                 <td><?php echo $order_product->product_title; ?></td>
                                                                 <td><?php echo $order_product->product_quantity; ?></td>
                                                                 <td style="white-space: nowrap"><?php echo price_formatted($order_product->product_unit_price, $order_product->product_currency); ?></td>

@@ -11,19 +11,21 @@
                         </ol>
                     </nav>
 
-                    <h1 class="page-title"><?php echo $title; ?></h1>
+                    <!-- <h1 class="page-title"><?php echo $title; ?></h1> -->
+                    <a href="<?php echo lang_base_url(); ?>orders" class="btn btn-sm btn-danger btn-sale-options btn-view-invoice"><?php echo trans('back_orders'); ?></a>
                 </div>
             </div>
 
             <div class="row">
+                <!--
                 <div class="col-sm-12 col-md-3">
                     <div class="row-custom">
-                        <!-- load profile nav -->
                         <?php $this->load->view("order/_order_tabs"); ?>
                     </div>
                 </div>
+                -->
 
-                <div class="col-sm-12 col-md-9">
+                <div class="col-sm-12 col-md-12">
                     <div class="row">
                         <div class="col-12">
                             <!-- include message block -->
@@ -291,12 +293,17 @@
                                                                     <?php echo html_escape($item->product_title); ?>
                                                                 </a>
                                                                 <p class="m-b-15">
-                                                                    <span><?php echo trans("seller"); ?>:</span>
-                                                                    <?php $seller = get_user($item->seller_id); ?>
-                                                                    <?php if (!empty($seller)): ?>
-                                                                        <a href="<?php echo generate_profile_url($seller->slug); ?>" target="_blank" class="table-product-title">
-                                                                            <strong class="font-600"><?php echo get_shop_name($seller); ?></strong>
-                                                                        </a>
+                                                                    <?php if (active_nebimv3()): ?>
+                                                                      <span><?php echo trans("barcode"); ?>:</span>
+                                                                      <strong class="font-600"><?php echo $item->variation_option_barcodes; ?></strong>
+                                                                    <?php else: ?>
+                                                                      <span><?php echo trans("seller"); ?>:</span>
+                                                                      <?php $seller = get_user($item->seller_id); ?>
+                                                                      <?php if (!empty($seller)): ?>
+                                                                          <a href="<?php echo generate_profile_url($seller->slug); ?>" target="_blank" class="table-product-title">
+                                                                              <strong class="font-600"><?php echo get_shop_name($seller); ?></strong>
+                                                                          </a>
+                                                                      <?php endif; ?>
                                                                     <?php endif; ?>
                                                                 </p>
                                                                 <p><span class="span-product-dtl-table"><?php echo trans("unit_price"); ?>:</span><?php echo price_formatted($item->product_unit_price, $item->product_currency); ?></p>
@@ -371,7 +378,7 @@
                                                     </td>
                                                 </tr>
 
-                                                <?php if ($item->product_type == "physical"): ?>
+                                                <?php /* if ($item->product_type == "physical"): ?>
                                                 <tr class="tr-shipping">
                                                     <td colspan="4">
                                                         <div class="order-shipping-tracking-number">
@@ -388,7 +395,7 @@
                                                 <tr class="tr-shipping-seperator">
                                                     <td colspan="4"></td>
                                                 </tr>
-                                            <?php endif; ?>
+                                            <?php endif; */ ?>
 
                                             <?php endforeach; ?>
                                             </tbody>

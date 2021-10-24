@@ -278,6 +278,26 @@
                     </ul>
                 </li>
                 */ ?>
+                <li class="treeview<?php is_admin_nav_active(['pending-product-comments', 'pending-blog-comments', 'product-comments', 'blog-comments']); ?>">
+                    <a href="#">
+                        <i class="fa fa-comments"></i>
+                        <span><?php echo trans("comments"); ?></span>
+                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="nav-pending-product-comments"><a href="<?php echo admin_url(); ?>pending-product-comments"> <?php echo trans("pending_comments"); ?></a></li>
+                        <li class="nav-product-comments"><a href="<?php echo admin_url(); ?>product-comments"> <?php echo trans("approved_comments"); ?></a></li>
+                        <!--
+                        <?php if ($this->general_settings->comment_approval_system == 1): ?>
+                            <li class="nav-pending-product-comments"><a href="<?php echo admin_url(); ?>pending-product-comments"> <?php echo trans("product_comments"); ?></a></li>
+                            <li class="nav-pending-blog-comments"><a href="<?php echo admin_url(); ?>pending-blog-comments"> <?php echo trans("blog_comments"); ?></a></li>
+                        <?php else: ?>
+                            <li class="nav-product-comments"><a href="<?php echo admin_url(); ?>product-comments"> <?php echo trans("product_comments"); ?></a></li>
+                            <li class="nav-blog-comments"><a href="<?php echo admin_url(); ?>blog-comments"> <?php echo trans("blog_comments"); ?></a></li>
+                        <?php endif; ?>
+                        -->
+                    </ul>
+                </li>
                 <li class="nav-categories<?php is_admin_nav_active(['categories']); ?>">
                     <a href="<?php echo admin_url(); ?>categories">
                         <i class="fa fa-folder-open"></i>
@@ -428,22 +448,7 @@
                         <span><?php echo trans("reviews"); ?></span>
                     </a>
                 </li>
-                <li class="treeview<?php is_admin_nav_active(['pending-product-comments', 'pending-blog-comments', 'product-comments', 'blog-comments']); ?>">
-                    <a href="#">
-                        <i class="fa fa-comments"></i>
-                        <span><?php echo trans("comments"); ?></span>
-                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <?php if ($this->general_settings->comment_approval_system == 1): ?>
-                            <li class="nav-pending-product-comments"><a href="<?php echo admin_url(); ?>pending-product-comments"> <?php echo trans("product_comments"); ?></a></li>
-                            <li class="nav-pending-blog-comments"><a href="<?php echo admin_url(); ?>pending-blog-comments"> <?php echo trans("blog_comments"); ?></a></li>
-                        <?php else: ?>
-                            <li class="nav-product-comments"><a href="<?php echo admin_url(); ?>product-comments"> <?php echo trans("product_comments"); ?></a></li>
-                            <li class="nav-blog-comments"><a href="<?php echo admin_url(); ?>blog-comments"> <?php echo trans("blog_comments"); ?></a></li>
-                        <?php endif; ?>
-                    </ul>
-                </li>
+
                 <li class="nav-abuse-reports">
                     <a href="<?php echo admin_url(); ?>abuse-reports">
                         <i class="fa fa-warning" aria-hidden="true"></i>

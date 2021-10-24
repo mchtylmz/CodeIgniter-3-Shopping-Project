@@ -27,22 +27,22 @@
                             <div class="bounce3"></div>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="username" class="form-control auth-form-input" placeholder="<?php echo trans("username"); ?>" value="<?php echo old("username"); ?>" maxlength="<?php echo $this->username_maxlength; ?>" required>
+                            <input type="text" name="username" class="form-control auth-form-input" placeholder="<?php echo trans("username"); ?>" value="<?php echo old("username"); ?>" maxlength="<?php echo $this->username_maxlength; ?>" autocomplete="off" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="first_name" class="form-control auth-form-input" placeholder="<?php echo trans("first_name"); ?>" value="<?php echo old("first_name"); ?>" maxlength="255" required>
+                            <input type="text" name="first_name" class="form-control auth-form-input" placeholder="<?php echo trans("first_name"); ?>" value="<?php echo old("first_name"); ?>" maxlength="255" autocomplete="off" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="last_name" class="form-control auth-form-input" placeholder="<?php echo trans("last_name"); ?>" value="<?php echo old("last_name"); ?>" maxlength="255" required>
+                            <input type="text" name="last_name" class="form-control auth-form-input" placeholder="<?php echo trans("last_name"); ?>" value="<?php echo old("last_name"); ?>" maxlength="255" autocomplete="off" required>
                         </div>
                         <div class="form-group">
-                            <input type="email" name="email" class="form-control auth-form-input" placeholder="<?php echo trans("email_address"); ?>" value="<?php echo old("email"); ?>" maxlength="255" required>
+                            <input type="email" name="email" class="form-control auth-form-input" placeholder="<?php echo trans("email_address"); ?>" value="<?php echo old("email"); ?>" maxlength="255" autocomplete="off" required>
                         </div>
                         <div class="form-group">
-                            <input type="password" name="password" class="form-control auth-form-input" placeholder="<?php echo trans("password"); ?>" value="<?php echo old("password"); ?>" minlength="4" maxlength="255" required>
+                            <input type="password" name="password" class="form-control auth-form-input" placeholder="<?php echo trans("password"); ?>" value="<?php echo old("password"); ?>" minlength="4" autocomplete="off" maxlength="255" required>
                         </div>
                         <div class="form-group">
-                            <input type="password" name="confirm_password" class="form-control auth-form-input" placeholder="<?php echo trans("password_confirm"); ?>" maxlength="255" required>
+                            <input type="password" name="confirm_password" class="form-control auth-form-input" autocomplete="off" placeholder="<?php echo trans("password_confirm"); ?>" maxlength="255" required>
                         </div>
                         <div class="form-group m-t-5 m-b-20">
                             <div class="custom-control custom-checkbox custom-control-validate-input">

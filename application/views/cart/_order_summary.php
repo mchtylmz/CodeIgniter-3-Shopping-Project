@@ -31,9 +31,17 @@
                                         <?php echo html_escape($cart_item->product_title); ?>
                                     </a>
                                 </div>
+
+                                <?php if (active_nebimv3()): ?>
+                                <div class="list-item seller">
+                                    <?php echo trans("barcode"); ?>:&nbsp; <?=$cart_item->barcode?>
+                                </div>
+                                <?php else: ?>
                                 <div class="list-item seller">
                                     <?php echo trans("by"); ?>&nbsp;<a href="<?php echo generate_profile_url($product->user_slug); ?>"><?php echo get_shop_name_product($product); ?></a>
                                 </div>
+                                <?php endif; ?>
+
                                 <div class="list-item m-t-15">
                                     <label><?php echo trans("quantity"); ?>:</label>
                                     <strong class="lbl-price"><?php echo $cart_item->quantity; ?></strong>

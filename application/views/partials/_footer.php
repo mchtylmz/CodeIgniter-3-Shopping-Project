@@ -151,6 +151,7 @@
 <script src="<?= base_url(); ?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="<?= base_url(); ?>assets/js/plugins-1.8.js"></script>
 <script src="<?= base_url(); ?>assets/js/script-1.8.min.js"></script>
+<script src="<?=base_url()?>assets/credit-card/jquery.creditCardValidator.js" charset="utf-8"></script>
 <?php if (!empty($this->session->userdata('mc20bt99_send_email_data'))): ?>
 <script>$(document).ready(function () {var data = JSON.parse(<?= json_encode($this->session->userdata("mc20bt99_send_email_data"));?>);if (data) {data[mc20bt99_config.csfr_token_name] = $.cookie(mc20bt99_config.csfr_cookie_name);data["sys_lang_id"] = mc20bt99_config.sys_lang_id;$.ajax({type: "POST", url: "<?= base_url(); ?>mds-send-email-post", data: data, success: function (response) {}});}});</script>
 <?php endif;$this->session->unset_userdata('mc20bt99_send_email_data'); ?>

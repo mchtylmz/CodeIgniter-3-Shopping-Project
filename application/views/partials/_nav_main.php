@@ -2,7 +2,7 @@
 <?php $menu_subcategory_display_limit = 6;
 if ($this->general_settings->selected_navigation == 1): ?>
 <div class="container">
-<div class="navbar navbar-light navbar-expand">
+<div class="navbar navbar-light justify-content-start navbar-expand">
 <ul class="nav navbar-nav mega-menu">
 <?php $limit = $this->general_settings->menu_limit;
 $count = 1;
@@ -19,8 +19,8 @@ if ($count <= $limit):?>
 if (!empty($subcategories)): ?>
 <div id="mega_menu_content_<?php echo $category->id; ?>" class="dropdown-menu">
 <div class="row">
-<div class="col-8 menu-subcategories col-category-links">
-<div class="card-columns">
+<div class="col-12 menu-subcategories col-category-links" style="flex: 0 0 100%; max-width: 100%">
+<div class="card-columns" style="column-count:5; -webkit-column-count:5">
 <?php foreach ($subcategories as $subcategory):
 if (!empty($subcategory->image) && $subcategory->show_image_on_navigation == 1) {
 array_push($array_image_categories, $subcategory);
@@ -52,6 +52,7 @@ endforeach; ?>
 <?php endforeach; ?>
 </div>
 </div>
+<!--
 <div class="col-4 col-category-images">
 <?php foreach ($array_image_categories as $image_category): ?>
 <div class="nav-category-image">
@@ -62,6 +63,7 @@ endforeach; ?>
 </div>
 <?php endforeach; ?>
 </div>
+-->
 </div>
 </div>
 <?php endif; ?>
@@ -136,7 +138,7 @@ foreach ($subcategories as $subcategory): ?>
 <?php $third_categories = !empty($this->categories_array[$subcategory->id]) ? $this->categories_array[$subcategory->id] : null;
 if (!empty($third_categories)): ?>
 <div class="row">
-<div class="card-columns">
+<div class="card-columns" style="column-count:5; -webkit-column-count:5">
 <?php foreach ($third_categories as $third_category): ?>
 <div class="card item-large-menu-content">
 <a id="nav_main_category_<?= $third_category->id; ?>" href="<?php echo generate_category_url($third_category); ?>" class="second-category nav-main-category" data-id="<?= $third_category->id; ?>" data-parent-id="<?= $third_category->parent_id; ?>" data-has-sb="0"><?php echo category_name($third_category); ?></a>

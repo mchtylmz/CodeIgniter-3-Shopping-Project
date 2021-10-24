@@ -40,6 +40,32 @@
                              value="<?php echo $this->general_settings->nebim_integrator_url; ?>" <?php echo ($this->rtl == true) ? 'dir="rtl"' : ''; ?> required>
                       <small>Örneğin; http://93.182.75.201:2366/ - Sonu / işareti bitmeli!</small>
                   </div>
+
+                  <hr>
+
+                  <div class="form-group">
+                      <label class="label-sitemap"><?php echo trans('nebim_renk_customfield'); ?></label>
+                      <select class="form-control" name="nebim_renk_customfield">
+                        <option value=""><?=trans('choose_option')?></option>
+                        <?php foreach ($custom_fields = $this->field_model->get_fields() as $key => $field): ?>
+                          <option value="<?=$field->id?>" <?=$this->general_settings->nebim_renk_customfield == $field->id ? 'selected':''?>>
+                            <?=parse_serialized_name_array($field->name_array, $this->selected_lang->id)?>
+                          </option>
+                        <?php endforeach; ?>
+                      </select>
+                  </div>
+                  <div class="form-group">
+                      <label class="label-sitemap"><?php echo trans('nebim_beden_customfield'); ?></label>
+                      <select class="form-control" name="nebim_beden_customfield">
+                        <option value=""><?=trans('choose_option')?></option>
+                        <?php foreach ($custom_fields = $this->field_model->get_fields() as $key => $field): ?>
+                          <option value="<?=$field->id?>" <?=$this->general_settings->nebim_beden_customfield == $field->id ? 'selected':''?>>
+                            <?=parse_serialized_name_array($field->name_array, $this->selected_lang->id)?>
+                          </option>
+                        <?php endforeach; ?>
+                      </select>
+                  </div>
+
               </div>
               <!-- /.box-body -->
               <div class="box-footer">

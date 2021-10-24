@@ -353,7 +353,7 @@
         </div>
     </div>
 
-<?php $this->load->view("partials/_modal_send_message", ["subject" => html_escape($title)]); ?>
+<?php $this->load->view("partials/_modal_send_message", ["subject" => html_escape($title . " (SKU: $product->sku)")]); ?>
 
 <?php if ($this->auth_check && $product->user_id != $this->auth_user->id): ?>
     <div class="modal fade" id="reportProductModal" tabindex="-1" role="dialog" aria-hidden="true">
