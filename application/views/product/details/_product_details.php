@@ -35,6 +35,7 @@
         <?php elseif ($product->visibility == 0): ?>
             <label class="badge badge-danger badge-product-status"><?php echo trans("hidden"); ?></label>
         <?php endif; ?>
+        <?php /* ?>
         <div class="row-custom meta">
             <div class="product-details-user">
                 <?php echo trans("by"); ?>&nbsp;<a href="<?php echo generate_profile_url($product->user_slug); ?>"><?php echo character_limiter(get_shop_name_product($product), 30, '..'); ?></a>
@@ -51,6 +52,7 @@
             <span><i class="icon-heart"></i><?php echo get_product_wishlist_count($product->id); ?></span>
             <span><i class="icon-eye"></i><?php echo html_escape($product->pageviews); ?></span>
         </div>
+        <?php */ ?>
         <div class="row-custom price">
             <div id="product_details_price_container" class="d-inline-block">
                 <?php $this->load->view("product/details/_price", ['product' => $product, 'price' => $product->price, 'discount_rate' => $product->discount_rate]); ?>
@@ -74,10 +76,12 @@
         <div class="row-custom details">
             <?php if ($product->listing_type != 'ordinary_listing' && $product->product_type != 'digital'): ?>
                 <div class="item-details">
+                    <!--
                     <div class="left">
                         <label><?php echo trans("status"); ?></label>
                     </div>
-                    <div id="text_product_stock_status" class="right">
+                    -->
+                    <div id="text_product_stock_status" class="left">
                         <?php if (check_product_stock($product)): ?>
                             <span class="status-in-stock text-success"><?php echo trans("in_stock") ?></span>
                         <?php else: ?>
@@ -88,10 +92,12 @@
             <?php endif; ?>
             <?php if ($this->product_settings->marketplace_sku == 1 && !empty($product->sku)): ?>
                 <div class="item-details">
+                    <!--
                     <div class="left">
                         <label><?php echo trans("sku"); ?></label>
                     </div>
-                    <div class="right">
+                    -->
+                    <div class="left">
                         <span><?php echo html_escape($product->sku); ?></span>
                     </div>
                 </div>
@@ -146,12 +152,24 @@
 <div class="row">
     <div class="col-12 product-add-to-cart-container">
         <?php if ($product->is_sold != 1 && $product->listing_type != 'ordinary_listing' && $product->product_type != 'digital'): ?>
+          <style media="screen">
+          /* Chrome, Safari, Edge, Opera */
+          input::-webkit-outer-spin-button,
+          input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+          }
+          /* Firefox */
+          input[type=number] {
+          -moz-appearance: textfield;
+          }
+          </style>
             <div class="number-spinner">
                 <div class="input-group">
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default btn-spinner-minus" data-dir="dwn">-</button>
                         </span>
-                    <input type="text" class="form-control text-center" name="product_quantity" value="1">
+                    <input type="number" class="form-control text-center" name="product_quantity" data-max="<?=intval($product->stock)?>" value="1">
                     <span class="input-group-btn">
                             <button type="button" class="btn btn-default btn-spinner-plus" data-dir="up">+</button>
                         </span>

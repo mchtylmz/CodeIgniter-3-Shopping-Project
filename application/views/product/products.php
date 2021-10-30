@@ -38,6 +38,10 @@
                     <?php $filter_sort = str_slug($this->input->get('sort', true)); ?>
                     <div class="sort-select">
                         <select id="select_sort_items" class="custom-select" data-current-url="<?= current_url(); ?>" data-query-string="<?= generate_filter_url($query_string_array, 'rmv_srt', ''); ?>" data-page="products">
+                            <option value="rand"<?= $filter_sort == 'rand' ? ' selected' : ''; ?>><?= trans("rand"); ?></option>
+                            <!--<option value="az"<?= $filter_sort == 'az' ? ' selected' : ''; ?>><?= trans("name_az"); ?></option> -->
+                            <!-- <option value="za"<?= $filter_sort == 'za' ? ' selected' : ''; ?>><?= trans("name_za"); ?></option> -->
+                            <option value="most_popular"<?= $filter_sort == 'most_popular' ? ' selected' : ''; ?>><?= trans("most_popular"); ?></option>
                             <option value="most_recent"<?= $filter_sort == 'most_recent' ? ' selected' : ''; ?>><?= trans("most_recent"); ?></option>
                             <option value="lowest_price"<?= $filter_sort == 'lowest_price' ? ' selected' : ''; ?>><?= trans("lowest_price"); ?></option>
                             <option value="highest_price"<?= $filter_sort == 'highest_price' ? ' selected' : ''; ?>><?= trans("highest_price"); ?></option>
@@ -206,7 +210,6 @@
                 </div>
                 <div class="product-list-content">
                     <div class="row row-product">
-                        <!--print products-->
                         <?php foreach ($products as $product): ?>
                             <div class="col-6 col-sm-4 col-md-4 col-lg-3 col-product">
                                 <?php $this->load->view('product/_product_item', ['product' => $product, 'promoted_badge' => true]); ?>

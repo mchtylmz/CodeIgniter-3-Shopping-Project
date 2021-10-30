@@ -64,9 +64,9 @@
                             <input type="text" name="username" class="form-control form-input" value="<?php echo html_escape($user->username); ?>" placeholder="<?php echo trans("username"); ?>" maxlength="<?php echo $this->username_maxlength; ?>" required>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group" style="display:none">
                             <label class="control-label"><?php echo trans("slug"); ?></label>
-                            <input type="text" name="slug" class="form-control form-input" value="<?php echo html_escape($user->slug); ?>" placeholder="<?php echo trans("slug"); ?>" maxlength="200" required>
+                            <input type="hidden" name="slug" class="form-control form-input" value="<?php echo html_escape($user->slug); ?>" placeholder="<?php echo trans("slug"); ?>" maxlength="200" required>
                         </div>
 
                         <div class="form-group">
@@ -104,7 +104,7 @@
                             </div>
                         </div>
                         <?php if ($this->auth_user->role == "admin" || $this->general_settings->hide_vendor_contact_information != 1): ?>
-                            <div class="form-group m-t-15">
+                            <div class="form-group m-t-0">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" name="show_email" value="1" id="checkbox_show_email" class="custom-control-input" <?php echo ($this->auth_user->show_email == 1) ? 'checked' : ''; ?>>
                                     <label for="checkbox_show_email" class="custom-control-label"><?php echo trans("show_my_email"); ?></label>
@@ -117,12 +117,15 @@
                                 </div>
                             </div>
                         <?php endif; ?>
+                        <?php /*
                         <div class="form-group m-b-30">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="show_location" value="1" id="checkbox_show_location" class="custom-control-input" <?php echo ($this->auth_user->show_location == 1) ? 'checked' : ''; ?>>
                                 <label for="checkbox_show_location" class="custom-control-label"><?php echo trans("show_my_location"); ?></label>
                             </div>
                         </div>
+                        */ ?>
+                        <br>
                         <button type="submit" name="submit" value="update" class="btn btn-md btn-custom"><?php echo trans("save_changes") ?></button>
                         <?php echo form_close(); ?>
 
@@ -133,4 +136,3 @@
     </div>
 </div>
 <!-- Wrapper End-->
-

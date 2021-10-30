@@ -193,13 +193,13 @@
                                 <li class="nav-completed-sales"><a href="<?= generate_dash_url("completed_sales"); ?>"><?= trans("completed_sales"); ?></a></li>
                             </ul>
                         </li>
-                        <?php /*
                         <li class="nav-earnings">
                             <a href="<?= generate_dash_url("earnings"); ?>">
                                 <i class="fa fa-money"></i>
                                 <span><?php echo trans("earnings"); ?></span>
                             </a>
                         </li>
+                        <?php /*
                         <li class="treeview<?php is_admin_nav_active(['withdraw-money', 'payouts', 'set-payout-account']); ?>">
                             <a href="#">
                                 <i class="fa fa-credit-card-alt" style="font-size: 14px;"></i>

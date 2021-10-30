@@ -1,6 +1,20 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <!-- Wrapper -->
-<div id="wrapper">
+<style>
+body {
+	background-image: url('<?=base_url()?>assets/img/maintenance_bg.jpg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.auth-container {
+	min-height: 440px !important;
+}
+.auth-box, #footer {
+  margin-top: 0 !important
+}
+</style>
+<div id="wrapper" style="background-color: rgba(0,0,0,0.5)">
 	<div class="container">
 		<div class="auth-container">
 			<div class="auth-box">

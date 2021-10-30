@@ -61,7 +61,7 @@
                             <button class="btn btn-md btn-outline-gray" data-toggle="modal" data-target="#messageModal"><i class="icon-envelope"></i><?php echo trans("ask_question") ?></button>
 
                             <!--form follow-->
-                            <?php echo form_open('follow-unfollow-user-post', ['class' => 'form-inline']); ?>
+                            <?php /*echo form_open('follow-unfollow-user-post', ['class' => 'form-inline']); ?>
                             <input type="hidden" name="following_id" value="<?php echo $user->id; ?>">
                             <input type="hidden" name="follower_id" value="<?php echo $this->auth_user->id; ?>">
                             <?php if (is_user_follows($user->id, $this->auth_user->id)): ?>
@@ -69,7 +69,7 @@
                             <?php else: ?>
                                 <button class="btn btn-md btn-outline-gray"><i class="icon-user-plus"></i><?php echo trans("follow"); ?></button>
                             <?php endif; ?>
-                            <?php echo form_close(); ?>
+                            <?php echo form_close(); */ ?>
                         <?php endif; ?>
                     <?php else: ?>
                         <button class="btn btn-md btn-outline-gray" data-toggle="modal" data-target="#loginModal"><i class="icon-envelope"></i><?php echo trans("ask_question") ?></button>

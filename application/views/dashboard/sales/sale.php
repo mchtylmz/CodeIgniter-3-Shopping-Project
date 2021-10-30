@@ -167,7 +167,7 @@
                                                 <a href="<?php echo generate_product_url_by_slug($item->product_slug); ?>" target="_blank" class="table-product-title">
                                                     <?php echo html_escape($item->product_title); ?>
                                                 </a>
-                                                <p class="m-b-15">
+                                                <p class="m-b-0" style="margin-top:5px!important">
                                                     <?php if (active_nebimv3()): ?>
                                                       <span><?php echo trans("barcode"); ?>:</span>
                                                       <strong class="font-600"><?php echo $item->variation_option_barcodes ?></strong>
@@ -180,6 +180,10 @@
                                                           </a>
                                                       <?php endif; ?>
                                                     <?php endif; ?>
+                                                </p>
+                                                <p class="m-b-15">
+                                                  <span><?php echo trans("sku"); ?>:</span>
+                                                  <strong class="font-600"><?php echo $item->product_sku; ?></strong>
                                                 </p>
                                                 <p><span class="span-product-dtl-table"><?php echo trans("unit_price"); ?>:</span><?php echo price_formatted($item->product_unit_price, $item->product_currency); ?></p>
                                                 <p><span class="span-product-dtl-table"><?php echo trans("quantity"); ?>:</span><?php echo $item->product_quantity; ?></p>
@@ -262,6 +266,16 @@
                             </div>
                         </div>
                     <?php endif; ?>
+                    <?php if ($order->coupon_code && $order->coupon_discount): ?>
+                      <div class="row">
+                          <div class="col-sm-6 col-xs-6 col-left">
+                              <?php echo trans("discount"); ?>
+                          </div>
+                          <div class="col-sm-6 col-xs-6 col-right">
+                              <?=$order->coupon_code?> (<strong><?php echo price_formatted($order->coupon_discount, $order->price_currency); ?></strong>)
+                          </div>
+                      </div>
+                    <?php endif; ?>
                     <div class="row">
                         <div class="col-sm-6 col-xs-6 col-left">
                             <?php echo trans("shipping"); ?>
@@ -280,7 +294,10 @@
                             <?php echo trans("total"); ?>
                         </div>
                         <div class="col-sm-6 col-xs-6 col-right">
-                            <strong><?php echo price_formatted($sale_total + $sale_shipping, $order->price_currency); ?></strong>
+                            <?php /*
+<strong><?php echo price_formatted($sale_total + $sale_shipping, $order->price_currency); ?></strong>
+                            */ ?>
+                            <strong><?php echo price_formatted($order->price_total, $order->price_currency); ?></strong>
                         </div>
                     </div>
                 </div>

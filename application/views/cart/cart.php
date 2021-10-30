@@ -82,7 +82,7 @@
                                                                         <span class="input-group-btn">
                                                                             <button type="button" class="btn btn-default btn-spinner-minus" data-cart-item-id="<?php echo $cart_item->cart_item_id; ?>" data-dir="dwn">-</button>
                                                                         </span>
-                                                                        <input type="text" id="q-<?php echo $cart_item->cart_item_id; ?>" class="form-control text-center" value="<?php echo $cart_item->quantity; ?>" data-product-id="<?php echo $cart_item->product_id; ?>" data-cart-item-id="<?php echo $cart_item->cart_item_id; ?>">
+                                                                        <input type="text" id="q-<?php echo $cart_item->cart_item_id; ?>" class="form-control text-center" value="<?php echo $cart_item->quantity; ?>" data-max="<?=$cart_item->max_stock?>" data-product-id="<?php echo $cart_item->product_id; ?>" data-cart-item-id="<?php echo $cart_item->cart_item_id; ?>">
                                                                         <span class="input-group-btn">
                                                                             <button type="button" class="btn btn-default btn-spinner-plus" data-cart-item-id="<?php echo $cart_item->cart_item_id; ?>" data-dir="up">+</button>
                                                                         </span>
@@ -101,8 +101,16 @@
                             <div class="col-sm-12 col-lg-4">
                                 <div class="right">
                                     <div class="row-custom m-b-15">
+                                        <?php $this->load->view('cart/coupon'); ?>
+                                    </div>
+                                    <div class="row-custom m-b-15">
                                         <strong><?php echo trans("subtotal"); ?><span class="float-right"><?= price_decimal($cart_total->subtotal, $cart_total->currency); ?></span></strong>
                                     </div>
+                                    <?php if (isset($cart_total->discount) && $cart_total->discount): ?>
+                                      <div class="row-custom">
+                                          <strong><?php echo trans("discount"); ?><span class="float-right"><?= price_decimal($cart_total->discount, $cart_total->currency); ?></span></strong>
+                                      </div>
+                                    <?php endif; ?>
                                     <?php if (!empty($cart_total->vat)): ?>
                                         <div class="row-custom">
                                             <strong><?php echo trans("vat"); ?><span class="float-right"><?= price_decimal($cart_total->vat, $cart_total->currency); ?></span></strong>

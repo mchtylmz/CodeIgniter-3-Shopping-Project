@@ -26,6 +26,7 @@
 							<th><?php echo trans('products'); ?></th>
 							<th><?php echo trans('buyer'); ?></th>
 							<th><?php echo trans('total'); ?></th>
+							<th><?php echo trans('payment_method'); ?></th>
 							<th><?php echo trans('status'); ?></th>
 							<th><?php echo trans('date'); ?></th>
 							<th class="max-width-120"><?php echo trans('options'); ?></th>
@@ -50,7 +51,7 @@
 										<div class="d-flex" style="display:flex; align-items:center; flex-wrap: wrap;">
 											<?php foreach ($order_products as $order_product): ?>
 												<a href="<?php echo admin_url(); ?>product-details/<?=$order_product->product_id?>" target="_blank" data-toggle="tooltip" data-placement="top" title="<?=$order_product->product_title?>, <?=$order_product->variation_option_barcodes ?? ''?>">
-														<img style="height:48px; object-fit:contain; margin-right: 8px; border:solid 1px #555" src="<?php echo get_product_image($order_product->product_id, 'image_small'); ?>" data-src="" alt="" class="lazyload img-responsive post-image"/>
+														<img style="height:48px; object-fit:contain; margin: 2px 5px; border:solid 1px #555" src="<?php echo get_product_image($order_product->product_id, 'image_small'); ?>" data-src="" alt="" class="lazyload img-responsive post-image"/>
 												</a>
 											<?php endforeach; ?>
 										</div>
@@ -70,16 +71,16 @@
 										$buyer = get_user($item->buyer_id);
 										if (!empty($buyer)):?>
 											<div class="table-orders-user">
-												<a href="<?php echo generate_profile_url($buyer->slug); ?>" target="_blank">
-													<img src="<?php echo get_user_avatar($buyer); ?>" alt="buyer" class="img-responsive" style="height: 40px;">
-													<?php echo html_escape($buyer->username); ?>
-												</a>
+												<?php echo html_escape($buyer->username); ?>
+												<br>
+												<?php echo html_escape($buyer->email); ?>
 											</div>
 										<?php endif;
 									endif;
 									?>
 								</td>
 								<td><strong><?php echo price_formatted($item->price_total, $item->price_currency); ?></strong></td>
+								<td><?= get_payment_method($item->payment_method); ?></td>
 								<td>
 									<?php if ($item->status == 1): ?>
 										<label class="label label-success"><?php echo trans("completed"); ?></label>
@@ -95,8 +96,6 @@
 									<?php echo formatted_date($item->created_at); ?>
 								</td>
 								<td>
-									<?php echo form_open_multipart('order_admin_controller/order_options_post'); ?>
-									<input type="hidden" name="id" value="<?php echo $item->id; ?>">
 									<div class="dropdown">
 										<button class="btn bg-purple dropdown-toggle btn-select-option"
 												type="button"
@@ -112,9 +111,12 @@
 											</li>
 											<li>
 												<?php if ($item->payment_status != 'payment_received'): ?>
+													<?php echo form_open_multipart('order_admin_controller/order_options_post'); ?>
+													<input type="hidden" name="id" value="<?php echo $item->id; ?>">
 													<button type="submit" name="option" value="payment_received" class="btn-list-button">
 														<i class="fa fa-check option-icon"></i><?php echo trans('payment_received'); ?>
 													</button>
+													<?php echo form_close(); ?><!-- form end -->
 												<?php endif; ?>
 											</li>
 											<li>
@@ -126,7 +128,7 @@
 										<div class="modal fade" id="updateStatusModal_<?php echo $item->id; ?>" tabindex="-1" role="dialog" aria-hidden="true">
 						            <div class="modal-dialog modal-md modal-dialog-centered" role="document">
 						                <div class="modal-content modal-custom">
-															<?php echo form_open('admin_controller/admin_update_order_status_post'); ?>
+															<?php echo form_open('admin_controller/admin_update_order_status_post', ['id' => 'update_order_status']); ?>
 															<input type="hidden" name="id" value="<?php echo $item->id; ?>">
 															<div class="modal-header">
 																	<h5 class="modal-title"><?php echo trans("update_status"); ?></h5>
@@ -135,45 +137,55 @@
 																	</button>
 															</div>
 															<div class="modal-body">
-																<?php
-																if ($order_products): ?>
-																		<?php foreach ($order_products as $order_product): ?>
-																			<div class="row" style="align-items:center; margin-bottom: 15px; display: flex; flex-wrap: wrap;">
-																				<div class="col-sm-2">
-																					<img style="width: 100%; object-fit:contain; margin-right: 5px; border:solid 1px #555" src="<?php echo get_product_image($order_product->product_id, 'image_small'); ?>" data-src="" alt="" class="lazyload img-responsive post-image"/>
-																				</div>
-																				<div class="col-sm-10">
-																					<h5 class="list-group-item-heading"><?php echo html_escape($order_product->product_title); ?></h5>
-																					<p class="list-group-item-text">
-																						<?php if (active_nebimv3()): ?>
-																							<?php echo trans('barcode'); ?> : <?php echo $order_product->variation_option_barcodes; ?>
+																	<?php if ($order_products): ?>
+																	<div style="max-height: 540px; overflow-x: hidden; border: solid 1px #eee;">
+																			<?php foreach ($order_products as $order_product): ?>
+																				<div class="row" style="align-items:center; margin-bottom: 15px; display: flex; flex-wrap: wrap;">
+																					<div class="col-sm-3">
+																						<img style="width: 100%; object-fit:contain; margin-right: 5px; border:solid 1px #555" src="<?php echo get_product_image($order_product->product_id, 'image_small'); ?>" data-src="" alt="" class="lazyload img-responsive post-image"/>
+																					</div>
+																					<div class="col-sm-9">
+																						<h5 class="list-group-item-heading"><b><?php echo html_escape($order_product->product_title); ?></b></h5>
+																						<p class="list-group-item-text">
+																							<?php if (active_nebimv3()): ?>
+																								<?php echo trans('barcode'); ?> : <?php echo $order_product->variation_option_barcodes; ?>
+																								<br>
+																							<?php endif; ?>
+																							<?php echo trans('sku'); ?> : <?php echo $order_product->product_sku; ?>
 																							<br>
-																						<?php endif; ?>
-																						<?php echo trans('unit_price'); ?> : <?php echo price_formatted($order_product->product_unit_price, $order_product->product_currency); ?>
-																						<br>
-																						<?php echo trans('quantity'); ?> : <?php echo $order_product->product_quantity; ?>
-																						<br>
-																						<?php echo trans('total'); ?> : <?php echo price_formatted($item->price_total, $item->price_currency); ?>
-																					</p>
+																							<?php echo trans('unit_price'); ?> : <?php echo price_formatted($order_product->product_unit_price, $order_product->product_currency); ?>
+																							<br>
+																							<?php echo trans('quantity'); ?> : <?php echo $order_product->product_quantity; ?>
+																							<br>
+																							<?php echo trans('total'); ?> : <?php echo price_formatted($order_product->product_total_price, $item->price_currency); ?>
+																						</p>
+																					</div>
 																				</div>
+																			<?php endforeach; ?>
 																			</div>
-																		<?php endforeach; ?>
-																<?php endif; ?>
+																			<br>
+																	<?php endif; ?>
 																	<div class="row">
 																			<div class="col-sm-12">
 																					<div class="form-group">
 																							<label class="control-label"><?php echo trans('status'); ?></label>
-																							<select id="select_order_status" name="status" class="form-control custom-select" data-order-id="<?php echo $sale->id; ?>">
+																							<select id="select_order_status" name="order_status" class="form-control custom-select" data-order-id="<?php echo $item->id; ?>">
 																								<option value="" hidden><?php echo trans("status"); ?></option>
+																								<?php if ($item->status == 0): ?>
 																								<option value="awaiting_payment"><?php echo trans("awaiting_payment"); ?></option>
 																								<option value="payment_received"><?php echo trans("payment_received"); ?></option>
 																								<option value="order_processing"><?php echo trans("order_processing"); ?></option>
 																								<option value="shipped"><?php echo trans("shipped"); ?></option>
+																								<?php endif; ?>
+																								<?php if ($item->status != 1): ?>
 																								<option value="completed"><?php echo trans("completed"); ?></option>
+																								<?php endif; ?>
+																								<?php if ($item->status != 2): ?>
 																								<option value="cancelled"><?php echo trans("cancelled"); ?></option>
+																								<?php endif; ?>
 																							</select>
 																					</div>
-																					<div class="row tracking-number-container <?= $sale->status != '1' ? 'display-none' : ''; ?>">
+																					<div class="row tracking-number-container <?= $item->status != '1' ? 'display-none' : ''; ?>">
 																							<hr>
 																							<div class="col-12 text-center">
 																									<strong><?= trans("shipping"); ?></strong>
@@ -203,7 +215,6 @@
 								    <!-- Modal -->
 
 									</div>
-									<?php echo form_close(); ?><!-- form end -->
 								</td>
 							</tr>
 
@@ -239,4 +250,9 @@
             $(".tracking-number-container").hide();
         }
     });
+</script>
+<script type="text/javascript">
+  $('form#update_order_status').submit(function(event) {
+    $(this).find('button[type=submit]').attr('disabled', 'disabled').text('<?=trans('please_wait')?>');
+  });
 </script>

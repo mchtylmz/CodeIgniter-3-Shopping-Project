@@ -26,7 +26,7 @@
                            value="<?php echo old('code') ?? ($coupon->code ?? ''); ?>" <?php echo ($this->rtl == true) ? 'dir="rtl"' : ''; ?> required>
                 </div>
                 <div class="row">
-                  <div class="col-lg-6">
+                  <div class="col-lg-4">
                     <div class="form-group">
                         <label class="control-label"><?php echo trans('coupon_type'); ?></label>
                         <?php $coupon_type = old('type') ?? ($coupon->type ?? ''); ?>
@@ -36,11 +36,18 @@
                         </select>
                     </div>
                   </div>
-                  <div class="col-lg-6">
+                  <div class="col-lg-4">
                     <div class="form-group">
                         <label class="control-label"><?php echo trans('discount'); ?></label>
                         <input type="number" step="0.01" class="form-control" name="discount" placeholder="<?php echo trans('discount'); ?>"
                                value="<?php echo old('discount') ?? ($coupon->discount ?? ''); ?>" <?php echo ($this->rtl == true) ? 'dir="rtl"' : ''; ?> required>
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                        <label class="control-label"><?php echo trans('allow_use'); ?></label>
+                        <input type="number" step="1" min="1" class="form-control" name="allow_count" placeholder="1.2.3.4.5..."
+                               value="<?php echo old('allow_count') ?? ($coupon->allow_count ?? ''); ?>" <?php echo ($this->rtl == true) ? 'dir="rtl"' : ''; ?> required>
                     </div>
                   </div>
                 </div> <!-- row -->
@@ -129,6 +136,7 @@
                                   <?php endif; ?>
                                     <th><?php echo trans('coupon_code'); ?></th>
                                     <th><?php echo trans('discount'); ?></th>
+                                    <th><?php echo trans('coupon_use'); ?></th>
                                     <th><?php echo trans('status'); ?></th>
                                     <th><?php echo trans('date'); ?></th>
                                     <th class="th-options"><?php echo trans('options'); ?></th>
@@ -143,6 +151,9 @@
                                         <td><?php echo html_escape($coupon->code); ?></td>
                                         <td>
                                           <?=$coupon->type == 'percent' ? 'Yüzde':'Miktar'?> - <?php echo $coupon->discount; ?>
+                                        </td>
+                                        <td>
+                                          <?=$coupon->allow_count?> / <?=$coupon->use_count?>
                                         </td>
                                         <td>
                                           <?php if ($coupon->status == 1): ?>
@@ -164,6 +175,9 @@
                                                     <span class="caret"></span>
                                                 </button>
                                                 <ul class="dropdown-menu options-dropdown">
+                                                  <li>
+                                                      <a href="<?php echo admin_url(); ?>orders?coupon=<?php echo $coupon->code; ?>"><i class="fa fa-shopping-cart option-icon"></i><?php echo trans('orders'); ?></a>
+                                                  </li>
                                                     <li>
                                                         <a href="<?php echo admin_url(); ?>coupons?id=<?php echo html_escape($coupon->id); ?>"><i class="fa fa-edit option-icon"></i><?php echo trans('edit'); ?></a>
                                                     </li>

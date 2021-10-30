@@ -9,7 +9,7 @@
     <meta name="keywords" content="<?= xss_clean($keywords); ?>"/>
     <meta name="author" content="<?= xss_clean($this->general_settings->application_name); ?>"/>
     <link rel="shortcut icon" type="image/png" href="<?= get_favicon($this->general_settings); ?>"/>
-    <meta property="og:locale" content="en-US"/>
+    <meta property="og:locale" content="tr-TR"/>
     <meta property="og:site_name" content="<?= xss_clean($this->general_settings->application_name); ?>"/>
 <?php if (isset($show_og_tags)): ?>
     <meta property="og:type" content="<?= !empty($og_type) ? $og_type : 'website'; ?>"/>
@@ -74,6 +74,82 @@ foreach ($this->languages as $language): ?>
     max-width: 150px;
     width: inherit;
   }
+  .product-item .img-product,
+  .img-product-container,
+  .col-content-products .product-item .img-product,
+  .col-content-products .img-product-container {
+    height: 300px
+  }
+  .index-mobile-slider .slider-container, .index-mobile-slider .item {
+    height: 580px !important;
+  }
+  .login-modal {
+    max-width: 400px;
+  }
+  .new-profile .notification {
+    position: absolute;
+    right: 5px;
+    top: 0;
+    font-size: 12px;
+    background-color: #f15e4f;
+    width: 18px;
+    border-radius: 50%;
+    display: block;
+    height: 18px;
+    line-height: 18px;
+    text-align: center;
+    color: #fff;
+    font-weight: 600;
+  }
+  .nav-item-language .info {
+    position: absolute;
+    right: 5px;
+    top: 0px;
+    font-size: 14px;
+    background-color: #eee;
+    width: 18px;
+    border-radius: 50%;
+    display: block;
+    height: 18px;
+    line-height: 18px;
+    text-align: center;
+    color: #000;
+    font-weight: 600;
+  }
+  .lb {width: 12.5px; height: 12.5px;}
+  .lb .cb {border-radius: 50%;border:solid 1px #eee;}
+  .lb.custom-control-label::before, .lb.custom-control-label::after {display: none;}
+  .custom-control-variation .option-out-of-stock {
+    background: linear-gradient(to left top, transparent 47.75%, red 49.5%, red 50.5%, transparent 52.25%);
+    text-decoration: unset;
+  }
+  .index-products-slider-nav .prev, .index-products-slider-nav .next, .main-slider-nav {
+    opacity: 0.8;
+  }
+  .slick-dots {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0 0 1rem 0;
+    list-style-type: none;
+  }
+  .slick-dots li {
+    margin: 0 0.25rem;
+  }
+  .slick-dots button {
+    display: block;
+    width: 0.75rem;
+    height: 0.75rem;
+    padding: 0;
+    border: none;
+    border-radius: 100%;
+    background-color: rgba(0,0,0,0.4);
+    text-indent: -9999px;
+    margin: 0px 3px;
+  }
+  .slick-dots li.slick-active button {
+    background-color: rgba(0,0,0,0.8);
+  }
 </style>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -85,7 +161,7 @@ foreach ($this->languages as $language): ?>
 </head>
 <body>
 <header id="header">
-    <?php $this->load->view("partials/_top_bar"); ?>
+    <?php // $this->load->view("partials/_top_bar"); ?>
     <div class="main-menu">
         <div class="container-fluid">
             <div class="row">
@@ -141,10 +217,23 @@ foreach ($this->languages as $language): ?>
                             </div>
                             <div class="col-md-3 nav-top-right" style="flex: 0 0 25%; max-width: 25%;">
                                 <ul class="nav align-items-center">
+                                    <li class="nav-item dropdown language-dropdown nav-item-language li-main-nav-right">
+                                      <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                                        <i class="icon-language"></i>
+                                        <span class="info"><?php echo case_converter($this->selected_lang->short_form, 'u'); ?> </span>
+                                      </a>
+                                      <div class="dropdown-menu">
+                                        <?php foreach ($this->languages as $language): ?>
+                                        <a href="<?php echo convert_url_by_language($language); ?>" class="dropdown-item <?php echo ($language->id == $this->selected_lang->id) ? 'selected' : ''; ?>">
+                                        <?php echo case_converter($language->short_form, 'u'); ?> - <?php echo $language->name; ?>
+                                        </a>
+                                        <?php endforeach; ?>
+                                      </div>
+                                    </li>
                                     <?php if ($this->is_sale_active): ?>
                                         <li class="nav-item nav-item-cart li-main-nav-right">
                                             <a href="<?php echo generate_url("cart"); ?>">
-                                                <i class="icon-cart"></i><span><?php echo trans("cart"); ?></span>
+                                                <i class="icon-cart"></i><!-- <span><?php echo trans("cart"); ?></span> -->
                                                 <?php $cart_product_count = get_cart_product_count();
                                                 if ($cart_product_count > 0): ?>
                                                     <span class="notification"><?php echo $cart_product_count; ?></span>
@@ -155,14 +244,60 @@ foreach ($this->languages as $language): ?>
                                     <?php if ($this->auth_check): ?>
                                         <li class="nav-item li-main-nav-right">
                                             <a href="<?php echo generate_url("wishlist") . "/" . $this->auth_user->slug; ?>">
-                                                <i class="icon-heart-o"></i><?php echo trans("wishlist"); ?>
+                                                <i class="icon-heart-o"></i><!-- <?php echo trans("wishlist"); ?> -->
                                             </a>
+                                        </li>
+                                        <?php /* ?>
+                                        <li class="nav-item dropdown profile-dropdown p-r-0 li-main-nav-right">
+                                            <a data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" style="padding-bottom: 0px; padding-top: 6px">
+                                                <img src="<?php echo get_user_avatar($this->auth_user); ?>" alt="<?php echo get_shop_name($this->auth_user); ?>" style="width: 28px; border-radius: 50%;">
+                                            </a>
+                                            <style media="screen">
+                                              .profile-dropdown .dropdown-menu li a i {
+                                                font-size: .9375rem;
+                                              }
+                                            </style>
+                                            <ul class="dropdown-menu custom">
+                                              <li>
+                                                <a href="<?php echo admin_url(); ?>">
+                                                <i class="icon-admin"></i>
+                                                <?php echo trans("admin_panel"); ?>
+                                                </a>
+                                              </li>
+                                              <li>
+                                                <a href="<?php echo generate_url("settings", "update_profile"); ?>">
+                                                <i class="icon-settings"></i>
+                                                <?php echo trans("settings"); ?>
+                                                </a>
+                                              </li>
+                                              <li>
+                                                <a href="<?php echo base_url(); ?>logout" class="logout">
+                                                <i class="icon-logout"></i>
+                                                <?php echo trans("logout"); ?>
+                                                </a>
+                                              </li>
+                                            </ul>
+                                        </li>
+                                        <?php */ ?>
+                                        <li class="nav-item li-main-nav-right">
+                                          <a href="javascript:void(0)" data-toggle="modal" data-target="#loginModal" class="nav-link new-profile" style="padding-bottom: 0px; padding-top: 6px">
+                                            <img src="<?php echo get_user_avatar($this->auth_user); ?>" alt="<?php echo get_shop_name($this->auth_user); ?>" style="width: 28px; border-radius: 50%;">
+                                            <?php if ($unread_message_count > 0): ?>
+                                            <span class="notification"><?php echo $unread_message_count; ?></span>
+                                            <?php endif; ?>
+                                          </a>
                                         </li>
                                     <?php else: ?>
                                         <li class="nav-item li-main-nav-right">
-                                            <a href="<?php echo generate_url("wishlist"); ?>">
-                                                <i class="icon-heart-o"></i><?php echo trans("wishlist"); ?>
+                                            <a href="<?php echo generate_url("wishlist"); ?>" style="padding-right:0">
+                                                <i class="icon-heart-o"></i><!-- <?php echo trans("wishlist"); ?> -->
                                             </a>
+                                        </li>
+
+                                        <li class="nav-item li-main-nav-right">
+                                          <a href="javascript:void(0)" data-toggle="modal" data-target="#loginModal" class="nav-link">
+                                            <i class="icon-user"></i>
+                                          </a>
                                         </li>
                                     <?php endif; ?>
                                     <?php /* if ($this->auth_check): ?>
@@ -288,6 +423,122 @@ foreach ($this->languages as $language): ?>
             </div>
         </div>
     </div>
+<?php else: ?>
+  <!-- Login Modal -->
+  <div class="modal fade" id="loginModal" role="dialog">
+      <div class="modal-dialog modal-dialog-centered login-modal" role="document">
+          <div class="modal-content">
+              <div class="auth-box">
+                  <button type="button" class="close" data-dismiss="modal" style="z-index: 9999"><i class="icon-close"></i></button>
+                  <div class="row align-items-center" style="margin-bottom: 15px;">
+                    <div class="col-4">
+                      <img style="width: 100%; border:solid 1px #eee" src="<?php echo get_user_avatar($this->auth_user); ?>" alt="<?php echo get_shop_name($this->auth_user); ?>" class="lazyload img-responsive post-image"/>
+                    </div>
+                    <div class="col-8">
+                      <a>
+                        <?=$this->auth_user->first_name?> <?=$this->auth_user->last_name?>
+                      </a>
+                      <p class="info">
+                        <?php echo $this->auth_user->phone_number; ?>
+                        <br>
+                        <?php echo character_limiter($this->auth_user->email, 20, '..'); ?>
+                      </p>
+                    </div>
+                  </div>
+
+                  <style media="screen">
+                    .account-menu a {margin: 2.5px 1.5px; text-align: center;}
+                    .account-menu a i {font-size: 1.5rem;}
+                  </style>
+                  <div class="row justify-content-center" style="padding: 10px;">
+                    <?php if ($this->auth_user->role == "admin"): ?>
+                    <div class="col-6 list-group account-menu">
+                      <a href="<?php echo admin_url(); ?>" class="list-group-item list-group-item-action border">
+                        <i class="icon-admin"></i>
+                        <br>
+                        <?php echo trans("admin_panel"); ?>
+                      </a>
+                    </div>
+                    <?php endif; ?>
+                    <?php if (is_user_vendor()): ?>
+                    <div class="col-6 list-group account-menu">
+                      <a href="<?php echo admin_url(); ?>" class="list-group-item list-group-item-action border">
+                          <i class="icon-dashboard"></i>
+                          <br>
+                          <?php echo trans("dashboard"); ?>
+                      </a>
+                    </div>
+                    <?php endif; ?>
+                    <?php if ($this->is_sale_active): ?>
+                    <div class="col-6 list-group account-menu">
+                      <a href="<?php echo generate_url("orders"); ?>" class="list-group-item list-group-item-action border">
+                          <i class="icon-shopping-basket"></i>
+                          <br>
+                          <?php echo trans("orders"); ?>
+                      </a>
+                    </div>
+                    <?php if (is_bidding_system_active()): ?>
+                    <div class="col-6 list-group account-menu">
+                      <a href="<?php echo generate_url("quote_requests"); ?>" class="list-group-item list-group-item-action border">
+                          <i class="icon-price-tag-o"></i>
+                          <br>
+                          <?php echo trans("quote_requests"); ?>
+                      </a>
+                    </div>
+                    <?php endif; ?>
+                    <?php if ($this->general_settings->digital_products_system == 1): ?>
+                    <div class="col-6 list-group account-menu">
+                      <a href="<?php echo generate_url("downloads"); ?>" class="list-group-item list-group-item-action border">
+                          <i class="icon-download"></i>
+                          <br>
+                          <?php echo trans("downloads"); ?>
+                      </a>
+                    </div>
+                    <?php endif; ?>
+                    <?php endif; ?>
+                    <div class="col-6 list-group account-menu">
+                      <a href="<?php echo generate_url("messages"); ?>" class="list-group-item list-group-item-action border">
+                          <i class="icon-mail"></i>
+                          <br>
+                          <?php echo trans("messages"); ?>&nbsp;<?php if ($unread_message_count > 0): ?>
+                          <span class="span-message-count"><?php echo $unread_message_count; ?></span>
+                          <?php endif; ?>
+                      </a>
+                    </div>
+                    <div class="col-6 list-group account-menu">
+                      <a href="<?php echo generate_url("settings", "shipping_address"); ?>" class="list-group-item list-group-item-action border">
+                          <i class="icon-search"></i>
+                          <br>
+                          <?php echo trans("my_address"); ?>
+                      </a>
+                    </div>
+                    <div class="col-6 list-group account-menu">
+                      <a href="<?php echo generate_url("wishlist") . "/" . $this->auth_user->slug; ?>" class="list-group-item list-group-item-action border">
+                          <i class="icon-heart-o"></i>
+                          <br>
+                          <?php echo trans("wishlist"); ?>
+                      </a>
+                    </div>
+                    <div class="col-6 list-group account-menu">
+                      <a href="<?php echo generate_url("settings", "update_profile"); ?>" class="list-group-item list-group-item-action border">
+                          <i class="icon-settings"></i>
+                          <br>
+                          <?php echo trans("settings"); ?>
+                      </a>
+                    </div>
+                    <div class="col-6 list-group account-menu">
+                      <a href="<?php echo base_url(); ?>logout" class="list-group-item list-group-item-action border">
+                          <i class="icon-logout"></i>
+                          <br>
+                          <?php echo trans("logout"); ?>
+                      </a>
+                    </div>
+                  </div> <!-- row-->
+                </div> <!-- authbox-->
+              </div>
+          </div>
+      </div>
+  </div>
 <?php endif; ?>
 
 <?php if ($this->general_settings->location_search_header == 1): ?>
@@ -296,7 +547,7 @@ foreach ($this->languages as $language): ?>
             <div class="modal-content">
                 <div class="auth-box">
                     <button type="button" class="close" data-dismiss="modal"><i class="icon-close"></i></button>
-                    <h4 class="title"><?php echo trans("select_location"); ?></h4>
+                    <h4 class="title text-left"><?php echo trans("select_location"); ?></h4>
                     <p class="location-modal-description"><?php echo trans("location_exp"); ?></p>
                     <div class="form-group m-b-20">
                         <div class="input-group input-group-location">

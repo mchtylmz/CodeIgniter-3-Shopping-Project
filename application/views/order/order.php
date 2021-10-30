@@ -45,12 +45,15 @@
                                             <?php echo trans("status"); ?>
                                         </div>
                                         <div class="col-9">
-                                            <?php if ($order->status == 1): ?>
-                                                <strong><?php echo trans("completed"); ?></strong>
-                                            <?php else: ?>
-                                                <strong><?php echo trans("order_processing"); ?></strong>
-                                            <?php endif; ?>
-
+                                            <b><?php
+                                            if ($order->status == 1):
+                															echo '<span class="text-success">'.trans("completed").'</label>';
+                														elseif ($order->status == 2):
+                															echo '<span class="text-danger">'.trans("cancelled").'</label>';
+                														else:
+                															echo '<span class="text-default">'.trans("order_processing").'</label>';
+                														endif;
+                                            ?></b>
                                             <a href="<?php echo lang_base_url(); ?>invoice/<?php echo $order->order_number; ?>" target="_blank" class="btn btn-sm btn-info btn-sale-options btn-view-invoice"><i class="icon-text-o"></i>&nbsp;<?php echo trans('view_invoice'); ?></a>
                                         </div>
                                     </div>
@@ -268,9 +271,12 @@
                                             <thead>
                                             <tr>
                                                 <th scope="col"><?php echo trans("product"); ?></th>
+                                                <th scope="col"><?php echo trans("unit_price"); ?></th>
+                                                <th scope="col"><?php echo trans("quantity"); ?></th>
+                                                <th scope="col"><?php echo trans("total"); ?></th>
                                                 <th scope="col"><?php echo trans("status"); ?></th>
                                                 <th scope="col"><?php echo trans("updated"); ?></th>
-                                                <th scope="col"><?php echo trans("options"); ?></th>
+                                                <!-- <th scope="col"><?php echo trans("options"); ?></th> -->
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -289,10 +295,10 @@
                                                                 </div>
                                                             </div>
                                                             <div class="right">
-                                                                <a href="<?php echo generate_product_url_by_slug($item->product_slug); ?>" target="_blank" class="table-product-title">
+                                                                <a href="<?php echo generate_product_url_by_slug($item->product_slug); ?>" target="_blank" class="table-product-title m-b-15">
                                                                     <?php echo html_escape($item->product_title); ?>
                                                                 </a>
-                                                                <p class="m-b-15">
+                                                                <p class="m-b-0" style="margin-top:5px!important">
                                                                     <?php if (active_nebimv3()): ?>
                                                                       <span><?php echo trans("barcode"); ?>:</span>
                                                                       <strong class="font-600"><?php echo $item->variation_option_barcodes; ?></strong>
@@ -306,17 +312,19 @@
                                                                       <?php endif; ?>
                                                                     <?php endif; ?>
                                                                 </p>
-                                                                <p><span class="span-product-dtl-table"><?php echo trans("unit_price"); ?>:</span><?php echo price_formatted($item->product_unit_price, $item->product_currency); ?></p>
-                                                                <p><span class="span-product-dtl-table"><?php echo trans("quantity"); ?>:</span><?php echo $item->product_quantity; ?></p>
+                                                                <p class="m-b-15">
+                                                                  <span><?php echo trans("sku"); ?>:</span>
+                                                                  <strong class="font-600"><?php echo $item->product_sku; ?></strong>
+                                                                </p>
                                                                 <?php if (!empty($item->product_vat)): ?>
                                                                     <p><span class="span-product-dtl-table"><?php echo trans("vat"); ?>&nbsp;(<?php echo $item->product_vat_rate; ?>%):</span><?php echo price_formatted($item->product_vat, $item->product_currency); ?></p>
-                                                                    <p><span class="span-product-dtl-table"><?php echo trans("total"); ?>:</span><?php echo price_formatted($item->product_total_price, $item->product_currency); ?></p>
-                                                                <?php else: ?>
-                                                                    <p><span class="span-product-dtl-table"><?php echo trans("total"); ?>:</span><?php echo price_formatted($item->product_total_price, $item->product_currency); ?></p>
                                                                 <?php endif; ?>
                                                             </div>
                                                         </div>
                                                     </td>
+                                                    <td style="width: 10%"><?php echo price_formatted($item->product_unit_price, $item->product_currency); ?></td>
+                                                    <td style="width: 10%"><?php echo $item->product_quantity; ?></td>
+                                                    <td style="width: 10%"><?php echo price_formatted($item->product_total_price, $item->product_currency); ?>  </td>
                                                     <td style="width: 10%">
                                                         <strong class="no-wrap"><?php echo trans($item->order_status) ?></strong>
                                                     </td>
@@ -325,8 +333,9 @@
                                                             echo time_ago($item->updated_at);
                                                         } ?>
                                                     </td>
+                                                    <?php /* ?>
                                                     <td style="width: 25%;">
-                                                        <?php if ($item->order_status == "shipped"): ?>
+                                                        <?php  if ($item->order_status == "shipped"): ?>
                                                             <button type="submit" class="btn btn-sm btn-custom" onclick="approve_order_product('<?php echo $item->id; ?>','<?php echo trans("confirm_approve_order"); ?>');"><i class="icon-check"></i><?php echo trans("confirm_order_received"); ?></button>
                                                             <small class="text-confirm-order-table"><?php echo trans("confirm_order_received_exp"); ?></small>
                                                         <?php elseif ($item->order_status == "completed"): ?>
@@ -376,6 +385,7 @@
                                                             <?php endif; ?>
                                                         <?php endif; ?>
                                                     </td>
+                                                    */ ?>
                                                 </tr>
 
                                                 <?php /* if ($item->product_type == "physical"): ?>
@@ -425,6 +435,16 @@
                                                 </div>
                                             </div>
                                         <?php endif; ?>
+                                        <?php if (!empty($order->coupon_code) && !empty($order->coupon_discount)): ?>
+                                            <div class="row">
+                                                <div class="col-6 col-left">
+                                                    <?php echo trans("discount"); ?>
+                                                </div>
+                                                <div class="col-6 col-right">
+                                                    <strong class="font-600"><?=$order->coupon_code?> (<?php echo price_formatted($order->coupon_discount, $order->price_currency); ?>)</strong>
+                                                </div>
+                                            </div>
+                                        <?php endif; ?>
                                         <?php if ($is_order_has_physical_product): ?>
                                             <div class="row">
                                                 <div class="col-6 col-left">
@@ -463,9 +483,9 @@
                             </div>
                         </div>
                     </div>
-                    <?php if (!empty($shipping)): ?>
+                    <?php /* if (!empty($shipping)): ?>
                         <p class="text-confirm-order">*<?php echo trans("confirm_order_received_warning"); ?></p>
-                    <?php endif; ?>
+                    <?php endif; */ ?>
 
                 </div>
             </div>

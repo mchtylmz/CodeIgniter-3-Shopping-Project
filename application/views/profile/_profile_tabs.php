@@ -17,12 +17,14 @@
             </li>
         <?php endif; ?>
     <?php endif; ?>
+    <?php /* ?>
     <li class="nav-item">
         <a class="nav-link <?php echo ($active_tab == 'followers') ? 'active' : ''; ?>" href="<?php echo generate_url("followers") . "/" . $user->slug; ?>"><?php echo trans("followers"); ?><span class="count">(<?php echo get_followers_count($user->id); ?>)</span></a>
     </li>
     <li class="nav-item">
         <a class="nav-link <?php echo ($active_tab == 'following') ? 'active' : ''; ?>" href="<?php echo generate_url("following") . "/" . $user->slug; ?>"><?php echo trans("following"); ?><span class="count">(<?php echo get_following_users_count($user->id); ?>)</span></a>
     </li>
+    <?php */ ?>
     <?php if (($this->general_settings->reviews == 1) && ($user->role == 'admin' || $user->role == 'vendor') && is_multi_vendor_active()): ?>
         <li class="nav-item">
             <a class="nav-link <?php echo ($active_tab == 'reviews') ? 'active' : ''; ?>" href="<?php echo generate_url("reviews") . "/" . $user->slug; ?>"><?php echo trans("reviews"); ?><span class="count">(<?php echo $user_rating->count; ?>)</span></a>

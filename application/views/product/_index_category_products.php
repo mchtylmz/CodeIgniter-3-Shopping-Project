@@ -44,6 +44,11 @@
                     endif; ?>
                 </div>
             </div>
+        <?php endif; ?>
+        <?php if ($category->parent_id == 0): ?>
+          <div class="col-12" style="max-height: 225px; overflow: hidden; margin: -30px 0 30px 0">
+            <?php $this->load->view("partials/_ad_spaces", ["ad_space" => "category_" . $category->id, "class" => ""]); ?>
+          </div>
         <?php endif;
     endforeach;
 endif; ?>

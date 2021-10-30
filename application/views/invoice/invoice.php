@@ -32,7 +32,7 @@
                                 <div class="logo">
                                     <img src="<?php echo get_logo($this->general_settings); ?>" alt="logo">
                                 </div>
-                                <div>
+                                <div style="padding-top: 15px">
                                     <?= $this->settings->contact_address; ?>
                                 </div>
                             </div>
@@ -56,7 +56,7 @@
                             </div>
                         </div>
 
-                        <div class="row" style="padding: 45px 30px;">
+                        <div class="row" style="padding: 20px 30px;">
                             <div class="col-6">
                                 <p class="font-weight-bold mb-3"><?php echo trans("client_information"); ?></p>
                                 <p class="mb-1"><?= html_escape($invoice->client_first_name); ?>&nbsp;<?= html_escape($invoice->client_last_name); ?>&nbsp;(<?= $invoice->client_username; ?>)</p>
@@ -83,7 +83,7 @@
                             </div>
                         </div>
 
-                        <div class="row p-4">
+                        <div class="row p-4" style="padding-bottom:0 !important">
                             <div class="col-md-12">
                                 <div class="table-responsive">
                                     <table class="table">
@@ -146,22 +146,25 @@
                                                             endif; ?>
                                                             <tr style="font-size: 15px;">
                                                                 <?php if (active_nebimv3()): ?>
-                                                                  <td><?php echo $order_product->variation_option_barcodes; ?></td>
+                                                                  <td style="text-align:center; width: 100px; ">
+                                                                    <img src="<?=generate_barcode($order_product->variation_option_barcodes)?>" alt="<?=$order_product->variation_option_barcodes?>">
+                                                                    <?php echo $order_product->variation_option_barcodes; ?>
+                                                                  </td>
                                                                 <?php else: ?>
-                                                                  <td><?php echo html_escape($seller); ?></td>
-                                                                  <td><?php echo $order_product->product_id; ?></td>
+                                                                  <td style=""><?php echo html_escape($seller); ?></td>
+                                                                  <td style=""><?php echo $order_product->product_id; ?></td>
                                                                 <?php endif; ?>
-                                                                <td><?php echo $order_product->product_title; ?></td>
-                                                                <td><?php echo $order_product->product_quantity; ?></td>
-                                                                <td style="white-space: nowrap"><?php echo price_formatted($order_product->product_unit_price, $order_product->product_currency); ?></td>
+                                                                <td style=""><?php echo $order_product->product_title; ?></td>
+                                                                <td style=""><?php echo $order_product->product_quantity; ?></td>
+                                                                <td style="white-space: nowrap; "><?php echo price_formatted($order_product->product_unit_price, $order_product->product_currency); ?></td>
                                                                 <?php if ($this->general_settings->vat_status): ?>
-                                                                    <td style="white-space: nowrap">
+                                                                    <td style="white-space: nowrap; ">
                                                                         <?php if (!empty($order_product->product_vat)): ?>
                                                                             <?php echo price_formatted($order_product->product_vat, $order_product->product_currency); ?>&nbsp;(<?php echo $order_product->product_vat_rate; ?>%)
                                                                         <?php endif; ?>
                                                                     </td>
                                                                 <?php endif; ?>
-                                                                <td style="white-space: nowrap"><?php echo price_formatted($order_product->product_total_price, $order_product->product_currency); ?></td>
+                                                                <td style="white-space: nowrap; "><?php echo price_formatted($order_product->product_total_price, $order_product->product_currency); ?></td>
                                                             </tr>
                                                         <?php endif;
                                                     endif;
@@ -202,6 +205,16 @@
                                             </div>
                                             <div class="col-6 col-right">
                                                 <strong class="font-600"><?php echo price_formatted($sale_shipping, $order->price_currency); ?></strong>
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
+                                    <?php if ($order->coupon_code && $order->coupon_discount): ?>
+                                        <div class="row mb-2">
+                                            <div class="col-6 col-left">
+                                                <?php echo trans("discount"); ?>
+                                            </div>
+                                            <div class="col-6 col-right">
+                                                <?=$order->coupon_code?> (<strong class="font-600"><?php echo price_formatted($order->coupon_discount, $order->price_currency); ?></strong>)
                                             </div>
                                         </div>
                                     <?php endif; ?>

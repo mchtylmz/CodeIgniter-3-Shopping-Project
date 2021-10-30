@@ -1,6 +1,21 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 <!-- Wrapper -->
-<div id="wrapper">
+<style>
+body {
+	background-image: url('<?=base_url()?>assets/img/maintenance_bg.jpg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.auth-container {
+  padding-top: 10px !important;
+	min-height: 760px !important;
+}
+.auth-box, #footer {
+  margin-top: 0 !important
+}
+</style>
+<div id="wrapper" style="background-color: rgba(0,0,0,0.5)">
     <div class="container">
         <div class="auth-container">
             <div class="auth-box">
@@ -26,9 +41,11 @@
                             <div class="bounce2"></div>
                             <div class="bounce3"></div>
                         </div>
+                        <?php /* ?>
                         <div class="form-group">
                             <input type="text" name="username" class="form-control auth-form-input" placeholder="<?php echo trans("username"); ?>" value="<?php echo old("username"); ?>" maxlength="<?php echo $this->username_maxlength; ?>" autocomplete="off" required>
                         </div>
+                        <?php */ ?>
                         <div class="form-group">
                             <input type="text" name="first_name" class="form-control auth-form-input" placeholder="<?php echo trans("first_name"); ?>" value="<?php echo old("first_name"); ?>" maxlength="255" autocomplete="off" required>
                         </div>

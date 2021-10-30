@@ -54,7 +54,12 @@
         <?php $this->load->view('admin/includes/_messages'); ?>
 
         <!-- form start -->
-        <?php echo form_open('common_controller/admin_login_post'); ?>
+        <?php if ($recaptcha_status) {
+            echo form_open('common_controller/admin_login_post', ['id' => 'form_validate', 'class' => 'validate_terms',
+                'onsubmit' => "var serializedData = $(this).serializeArray();var recaptcha = ''; $.each(serializedData, function (i, field) { if (field.name == 'g-recaptcha-response') {recaptcha = field.value;}});if (recaptcha.length < 5) { $('.g-recaptcha>div').addClass('is-invalid');return false;} else { $('.g-recaptcha>div').removeClass('is-invalid');}"]);
+        } else {
+            echo form_open('common_controller/admin_login_post');
+        } ?>
 
         <div class="form-group has-feedback">
             <label class="form-control-label">Email Adresi</label>
@@ -77,6 +82,12 @@
             <input type="text" name="code" minlength="4" class="form-control form-input"
                    placeholder="XXXX.." autocomplete="off" <?php echo ($this->rtl == true) ? 'dir="rtl"' : ''; ?> required>
         </div>
+
+        <?php if ($recaptcha_status): ?>
+            <div class="recaptcha-cnt">
+                <?php generate_recaptcha(); ?>
+            </div>
+        <?php endif; ?>
 
         <div class="row">
             <div class="col-sm-8 col-xs-12">

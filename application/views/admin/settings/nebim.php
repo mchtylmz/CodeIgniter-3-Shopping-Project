@@ -5,7 +5,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-6 col-md-12">
+    <div class="col-lg-7 col-md-12 col-sm-12">
         <div class="box box-primary">
             <?php if (active_nebimv3()): ?>
               <!-- form start -->
@@ -64,6 +64,30 @@
                           </option>
                         <?php endforeach; ?>
                       </select>
+                  </div>
+
+                  <hr>
+
+                  <div class="form-group">
+                      <label class="control-label"><?php echo trans('nebim_image_settings'); ?></label>
+                      <div class="row">
+                          <?php
+                          $images = json_decode($this->general_settings->nebim_images_sync, true);
+                          for ($image = 1; $image <= 8; $image++) :
+                            $attr = '';
+                            if ($image <= 4) {
+                              $attr = 'checked disabled';
+                            }
+                            if ($images && in_array($image, $images)) {
+                              $attr = 'checked';
+                            }
+                            ?>
+                            <div class="col-sm-2">
+                                <input type="checkbox" name="nebim_images_sync[]" value="<?=$image?>" class="square-purple" <?=$attr?>>
+                                <label class="option-label">Image<?=$image?></label>
+                            </div>
+                          <?php endfor; ?>
+                      </div>
                   </div>
 
               </div>

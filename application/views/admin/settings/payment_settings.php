@@ -651,6 +651,38 @@
                             </select>
                         </div>
                     <?php endif; ?>
+                    <div class="form-group">
+                        <label class="control-label"><?php echo trans('commission'); ?></label>
+                        <select name="base_currency" class="form-control">
+                          <option value="0"><?=trans('passive')?></option>
+                          <option value="1" <?= $paynet->commission == 1 ? 'selected' : ''; ?>><?=trans('active')?></option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label"><?php echo trans('paynet_instalments'); ?></label>
+                        <div class="row">
+                            <?php
+                            $installments = json_decode($paynet->installments, true);
+                            for ($install = 1; $install <= 12; $install++) :
+                              $attr = '';
+                              if ($install <= 1) {
+                                $attr = 'checked disabled';
+                              }
+                              if ($install && in_array($install, $installments)) {
+                                $attr = 'checked';
+                              }
+                              ?>
+                              <div class="col-sm-2">
+                                  <input type="checkbox" name="paynet_instalments[]" id="i<?=$install?>" value="<?=$install == 1 ? 0:$install?>" class="square-purple" <?=$attr?>>
+                                  <label class="option-label" for="i<?=$install?>">
+                                    <?=$install == 1 ? trans('paynet_one'):$install.' '.trans('paynet_instalment')?>
+                                  </label>
+                              </div>
+                            <?php endfor; ?>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="box-footer">
                     <button type="submit" class="btn btn-primary pull-right"><?php echo trans('save_changes'); ?></button>
@@ -689,6 +721,11 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Nebim V3</label>
+                    <input type="text" class="form-control" name="bank_transfer_nebim_v3" placeholder="..." value="<?= $this->payment_settings->bank_transfer_nebim_v3 ?>">
                 </div>
                 <div class="form-group">
                     <label class="control-label"><?php echo trans('bank_accounts'); ?></label>
@@ -732,6 +769,11 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Nebim V3</label>
+                    <input type="text" class="form-control" name="cash_nebim_v3" placeholder="..." value="<?= $this->payment_settings->cash_nebim_v3 ?>">
                 </div>
             </div>
             <div class="box-footer">

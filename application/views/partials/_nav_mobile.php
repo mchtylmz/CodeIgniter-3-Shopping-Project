@@ -46,17 +46,17 @@
                         <?php if ($this->auth_check): ?>
                             <li class="nav-item">
                                 <a href="<?php echo generate_url("wishlist") . "/" . $this->auth_user->slug; ?>" class="nav-link">
-                                    <?php echo trans("wishlist"); ?>
+                                    <?php echo case_converter(trans("wishlist"), 'u'); ?>
                                 </a>
                             </li>
                         <?php else: ?>
                             <li class="nav-item">
                                 <a href="<?php echo generate_url("wishlist"); ?>" class="nav-link">
-                                    <?php echo trans("wishlist"); ?>
+                                    <?php echo case_converter(trans("wishlist"), 'u'); ?>
                                 </a>
                             </li>
                         <?php endif; ?>
-
+                        <?php /* ?>
                         <?php if (!empty($this->menu_links)):
                             foreach ($this->menu_links as $menu_link):
                                 if ($menu_link->page_default_name == 'blog' || $menu_link->page_default_name == 'contact' || $menu_link->location == 'top_menu'):
@@ -68,16 +68,19 @@
                                 <?php endif;
                             endforeach;
                         endif; ?>
+                        <?php */ ?>
 
                         <?php if ($this->auth_check): ?>
-                            <li class="dropdown profile-dropdown nav-item">
-                                <a href="#" class="dropdown-toggle image-profile-drop nav-link" data-toggle="dropdown" aria-expanded="false">
+                            <li class="profile-dropdown nav-item">
+                              <a href="javascript:void(0)" data-toggle="modal" data-target="#loginModal" class="nav-link close-menu-click">
                                     <?php if ($unread_message_count > 0): ?>
                                         <span class="span-message-count span-message-count-profile"><?php echo $unread_message_count; ?></span>
                                     <?php endif; ?>
-                                    <img src="<?php echo get_user_avatar($this->auth_user); ?>" alt="<?php echo html_escape($this->auth_user->username); ?>">
-                                    <?php echo get_shop_name($this->auth_user); ?> <span class="icon-arrow-down"></span>
+                                    <img src="<?php echo get_user_avatar($this->auth_user); ?>" alt="<?php echo $this->auth_user->first_name .' '. $this->auth_user->last_name; ?>" style="width: 36px; border-radius: 6px; margin-right: 5px;">
+                                    <?php echo $this->auth_user->first_name .' '. $this->auth_user->last_name; ?>
+                                    <span class="icon-arrow-right" style="float:right; margin-top: 6px"></span>
                                 </a>
+                                <?php /*
                                 <ul class="dropdown-menu">
                                     <?php if ($this->auth_user->role == "admin"): ?>
                                         <li>
@@ -146,6 +149,7 @@
                                         </a>
                                     </li>
                                 </ul>
+                                */ ?>
                             </li>
                         <?php else: ?>
                             <li class="nav-item"><a href="javascript:void(0)" data-toggle="modal" data-target="#loginModal" class="nav-link close-menu-click"><?php echo trans("login"); ?></a></li>

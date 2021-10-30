@@ -19,6 +19,7 @@
 </a>
 <?php endif; ?>
 <div class="product-item-options">
+<?php /* ?>
 <a href="javascript:void(0)" class="item-option btn-add-remove-wishlist" data-toggle="tooltip" data-placement="left" data-product-id="<?php echo $product->id; ?>" data-reload="0" title="<?php echo trans("wishlist"); ?>">
 <?php if (is_product_in_wishlist($product) == 1): ?>
 <i class="icon-heart"></i>
@@ -26,6 +27,7 @@
 <i class="icon-heart-o"></i>
 <?php endif; ?>
 </a>
+<?php */ ?>
 <?php if (($product->listing_type == "sell_on_site" || $product->listing_type == "bidding") && $product->is_free_product != 1):
 if (!empty($product->has_variation) || $product->listing_type == "bidding"):?>
 <a href="<?= generate_product_url($product); ?>" class="item-option" data-toggle="tooltip" data-placement="left" data-product-id="<?php echo $product->id; ?>" data-reload="0" title="<?php echo trans("view_options"); ?>">
@@ -38,7 +40,9 @@ if (!empty($product->has_variation) || $product->listing_type == "bidding"):?>
 <?php endif;
 endif; ?>
 </div>
-<?php if (!empty($product->discount_rate) && !empty($discount_label)): ?>
+<?php
+//  && !empty($discount_label)
+if (!empty($product->discount_rate)): ?>
 <span class="badge badge-discount">-<?= $product->discount_rate; ?>%</span>
 <?php endif; ?>
 </div>
@@ -51,15 +55,27 @@ endif; ?>
 <a href="<?php echo generate_product_url($product); ?>"><?= get_product_title($product); ?></a>
 </h3>
 <p class="product-user text-truncate">
+<?php /* ?>
 <a href="<?php echo generate_profile_url($product->user_slug); ?>">
 <?php echo get_shop_name_product($product); ?>
 </a>
+<?php */ ?>
+<?php if ($vr_colors = explode('::', $product->variation_colors)): ?>
+<?php foreach ($vr_colors as $key => $color):
+	$option_name = get_variation_option_name($color, $this->selected_lang->id); ?>
+	<label for="radio<?php echo $key; ?>" data-input-name="variation<?php echo $key; ?>" class="custom-control-label label-variation-color label-variation lb" data-toggle="tooltip" data-placement="top" title="<?php echo html_escape($option_name); ?>">
+			<span class="variation-color-box cb" style="background-color: red"></span>
+	</label>
+<?php endforeach; ?>
+<?php endif; ?>
 </p>
 <div class="product-item-rating">
 <?php if ($this->general_settings->reviews == 1) {
 $this->load->view('partials/_review_stars', ['review' => $product->rating]);
 } ?>
+<?php /* ?>
 <span class="item-wishlist"><i class="icon-heart-o"></i><?php echo $product->wishlist_count; ?></span>
+<?php */ ?>
 </div>
 <div class="item-meta">
 <?php $this->load->view('product/_price_product_item', ['product' => $product]); ?>

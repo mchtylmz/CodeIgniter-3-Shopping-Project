@@ -21,7 +21,7 @@
                                       <?php echo html_escape(get_variation_option_name($option->option_names, $this->selected_lang->id)); ?>
                                     </strong>
                                     <?php if ($option->is_default != 1): ?>
-                                        <?php if ($option->stock == 9999): ?>
+                                        <?php if ($variation->parent_id == 0): ?>
                                           <span><?php echo trans("option_stock"); ?></span>
                                         <?php else: ?>
                                           <span><?php echo trans("stock"); ?>:<strong><?php echo $option->stock; ?></strong></span>

@@ -119,7 +119,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label"><?php echo trans('image'); ?> (1920x600)</label>
+                    <label class="control-label"><?php echo trans('image'); ?> (1920x585)</label>
                     <div class="display-block">
                         <a class='btn btn-success btn-sm btn-file-upload'>
                             <?php echo trans('select_image'); ?>
@@ -130,7 +130,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label"><?php echo trans('image'); ?>&nbsp;(for mobile) (768x500)</label>
+                    <label class="control-label"><?php echo trans('image'); ?>&nbsp;(for mobile) (400x580)</label>
                     <div class="display-block">
                         <a class='btn btn-success btn-sm btn-file-upload'>
                             <?php echo trans('select_image'); ?>

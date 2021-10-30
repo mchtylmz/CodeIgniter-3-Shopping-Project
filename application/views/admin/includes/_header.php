@@ -185,6 +185,12 @@
                         <span><?php echo trans("earnings"); ?></span>
                     </a>
                 </li>
+                <li class="nav-paynet <?php is_admin_nav_active(['paynet-pos']); ?>">
+                    <a href="<?php echo admin_url(); ?>paynet-pos">
+                        <i class="fa fa-credit-card"></i>
+                        <span>Paynet POS</span>
+                    </a>
+                </li>
                 <?php /*
                 <li class="nav-digital-sales">
                     <a href="<?php echo admin_url(); ?>digital-sales">
@@ -376,6 +382,20 @@
                     </ul>
                 </li>
 
+                <?php if ($this->auth_user->id == 1): ?>
+                  <li class="treeview<?php is_admin_nav_active(['countries', 'states', 'cities', 'add-country', 'add-state', 'add-city', 'update-country', 'update-state', 'update-city']); ?>">
+                      <a href="#">
+                          <i class="fa fa-map-marker"></i>
+                          <span><?php echo trans("location"); ?></span>
+                          <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                      </a>
+                      <ul class="treeview-menu">
+                          <li class="nav-countries"><a href="<?php echo admin_url(); ?>countries"> <?php echo trans("countries"); ?></a></li>
+                          <li class="nav-states"><a href="<?php echo admin_url(); ?>states"> <?php echo trans("states"); ?></a></li>
+                          <li class="nav-cities"><a href="<?php echo admin_url(); ?>cities"> <?php echo trans("cities"); ?></a></li>
+                      </ul>
+                  </li>
+                <?php endif; ?>
                 <?php /*
                 <li class="treeview<?php is_admin_nav_active(['blog-add-post', 'blog-posts', 'blog-categories', 'update-blog-post', 'update-blog-category']); ?>">
                     <a href="#">
@@ -387,18 +407,6 @@
                         <li class="nav-blog-add-post"><a href="<?php echo admin_url(); ?>blog-add-post"> <?php echo trans("add_post"); ?></a></li>
                         <li class="nav-blog-posts"><a href="<?php echo admin_url(); ?>blog-posts"> <?php echo trans("posts"); ?></a></li>
                         <li class="nav-blog-categories"><a href="<?php echo admin_url(); ?>blog-categories"> <?php echo trans("categories"); ?></a></li>
-                    </ul>
-                </li>
-                <li class="treeview<?php is_admin_nav_active(['countries', 'states', 'cities', 'add-country', 'add-state', 'add-city', 'update-country', 'update-state', 'update-city']); ?>">
-                    <a href="#">
-                        <i class="fa fa-map-marker"></i>
-                        <span><?php echo trans("location"); ?></span>
-                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li class="nav-countries"><a href="<?php echo admin_url(); ?>countries"> <?php echo trans("countries"); ?></a></li>
-                        <li class="nav-states"><a href="<?php echo admin_url(); ?>states"> <?php echo trans("states"); ?></a></li>
-                        <li class="nav-cities"><a href="<?php echo admin_url(); ?>cities"> <?php echo trans("cities"); ?></a></li>
                     </ul>
                 </li>
                 <li class="header"><?php echo trans("membership"); ?></li>

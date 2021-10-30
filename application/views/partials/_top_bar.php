@@ -3,6 +3,7 @@
 <div class="container">
 <div class="row">
 <div class="col-6 col-left">
+<?php /* ?>
 <?php if (!empty($this->menu_links)): ?>
 <ul class="navbar-nav">
 <?php if (!empty($this->menu_links)):
@@ -18,17 +19,18 @@ endforeach;
 endif; ?>
 </ul>
 <?php endif; ?>
+<?php */ ?>
 </div>
 <div class="col-6 col-right">
 <ul class="navbar-nav">
-<?php if ($this->general_settings->location_search_header == 1 && item_count($this->countries) > 0): ?>
+<?php /* if ($this->general_settings->location_search_header == 1 && item_count($this->countries) > 0): ?>
 <li class="nav-item">
 <a href="javascript:void(0)" data-toggle="modal" data-target="#locationModal" class="nav-link btn-modal-location">
 <i class="icon-map-marker"></i><?= !empty($this->default_location_input) ? $this->default_location_input : trans("location"); ?>
 </a>
 </li>
 <?php endif; ?>
-<?php if ($this->payment_settings->currency_converter == 1 && !empty($this->currencies)): ?>
+<?php  if ($this->payment_settings->currency_converter == 1 && !empty($this->currencies)): ?>
 <li class="nav-item dropdown language-dropdown currency-dropdown">
 <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-toggle="dropdown">
 <?= $this->selected_currency->code; ?>&nbsp;(<?= $this->selected_currency->symbol; ?>)<i class="icon-arrow-down"></i>
@@ -45,21 +47,22 @@ endforeach; ?>
 </ul>
 <?php echo form_close(); ?>
 </li>
-<?php endif; ?>
+<?php endif; */ ?>
 <?php if ($this->general_settings->multilingual_system == 1 && count($this->languages) > 1): ?>
 <li class="nav-item dropdown language-dropdown">
 <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-toggle="dropdown">
-<img src="<?php echo base_url($this->selected_lang->flag_path); ?>" class="flag"><?php echo html_escape($this->selected_lang->name); ?><i class="icon-arrow-down"></i>
+<?php echo case_converter($this->selected_lang->short_form, 'u'); ?> - <?php echo html_escape($this->selected_lang->name); ?><i class="icon-arrow-down"></i>
 </a>
 <div class="dropdown-menu">
 <?php foreach ($this->languages as $language): ?>
 <a href="<?php echo convert_url_by_language($language); ?>" class="dropdown-item <?php echo ($language->id == $this->selected_lang->id) ? 'selected' : ''; ?>">
-<img src="<?php echo base_url($language->flag_path); ?>" class="flag"><?php echo $language->name; ?>
+<?php echo case_converter($language->short_form, 'u'); ?> - <?php echo $language->name; ?>
 </a>
 <?php endforeach; ?>
 </div>
 </li>
 <?php endif; ?>
+<?php /* ?>
 <?php if ($this->auth_check): ?>
 <li class="nav-item dropdown profile-dropdown p-r-0">
 <a class="nav-link dropdown-toggle a-profile" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false">
@@ -146,9 +149,9 @@ endforeach; ?>
 <a href="<?php echo generate_url("register"); ?>" class="nav-link"><?php echo trans("register"); ?></a>
 </li>
 <?php endif; ?>
+<?php */ ?>
 </ul>
 </div>
 </div>
 </div>
 </div>
-

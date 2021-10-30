@@ -119,7 +119,7 @@ async function getAllProducts() {
         startImport();
       }, 1500);
     },
-    timeout: 120000 // sets timeout to 120 seconds
+    timeout: 480000 // sets timeout to 120 seconds
   });
 }
 
@@ -127,11 +127,11 @@ async function startImport() {
   import_div.show();
   add_import_content('İçe aktarma işlemleri başladı, işlem tamamlanıncaya kadar sayfayı kapatmayınız!.', 'AKTARMA');
   import_progress.show();
-  //  parseInt(nebim_getproducts_count)
-  for (var index = 1; index <= 100; index++) {
+  nebim_getproducts_count = 100;
+  for (var index = 1; index <= parseInt(nebim_getproducts_count); index++) {
      window.variation_images = null;
      var now_index = (index - 1) * 9;
-     var max_index = 100 * 9;
+     var max_index = parseInt(nebim_getproducts_count) * 9;
      progress_change(index, now_index, max_index);
      try {
        await import_product(index);
@@ -151,7 +151,7 @@ async function startImport() {
   // Taslak
   add_import_content('Aktarılmayan ürünler taslak olarak güncelleniyor..', 'TASLAK', '#ee7600');
   change_products_status();
-  await sleep(2100);
+  await sleep(4000);
   write_import_file();
 
   setTimeout(function() {

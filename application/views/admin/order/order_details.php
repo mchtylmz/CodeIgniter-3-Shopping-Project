@@ -431,6 +431,10 @@
                                               <?php endif; ?>
                                             <?php endif; ?>
                                         </p>
+                                        <p style="margin-top: -10px">
+                                          <span><?php echo trans("sku"); ?>:</span>
+                                          <strong class="font-600"><?php echo $item->product_sku; ?></strong>
+                                        </p>
                                     </td>
                                     <td><?php echo price_formatted($item->product_unit_price, $item->product_currency); ?></td>
                                     <td><?php echo $item->product_quantity; ?></td>
@@ -539,6 +543,16 @@
                     </div>
                     <div class="col-sm-6">
                         <strong class="font-right"><?php echo price_formatted($order->price_vat, $order->price_currency); ?></strong>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <?php if ($order->coupon_code || $order->coupon_discount): ?>
+                <div class="row row-details">
+                    <div class="col-xs-12 col-sm-6 col-right">
+                        <strong> <?php echo trans("discount"); ?></strong>
+                    </div>
+                    <div class="col-sm-6">
+                        <strong class="font-right"><?=$order->coupon_code?> (<?php echo price_formatted($order->coupon_discount, $order->price_currency); ?>)</strong>
                     </div>
                 </div>
             <?php endif; ?>

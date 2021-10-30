@@ -851,6 +851,3 @@ $(document).ajaxStop(function () {
     });
 
 });
-
-
-

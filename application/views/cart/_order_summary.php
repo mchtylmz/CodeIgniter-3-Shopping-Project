@@ -3,6 +3,9 @@
 <div class="col-sm-12 col-lg-4 order-summary-container">
     <h2 class="cart-section-title"><?php echo trans("order_summary"); ?> (<?php echo get_cart_product_count(); ?>)</h2>
     <div class="right">
+        <div class="row-custom m-b-15">
+            <?php $this->load->view('cart/coupon'); ?>
+        </div>
         <?php $is_physical = false; ?>
         <div class="cart-order-details">
             <?php if (!empty($cart_items)):
@@ -70,9 +73,13 @@
                 <strong><?php echo trans("vat"); ?><span class="float-right"><?= price_decimal($cart_total->vat, $cart_total->currency); ?></span></strong>
             </div>
         <?php endif; ?>
-
+        <?php if (isset($cart_total->discount) && $cart_total->discount): ?>
+          <div class="row-custom m-b-10">
+              <strong><?php echo trans("discount"); ?><span class="float-right"><?= price_decimal($cart_total->discount, $cart_total->currency); ?></span></strong>
+          </div>
+        <?php endif; ?>
         <?php if (!empty($show_shipping_cost) && !empty($cart_total->shipping_cost)): ?>
-            <div class="row-custom">
+            <div class="row-custom m-b-10">
                 <strong><?php echo trans("shipping"); ?><span class="float-right"><?= price_decimal($cart_total->shipping_cost, $cart_total->currency); ?></span></strong>
             </div>
         <?php endif; ?>

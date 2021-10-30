@@ -64,9 +64,11 @@
 														}
 													else:
 														if ($order->status == 1):
-															echo trans("completed");
+															echo '<label class="label text-success">'.trans("completed").'</label>';
+														elseif ($order->status == 2):
+															echo '<label class="label text-danger">'.trans("cancelled").'</label>';
 														else:
-															echo trans("order_processing");
+															echo '<label class="label text-default">'.trans("order_processing").'</label>';
 														endif;
 													endif; ?>
 												</strong>

@@ -102,7 +102,10 @@
                     <?php endif; ?>
                 </div>
             </div>
-            <div class="col-sm-12 text-right">
+            <div class="col-sm-6 text-left">
+                <h4><?=trans('total')?>: <?php echo $total ?? 0; ?> </h4>
+            </div>
+            <div class="col-sm-6 text-right">
                 <?php echo $this->pagination->create_links(); ?>
             </div>
         </div>

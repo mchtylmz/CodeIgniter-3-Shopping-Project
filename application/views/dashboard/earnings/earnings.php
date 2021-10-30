@@ -55,7 +55,6 @@
                         <tr role="row">
                             <th scope="col"><?php echo trans("order"); ?></th>
                             <th scope="col"><?php echo trans("total"); ?></th>
-                            <th scope="col"><?php echo trans("commission_rate"); ?></th>
                             <th scope="col"><?php echo trans("shipping_cost"); ?></th>
                             <th scope="col"><?php echo trans("earned_amount"); ?></th>
                             <th scope="col"><?php echo trans("date"); ?></th>
@@ -67,14 +66,14 @@
                                 <tr>
                                     <td>#<?php echo $earning->order_number; ?></td>
                                     <td><?php echo price_formatted($earning->price, $earning->currency); ?></td>
-                                    <td><?php echo $earning->commission_rate; ?>%</td>
                                     <td><?php echo price_formatted($earning->shipping_cost, $earning->currency); ?></td>
                                     <td>
                                         <?php echo price_formatted($earning->earned_amount, $earning->currency);
+                                        /*
                                         $order = get_order_by_order_number($earning->order_number);
                                         if (!empty($order) && $order->payment_method == "Cash On Delivery"):?>
                                             <span class="text-danger">(-<?php echo price_formatted($earning->earned_amount, $earning->currency); ?>)</span><br><small class="text-danger"><?php echo trans("cash_on_delivery"); ?></small>
-                                        <?php endif; ?>
+                                        <?php endif; */ ?>
                                         <?php if ($this->payment_settings->currency_converter == 1 && $earning->exchange_rate > 0 && $earning->exchange_rate != 1):
                                             $total_earned = get_price($earning->earned_amount, 'decimal');
                                             $total_earned = $total_earned / $earning->exchange_rate;
@@ -110,4 +109,3 @@
         </div>
     </div><!-- /.box-body -->
 </div>
-

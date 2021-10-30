@@ -23,7 +23,7 @@
 							<th><?php echo trans('order'); ?></th>
 							<th><?php echo trans('user'); ?></th>
 							<th><?php echo trans('price'); ?></th>
-							<th><?php echo trans('commission_rate'); ?></th>
+							<?php /*<th><?php echo trans('commission_rate'); ?></th>*/ ?>
 							<th><?php echo trans('shipping_cost'); ?></th>
 							<th><?php echo trans('earned_amount'); ?></th>
 							<th><?php echo trans('date'); ?></th>
@@ -47,14 +47,16 @@
 									<?php endif; ?>
 								</td>
 								<td><?php echo price_formatted($item->price, $item->currency); ?></td>
+								<?php /*
 								<td><?php echo $item->commission_rate; ?>%</td>
+								*/ ?>
 								<td><?php echo price_formatted($item->shipping_cost, $item->currency); ?></td>
                                 <td>
                                     <?php echo price_formatted($item->earned_amount, $item->currency);
-                                    $order = get_order_by_order_number($item->order_number);
+                                    /*$order = get_order_by_order_number($item->order_number);
                                     if (!empty($order) && $order->payment_method == "Cash On Delivery"):?>
                                         <span class="text-danger">(-<?php echo price_formatted($item->earned_amount, $item->currency); ?>)</span><br><small class="text-danger"><?php echo trans("cash_on_delivery"); ?></small>
-                                    <?php endif; ?>
+                                    <?php endif; */ ?>
                                 </td>
 								<td><?php echo formatted_date($item->created_at); ?></td>
 								<td>

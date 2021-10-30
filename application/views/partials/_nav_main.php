@@ -2,7 +2,7 @@
 <?php $menu_subcategory_display_limit = 6;
 if ($this->general_settings->selected_navigation == 1): ?>
 <div class="container">
-<div class="navbar navbar-light justify-content-start navbar-expand">
+<div class="navbar navbar-light justify-content-center navbar-expand">
 <ul class="nav navbar-nav mega-menu">
 <?php $limit = $this->general_settings->menu_limit;
 $count = 1;

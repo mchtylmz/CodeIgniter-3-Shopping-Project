@@ -97,7 +97,7 @@
                 <h4 class="modal-title"><?= trans("add_new_address"); ?></h4>
             </div>
             <?php echo form_open("add-shipping-address-post", ['id' => 'form_add_shipping_address', 'class' => 'validate-form']); ?>
-            <div class="modal-body">
+            <div class="modal-body pb-0">
                 <div class="form-group">
                     <label class="control-label"><?= trans("address_title"); ?></label>
                     <input type="text" name="title" class="form-control form-input" placeholder="<?= trans("address_title"); ?>" maxlength="250" required>
@@ -143,7 +143,7 @@
                         </div>
                         <div id="get_states_container_new_address" class="col-12 col-md-6">
                             <label class="control-label"><?php echo trans("state"); ?></label>
-                            <select id="select_states_new_address" name="state_id" class="select2 select2-req form-control" data-placeholder="<?= trans("state"); ?>" required>
+                            <select id="select_states_new_address" name="state_id" class="select2 select2-req form-control" data-placeholder="<?= trans("state"); ?>" onchange="get_cities(this.value,false,'new_address');" required>
                                 <option></option>
                                 <?php if (!empty($states)):
                                     foreach ($states as $item): ?>
@@ -156,9 +156,22 @@
                 </div>
                 <div class="form-group">
                     <div class="row">
+                        <?php /* ?>
                         <div class="col-12 col-md-6 m-b-sm-15">
                             <label class="control-label"><?= trans("city"); ?></label>
                             <input type="text" name="city" class="form-control form-input" placeholder="<?= trans("city"); ?>" maxlength="250" required>
+                        </div>
+                        <?php */ ?>
+                        <div id="get_city_container_new_address" class="col-12 col-md-6">
+                            <label class="control-label"><?php echo trans("city"); ?></label>
+                            <select id="select_cities_new_address" name="city" class="select2 select2-req form-control" data-placeholder="<?= trans("city"); ?>" required>
+                                <option></option>
+                                <?php if (!empty($cities)):
+                                    foreach ($cities as $item): ?>
+                                        <option value="<?= $item->id; ?>"><?= html_escape($item->name); ?></option>
+                                    <?php endforeach;
+                                endif; ?>
+                            </select>
                         </div>
                         <div class="col-12 col-md-6">
                             <label class="control-label"><?= trans("zip_code"); ?></label>
@@ -167,8 +180,8 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-custom m-0"><?= trans("submit"); ?></button>
+            <div class="modal-footer p-3 pt-0 text-center">
+                <button type="submit" class="btn btn-lg btn-custom m-0"><?= trans("save_changes"); ?></button>
             </div>
             <?php echo form_close(); ?>
         </div>
@@ -186,7 +199,7 @@
                     </div>
                     <?php echo form_open("edit-shipping-address-post", ['id' => 'form_edit_shipping_address_' . $address->id, 'class' => 'validate-form']); ?>
                     <input type="hidden" name="id" value="<?= $address->id; ?>">
-                    <div class="modal-body">
+                    <div class="modal-body pb-0">
                         <div class="form-group">
                             <label class="control-label"><?= trans("address_title"); ?></label>
                             <input type="text" name="title" class="form-control form-input" value="<?= html_escape($address->title); ?>" placeholder="<?= trans("address_title"); ?>" maxlength="250" required>
@@ -231,7 +244,7 @@
                                 </div>
                                 <div id="get_states_container_address_<?= $address->id; ?>" class="col-12 col-md-6">
                                     <label class="control-label"><?php echo trans("state"); ?></label>
-                                    <select id="select_states_address_<?= $address->id; ?>" name="state_id" class="select2 form-control" required>
+                                    <select id="select_states_address_<?= $address->id; ?>" name="state_id" onchange="get_cities(this.value,false, 'address_<?= $address->id; ?>');" class="select2 form-control" required>
                                         <?php $states = get_states_by_country($address->country_id);
                                         if (!empty($states)):
                                             foreach ($states as $item): ?>
@@ -244,9 +257,22 @@
                         </div>
                         <div class="form-group">
                             <div class="row">
+                              <?php /* ?>
                                 <div class="col-12 col-md-6 m-b-sm-15">
                                     <label class="control-label"><?= trans("city"); ?></label>
                                     <input type="text" name="city" class="form-control form-input" value="<?= html_escape($address->city); ?>" placeholder="<?= trans("city"); ?>" maxlength="250" required>
+                                </div>
+                                <?php */ ?>
+                                <div id="get_city_container_address_<?= $address->id; ?>" class="col-12 col-md-6">
+                                    <label class="control-label"><?php echo trans("city"); ?></label>
+                                    <select id="select_cities_address_<?= $address->id; ?>" name="city" class="select2 form-control" data-placeholder="<?= trans("city"); ?>" required>
+                                      <?php $cities = get_cities_by_state($address->state_id);
+                                      if (!empty($cities)):
+                                          foreach ($cities as $item): ?>
+                                              <option value="<?= $item->id; ?>" <?= $item->id == $address->city ? 'selected' : ''; ?>><?= html_escape($item->name); ?></option>
+                                          <?php endforeach;
+                                      endif; ?>
+                                    </select>
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <label class="control-label"><?= trans("zip_code"); ?></label>
@@ -255,8 +281,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-custom m-0"><?= trans("submit"); ?></button>
+                    <div class="modal-footer p-3 pt-0 text-center">
+                        <button type="submit" class="btn btn-lg btn-custom m-0"><?= trans("save_changes"); ?></button>
                     </div>
                     <?php echo form_close(); ?>
                 </div>

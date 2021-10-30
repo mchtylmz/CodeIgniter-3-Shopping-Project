@@ -390,3 +390,7 @@
 <?php if ($this->general_settings->facebook_comment_status == 1):
     echo $this->general_settings->facebook_comment;
 endif; ?>
+
+<script type="text/javascript">
+  var $choose_option_no_stock = "<?= trans('choose_option_no_stock') ?>";
+</script>

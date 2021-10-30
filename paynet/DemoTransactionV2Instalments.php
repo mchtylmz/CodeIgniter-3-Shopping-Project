@@ -1,7 +1,7 @@
 <?php
 session_start();
 include 'PaynetClass.php';
-		
+
 try{
 	//Paynet secret keyi nesneye aktar
 	$paynet = new PaynetClient("Buraya secret key değeri girilecektir");
@@ -42,9 +42,9 @@ function PrintInstalments($bank)
 			<td colspan="3"><img src="'.$bank->bank_logo.'" /></td>
 		</tr>');
 
-		foreach ($bank->ratio as $ratioItem) 
+		foreach ($bank->ratio as $ratioItem)
 		{
-			echo( 
+			echo(
 			'<tr>
 				<td><input type="radio" name="instalment-item" value="'.$ratioItem->instalment.'"/></td>
 				<td>'.$ratioItem->desc.'</td>

@@ -43,6 +43,15 @@
                                     <input name="q" class="form-control" placeholder="<?php echo trans("search"); ?>" type="search" value="<?php echo html_escape($this->input->get('q', true)); ?>" <?php echo ($this->rtl == true) ? 'dir="rtl"' : ''; ?>>
                                 </div>
 
+                                <div class="item-table-filter" style="width: 80px; min-width: 80px;">
+                                    <label><?php echo trans("status"); ?></label>
+                                    <select name="status" class="form-control">
+                                        <option value="1" <?php echo ($this->input->get('status', true) == '1') ? 'selected' : ''; ?>><?=trans('active')?></option>
+                                        <option value="0" <?php echo ($this->input->get('status', true) == '0') ? 'selected' : ''; ?>><?=trans('passive')?></option>
+                                        <option value="2" <?php echo ($this->input->get('status', true) == '2') ? 'selected' : ''; ?>><?=trans('all')?></option>
+                                    </select>
+                                </div>
+
                                 <div class="item-table-filter md-top-10" style="width: 65px; min-width: 65px;">
                                     <label style="display: block">&nbsp;</label>
                                     <button type="submit" class="btn bg-purple"><?php echo trans("filter"); ?></button>
