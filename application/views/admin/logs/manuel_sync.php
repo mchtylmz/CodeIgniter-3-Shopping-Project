@@ -43,7 +43,7 @@
     background-color: green;
     color: white;
   }
-  .new_img {height: 90px; padding: 4px; }
+  .new_img {height: 48px; padding: 4px; }
 </style>
 
 <div class="box" id="infoo">
@@ -52,6 +52,12 @@
     </div>
     <div class="box-body p-1">
       <div style="display: flex; align-items:center;">
+        <!--
+        <div class="form-group" style="margin: 0">
+          <input type="checkbox" id="auto_refresh" class="square-purple" checked>
+          <label for="auto_refresh" class="option-label" style="margin: 0 5px">Yenileme</label>
+        </div>
+        -->
         <button id="tum_urunler" class="btn btn-primary m-2" type="button" onclick="getAllProducts()">Tüm Ürünler Çek ve Aktar</button>
         <h4 class="m-2" id="tum_urunler_title"></h4>
       </div>
@@ -81,6 +87,7 @@
 </div>
 
 <script type="text/javascript">
+
 var nebim_getproducts_count = 0;
 var btn_tum_urunler = $('#tum_urunler');
 var text_tum_urunler = $('#tum_urunler_title');
@@ -94,6 +101,8 @@ var div_success = $('#isuccess');
 var div_error = $('#ierror');
 var c_success = 0;
 var c_error = 0;
+window.variation_images = null;
+window.auto_refresh = false;
 async function getAllProducts() {
   Kronometre.baslat();
   box_error.hide().html('');
@@ -115,11 +124,9 @@ async function getAllProducts() {
     success: function(response) {
       text_tum_urunler.text(response.count + ' satır aktarım bulundu');
       nebim_getproducts_count = response.count;
-      setTimeout(function () {
-        startImport();
-      }, 1500);
+      setTimeout(startImport, 1500);
     },
-    timeout: 480000 // sets timeout to 120 seconds
+    timeout: 480000 // sets timeout to 480 seconds
   });
 }
 
@@ -127,27 +134,37 @@ async function startImport() {
   import_div.show();
   add_import_content('İçe aktarma işlemleri başladı, işlem tamamlanıncaya kadar sayfayı kapatmayınız!.', 'AKTARMA');
   import_progress.show();
-  nebim_getproducts_count = 100;
-  for (var index = 1; index <= parseInt(nebim_getproducts_count); index++) {
+  if (nebim_getproducts_count >= 500) {
+    window.auto_refresh = true;
+  }
+  var index = 1;
+  var count = 500;
+  while (index <= count) {
+  // for (var index = 1; index <= parseInt(count); index++) {
      window.variation_images = null;
      var now_index = (index - 1) * 9;
-     var max_index = parseInt(nebim_getproducts_count) * 9;
+     var max_index = parseInt(count) * 9;
      progress_change(index, now_index, max_index);
      try {
        await import_product(index);
+       if (window.variation_images) {
+         var image_index = 0;
+         var image_count = window.variation_images.length;
+         while (image_index < image_count) {
+           //for (var image = 0; image < window.variation_images.length; image++) {
+             progress_change(index, now_index + image_index, max_index);
+             await image_download(window.variation_images[image_index]).then((res) => {});
+           //} // for images
+           image_index++;
+         } // while
+       } // if variation_images
      } catch (e) {
-       add_import_content(index + '. satır, Bilinmeyen hata oluştu, satır aktarılamıyor', 'AKTARMA', 'red');
+       add_import_content(index + '. satır, Hata oluştu, satır aktarılamadı. HATA: ' + JSON.stringify(e), 'AKTARMA', 'red');
      }
-     if (window.variation_images) {
-       for (var image = 0; image < window.variation_images.length; image++) {
-         progress_change(index, now_index + image, max_index);
-         await image_download(window.variation_images[image]).then((res) => {
-        });
-       } // for images
-     } // if variation_images
      progress_change(index, now_index + 8, max_index);
-  } //  for
-
+  // } //  for
+    index++;
+  } //  while
   // Taslak
   add_import_content('Aktarılmayan ürünler taslak olarak güncelleniyor..', 'TASLAK', '#ee7600');
   change_products_status();
@@ -158,17 +175,24 @@ async function startImport() {
     add_import_content('İçe aktarma işlemleri tamamlandı!.', 'AKTARMA');
     Kronometre.bitir();
     progressbar.removeClass('progress-bar-animated').removeClass('progress-bar-striped').text('Aktarımlar Tamamlandı');
+    if (window.auto_refresh) {
+      add_import_content('Lütfen Bekleyiniz, işlemler yenileniyor..', 'AKTARMA');
+    }
+    setTimeout(function () {
+      if (window.auto_refresh) {
+        window.location.href = "<?=admin_url()?>manuel-sync?run=1";
+      }
+    }, 1500);
   }, 1500);
 }
 
-
-window.variation_images = null;
 async function import_product(index = 1) {
   return await $.ajax({
     url: "<?=base_url()?>ajax_controller/nebim_getproducts_manual",
     type: 'POST',
     data: {},
     dataType: 'json',
+    async: true,
     error: function(response) {
       add_import_content(index + '. satır, ' + response.responseText, 'URUN', 'red');
       return response;
@@ -179,8 +203,65 @@ async function import_product(index = 1) {
       } // if response
       add_import_content('SKU: ' + response.model_kodu + ' ' + response.options + ' >> ' + response.message, 'URUN', (response.status == 'success' ? 'green':'red'));
       return response;
-    }
+    },
+    timeout: 1000 * 30 // 30 sn
   });
+}
+
+
+function write_import_file() {
+  $.ajax({
+    url: "<?=base_url()?>ajax_controller/nebim_import_log_file",
+    type: 'POST',
+    data: {
+      import_html: $('#import_content').html()
+    },
+    dataType: 'json',
+    timeout: 1000 * 15 // 15 sn
+  });
+}
+function change_products_status() {
+  $.ajax({
+    url: "<?=base_url()?>ajax_controller/nebim_products_not_in_status",
+    type: 'POST',
+    data: {},
+    dataType: 'json',
+    timeout: 1000 * 30 // 30 sn
+  });
+}
+function image_download(image) {
+  return new Promise(resolve => setTimeout(function() {
+    //add_import_content(image.url + ' resmi için işlemler yapılıyor..', 'IMG');
+    try {
+      $.ajax({
+        url: "<?=base_url()?>ajax_controller/nebim_varitation_image_download",
+        type: 'POST',
+        data: {
+          image_id: image.id,
+          image_index: image.index,
+          image_url: image.url
+        },
+        async: true,
+        dataType: 'json',
+        error: function(response) {
+          add_import_content(image.url + ' resmi kayıt edilemedi. <a target="_blank" href="'+image.url+'">-Yeni Sekmede Aç-</a>', 'IMG', 'red');
+          resolve();
+        },
+        success: function(response) {
+          var html_image = '';
+          if (response.status == 'success') {
+            html_image = '<img class="new_img" src="'+response.new_url+'">';
+          }
+          add_import_content(html_image + image.url + ' ' + response.message + ' <a target="_blank" href="'+image.url+'">-Yeni Sekmede Aç-</a>', 'IMG', (response.status == 'success' ? 'green':'red'));
+          resolve();
+        },
+        timeout: 1000 * 30 // 30 sn
+      });
+    } catch (e) {
+      add_import_content(image.url + ' resmi için işlem yapılamadı!.', 'IMG', 'red');
+      resolve();
+    }
+  }, 250));
 }
 
 function add_import_content(text, type = 'AKTARMA', color = 'black') {
@@ -206,52 +287,10 @@ function current_time() {
   var currentdate = new Date();
   return currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds();
 }
-function write_import_file() {
-  $.ajax({
-    url: "<?=base_url()?>ajax_controller/nebim_import_log_file",
-    type: 'POST',
-    data: {
-      import_html: $('#import_content').html()
-    },
-    dataType: 'json'
-  });
-}
-function change_products_status() {
-  $.ajax({
-    url: "<?=base_url()?>ajax_controller/nebim_products_not_in_status",
-    type: 'POST',
-    data: {},
-    dataType: 'json'
-  });
-}
-function image_download(image) {
-  return new Promise(resolve => setTimeout(function() {
-    add_import_content(image.url + ' resmi için işlemler yapılıyor..', 'IMG');
-    $.ajax({
-      url: "<?=base_url()?>ajax_controller/nebim_varitation_image_download",
-      type: 'POST',
-      data: {
-        image_id: image.id,
-        image_index: image.index,
-        image_url: image.url
-      },
-      dataType: 'json',
-      error: function(response) {
-        add_import_content(image.url + ' resmi kayıt edilemedi. <a target="_blank" href="'+image.url+'">-Yeni Sekmede Aç-</a>', 'IMG', 'red');
-        resolve();
-      },
-      success: function(response) {
-        var html_image = '';
-        if (response.status == 'success') {
-          html_image = '<img class="new_img" src="'+response.new_url+'">';
-        }
-        add_import_content(html_image + image.url + ' ' + response.message + ' <a target="_blank" href="'+image.url+'">-Yeni Sekmede Aç-</a>', 'IMG', (response.status == 'success' ? 'green':'red'));
-        resolve();
-      }
-    });
-  }, 250));
-}
 function Kronometre (t,i){this.gercekSaniye=i||0,this.saniye=i||0,this.interval,this.baslat=function(){this.sayacElem=document.getElementById(t),this.interval||(this.sayac(),this.interval=setInterval(this.sayac.bind(this),1e3))},this.sayac=function(){var t=this.saniye,i=parseInt(t/3600)%24,s=parseInt(t/60)%60,a=t%60;this.sayacElem.innerHTML=(i<10?"0"+i:i)+":"+(s<10?"0"+s:s)+":"+(a<10?"0"+a:a),this.saniye+=1},this.duraklat=function(){clearInterval(this.interval),this.interval=null},this.bitir=function(){this.duraklat(),this.saniye=this.gercekSaniye}};
 var Kronometre = new Kronometre('uptime');
 
 </script>
+<?php if (input_get('run') == '1'): ?>
+<script type="text/javascript">setTimeout(getAllProducts, 500);</script>
+<?php endif;

@@ -17,7 +17,6 @@
                         </svg>
                     </div>
                 </div>
-                <!--
                 <div class="col-lg-3 col-md-6 col-sm-12 p-0">
                     <div class="small-box-dashboard">
                         <h3 class="total"><?= price_formatted($this->auth_user->balance, $this->payment_settings->default_currency); ?></h3>
@@ -29,7 +28,6 @@
                         </svg>
                     </div>
                 </div>
-              -->
             <?php endif; ?>
             <div<?= !$this->is_sale_active ? ' class="classified-small-boxes"' : ''; ?>>
                 <div class="col-lg-3 col-md-6 col-sm-12 p-0">

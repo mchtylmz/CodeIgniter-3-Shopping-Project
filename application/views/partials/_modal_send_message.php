@@ -26,16 +26,17 @@
                                                     <a href="<?php echo generate_profile_url($user->slug); ?>"><img src="<?php echo get_user_avatar($user); ?>" alt="<?php echo get_shop_name($user); ?>"></a>
                                                 </div>
                                                 <div class="right">
-                                                    <strong><a href="<?php echo generate_profile_url($user->slug); ?>"><?php echo get_shop_name($user); ?></a></strong>
+                                                    <a href="<?php echo generate_profile_url($user->slug); ?>">
+                                                      <h4 style="margin-bottom:0"><?php echo get_shop_name($user); ?></h4>
+                                                    </a>
                                                     <?php if ($user->role == "admin" || $this->general_settings->hide_vendor_contact_information != 1):
                                                         if (!empty($user->phone_number) && $user->show_phone == 1): ?>
                                                             <p class="info">
-                                                                <i class="icon-phone"></i><a href="javascript:void(0)" id="show_phone_number"><?php echo trans("show"); ?></a>
-                                                                <a href="tel:<?php echo html_escape($user->phone_number); ?>" id="phone_number" class="display-none"><?php echo html_escape($user->phone_number); ?></a>
+                                                                <a href="tel:<?php echo html_escape($user->phone_number); ?>" id="phone_number"><?php echo html_escape($user->phone_number); ?></a>
                                                             </p>
                                                         <?php endif; ?>
-                                                        <?php if (!empty($user->email) && $user->show_email == 1): ?>
-                                                        <p class="info"><i class="icon-envelope"></i><?php echo html_escape($user->email); ?></p>
+                                                        <?php if ($this->settings->contact_email): ?>
+                                                        <p class="info"><i class="icon-envelope"></i><?php echo html_escape($this->settings->contact_email); ?></p>
                                                     <?php endif;
                                                     endif; ?>
                                                 </div>

@@ -60,6 +60,9 @@
         var csfr_token_name = "<?= $this->security->get_csrf_token_name(); ?>";
         var csfr_cookie_name = "<?= $this->config->item('csrf_cookie_name'); ?>";
     </script>
+    <style media="screen">
+      .kint-rich dt, .kint-rich div.access-path {overflow: hidden !important;}
+    </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -157,14 +160,6 @@
                         <i class="fa fa-home"></i> <span><?php echo trans("home"); ?></span>
                     </a>
                 </li>
-                <?php /*
-                <li class="nav-homepage-manager">
-                    <a href="<?php echo admin_url(); ?>homepage-manager">
-                        <i class="fa fa-clone"></i>
-                        <span><?php echo trans("homepage_manager"); ?></span>
-                    </a>
-                </li>
-                */ ?>
                 <li class="header"><?php echo trans("orders"); ?></li>
                 <li class="treeview<?php is_admin_nav_active(['orders', 'transactions', 'order-bank-transfers', 'invoices', 'order-details']); ?>">
                     <a href="#">
@@ -185,11 +180,16 @@
                         <span><?php echo trans("earnings"); ?></span>
                     </a>
                 </li>
-                <li class="nav-paynet <?php is_admin_nav_active(['paynet-pos']); ?>">
-                    <a href="<?php echo admin_url(); ?>paynet-pos">
-                        <i class="fa fa-credit-card"></i>
+                <li class="treeview<?php is_admin_nav_active(['paynet-pos', 'paynet-service']); ?>">
+                    <a href="#">
+                        <i class="fa fa-credit-card" aria-hidden="true"></i>
                         <span>Paynet POS</span>
+                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                     </a>
+                    <ul class="treeview-menu">
+                        <li class="nav-paynet<?php is_admin_nav_active(['paynet-pos']); ?>"><a href="<?php echo admin_url(); ?>paynet-pos"> <?php echo trans("site_paynet"); ?></a></li>
+                        <li class="nav-service<?php is_admin_nav_active(['paynet-service']); ?>"><a href="<?php echo admin_url(); ?>paynet-service"> <?php echo trans("service_paynet"); ?></a></li>
+                    </ul>
                 </li>
                 <?php /*
                 <li class="nav-digital-sales">
@@ -284,6 +284,18 @@
                     </ul>
                 </li>
                 */ ?>
+                <li class="nav-categories<?php is_admin_nav_active(['categories']); ?>">
+                    <a href="<?php echo admin_url(); ?>categories">
+                        <i class="fa fa-folder-open"></i>
+                        <span><?php echo trans("categories"); ?></span>
+                    </a>
+                </li>
+                <li class="nav-coupons<?php is_admin_nav_active(['coupons']); ?>">
+                    <a href="<?php echo admin_url(); ?>coupons">
+                        <i class="fa fa-percent"></i>
+                        <span><?php echo trans("coupons"); ?></span>
+                    </a>
+                </li>
                 <li class="treeview<?php is_admin_nav_active(['pending-product-comments', 'pending-blog-comments', 'product-comments', 'blog-comments']); ?>">
                     <a href="#">
                         <i class="fa fa-comments"></i>
@@ -304,16 +316,18 @@
                         -->
                     </ul>
                 </li>
-                <li class="nav-categories<?php is_admin_nav_active(['categories']); ?>">
-                    <a href="<?php echo admin_url(); ?>categories">
-                        <i class="fa fa-folder-open"></i>
-                        <span><?php echo trans("categories"); ?></span>
+                <!--
+                <li class="nav-abuse-reports">
+                    <a href="<?php echo admin_url(); ?>abuse-reports">
+                        <i class="fa fa-warning" aria-hidden="true"></i>
+                        <span><?php echo trans("abuse_reports"); ?></span>
                     </a>
                 </li>
-                <li class="nav-coupons<?php is_admin_nav_active(['coupons']); ?>">
-                    <a href="<?php echo admin_url(); ?>coupons">
-                        <i class="fa fa-percent"></i>
-                        <span><?php echo trans("coupons"); ?></span>
+                -->
+                <li class="nav-contact-messages">
+                    <a href="<?php echo admin_url(); ?>contact-messages">
+                        <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                        <span><?php echo trans("contact_messages"); ?></span>
                     </a>
                 </li>
 
@@ -336,66 +350,72 @@
                         <li class="nav-add-administrator"><a href="<?php echo admin_url(); ?>add-administrator"> <?php echo trans("add_administrator"); ?></a></li>
                     </ul>
                 </li>
-                <li class="nav-contact-messages">
-                    <a href="<?php echo admin_url(); ?>contact-messages">
-                        <i class="fa fa-paper-plane" aria-hidden="true"></i>
-                        <span><?php echo trans("contact_messages"); ?></span>
-                    </a>
-                </li>
                 <li class="header"><?php echo trans("content"); ?></li>
-                <li class="treeview<?php is_admin_nav_active(['add-page', 'pages', 'update-page']); ?>">
+                <li class="treeview<?php is_admin_nav_active([
+                  'add-page', 'pages', 'update-page', 'slider', 'story', 'add-custom-field', 'custom-fields', 'update-custom-field', 'custom-field-options', 'countries', 'states', 'cities', 'add-country', 'add-state', 'add-city', 'update-country', 'update-state', 'update-city'
+                ]); ?>">
                     <a href="#">
-                        <i class="fa fa-file"></i>
-                        <span><?php echo trans("pages"); ?></span>
+                        <i class="fa fa-list"></i>
+                        <span><?php echo trans("content"); ?></span>
                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                     </a>
                     <ul class="treeview-menu">
-                        <li class="nav-add-page"><a href="<?php echo admin_url(); ?>add-page"> <?php echo trans("add_page"); ?></a></li>
-                        <li class="nav-pages"><a href="<?php echo admin_url(); ?>pages"> <?php echo trans("pages"); ?></a></li>
+
+                      <li class="treeview<?php is_admin_nav_active(['add-page', 'pages', 'update-page']); ?>">
+                          <a href="#">
+                              <i class="fa fa-file"></i>
+                              <span><?php echo trans("pages"); ?></span>
+                              <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                          </a>
+                          <ul class="treeview-menu">
+                              <li class="nav-add-page"><a href="<?php echo admin_url(); ?>add-page"> <?php echo trans("add_page"); ?></a></li>
+                              <li class="nav-pages"><a href="<?php echo admin_url(); ?>pages"> <?php echo trans("pages"); ?></a></li>
+                          </ul>
+                      </li>
+                      <li class="nav-slider">
+                          <a href="<?php echo admin_url(); ?>slider">
+                              <i class="fa fa-sliders"></i>
+                              <span><?php echo trans("slider"); ?></span>
+                          </a>
+                      </li>
+                      <?php if (active_story()): ?>
+                      <li class="nav-story">
+                          <a href="<?php echo admin_url(); ?>story">
+                              <i class="fa fa-image"></i>
+                              <span><?php echo trans("stories"); ?></span>
+                          </a>
+                      </li>
+                      <?php endif; ?>
+                      <li class="treeview<?php is_admin_nav_active(['add-custom-field', 'custom-fields', 'update-custom-field', 'custom-field-options']); ?>">
+                          <a href="#">
+                              <i class="fa fa-plus-square-o"></i>
+                              <span><?php echo trans("custom_fields"); ?></span>
+                              <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                          </a>
+                          <ul class="treeview-menu">
+                              <li class="nav-add-custom-field"><a href="<?php echo admin_url(); ?>add-custom-field"> <?php echo trans("add_custom_field"); ?></a></li>
+                              <li class="nav-custom-fields"><a href="<?php echo admin_url(); ?>custom-fields"> <?php echo trans("custom_fields"); ?></a></li>
+                          </ul>
+                      </li>
+                      <?php if ($this->auth_user->id == 1): ?>
+                        <li class="treeview<?php is_admin_nav_active(['countries', 'states', 'cities', 'add-country', 'add-state', 'add-city', 'update-country', 'update-state', 'update-city']); ?>">
+                            <a href="#">
+                                <i class="fa fa-map-marker"></i>
+                                <span><?php echo trans("location"); ?></span>
+                                <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li class="nav-countries"><a href="<?php echo admin_url(); ?>countries"> <?php echo trans("countries"); ?></a></li>
+                                <li class="nav-states"><a href="<?php echo admin_url(); ?>states"> <?php echo trans("states"); ?></a></li>
+                                <li class="nav-cities"><a href="<?php echo admin_url(); ?>cities"> <?php echo trans("cities"); ?></a></li>
+                            </ul>
+                        </li>
+                      <?php endif; ?>
+
                     </ul>
                 </li>
-                <?php /*
 
-                <li class="nav-navigation">
-                    <a href="<?php echo admin_url(); ?>navigation">
-                        <i class="fa fa-th"></i>
-                        <span><?php echo trans("navigation"); ?></span>
-                    </a>
-                </li>
-                */ ?>
-                <li class="nav-slider">
-                    <a href="<?php echo admin_url(); ?>slider">
-                        <i class="fa fa-sliders"></i>
-                        <span><?php echo trans("slider"); ?></span>
-                    </a>
-                </li>
 
-                <li class="treeview<?php is_admin_nav_active(['add-custom-field', 'custom-fields', 'update-custom-field', 'custom-field-options']); ?>">
-                    <a href="#">
-                        <i class="fa fa-plus-square-o"></i>
-                        <span><?php echo trans("custom_fields"); ?></span>
-                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li class="nav-add-custom-field"><a href="<?php echo admin_url(); ?>add-custom-field"> <?php echo trans("add_custom_field"); ?></a></li>
-                        <li class="nav-custom-fields"><a href="<?php echo admin_url(); ?>custom-fields"> <?php echo trans("custom_fields"); ?></a></li>
-                    </ul>
-                </li>
-
-                <?php if ($this->auth_user->id == 1): ?>
-                  <li class="treeview<?php is_admin_nav_active(['countries', 'states', 'cities', 'add-country', 'add-state', 'add-city', 'update-country', 'update-state', 'update-city']); ?>">
-                      <a href="#">
-                          <i class="fa fa-map-marker"></i>
-                          <span><?php echo trans("location"); ?></span>
-                          <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-                      </a>
-                      <ul class="treeview-menu">
-                          <li class="nav-countries"><a href="<?php echo admin_url(); ?>countries"> <?php echo trans("countries"); ?></a></li>
-                          <li class="nav-states"><a href="<?php echo admin_url(); ?>states"> <?php echo trans("states"); ?></a></li>
-                          <li class="nav-cities"><a href="<?php echo admin_url(); ?>cities"> <?php echo trans("cities"); ?></a></li>
-                      </ul>
-                  </li>
-                <?php endif; ?>
                 <?php /*
                 <li class="treeview<?php is_admin_nav_active(['blog-add-post', 'blog-posts', 'blog-categories', 'update-blog-post', 'update-blog-category']); ?>">
                     <a href="#">
@@ -478,7 +498,7 @@
                 </li>
                 */ ?>
                 <?php if (active_nebimv3()): ?>
-                <li class="header text-uppercase">Nebim</li>
+                <li class="header text-uppercase"><?=trans('nebim')?></li>
                 <li class="treeview<?php is_admin_nav_active(['nebim-logs', 'queue-logs', 'nebim-products', 'manuel-sync', 'image-sync']); ?>">
                     <a href="#">
                         <i class="fa fa-align-left"></i>
@@ -490,7 +510,9 @@
                         <li class="nav-manuel"><a href="<?php echo admin_url(); ?>manuel-sync"> <?php echo trans("manuel_sync"); ?></a></li>
                         <li class="nav-img-logs"><a href="<?php echo admin_url(); ?>image-sync"> <?php echo trans("image_sync"); ?></a></li>
                         <li class="nav-nebim-logs"><a href="<?php echo admin_url(); ?>nebim-logs"> <?php echo trans("procedure_logs"); ?></a></li>
-                        <li class="nav-queue-logs"><a href="<?php echo admin_url(); ?>queue-logs"> <?php echo trans("queue_logs"); ?></a></li>
+                        <?php if (active_queue()): ?>
+                          <li class="nav-queue-logs"><a href="<?php echo admin_url(); ?>queue-logs"> <?php echo trans("queue_logs"); ?></a></li>
+                        <?php endif; ?>
                     </ul>
                 </li>
                 <?php endif; ?>
@@ -506,7 +528,7 @@
                   'settings', 'languages', 'social-login', 'update-language', 'translations', 'email-settings',
                   'navigation', 'homepage-manager', 'product-settings', 'payment-settings', 'currency-settings',
                   'visual-settings', 'font-settings', 'system-settings', 'route-settings',
-                  'storage', 'cache-system', 'seo-tools', 'ad-spaces', 'nebim-settings'
+                  'storage', 'cache-system', 'seo-tools', 'ad-spaces', 'nebim-settings', 'homepage_manager'
                 ]); ?>">
                     <a href="#">
                         <i class="fa fa-cog"></i>
@@ -516,6 +538,31 @@
                     <ul class="treeview-menu">
                         <li class="nav-settings">
                           <a href="<?php echo admin_url(); ?>settings"> <?php echo trans("general_settings"); ?></a>
+                        </li>
+                        <li class="nav-homepage-manager">
+                          <a href="<?php echo admin_url(); ?>homepage-manager"> <?php echo trans("homepage_manager"); ?></a>
+                        </li>
+                        <?php /*
+                        <li class="nav-homepage-manager">
+                            <a href="<?php echo admin_url(); ?>homepage-manager">
+                                <i class="fa fa-clone"></i>
+                                <span><?php echo trans("homepage_manager"); ?></span>
+                            </a>
+                        </li>
+                        <li class="nav-navigation">
+                            <a href="<?php echo admin_url(); ?>navigation">
+                                <i class="fa fa-th"></i>
+                                <span><?php echo trans("navigation"); ?></span>
+                            </a>
+                        </li>
+                        <li class="nav-ad-spaces">
+                            <a href="<?php echo admin_url(); ?>ad-spaces">
+                                <i class="fa fa-dollar"></i> <span><?php echo trans("ad_spaces"); ?></span>
+                            </a>
+                        </li>
+                        */ ?>
+                        <li class="nav-ad-spaces">
+                          <a href="<?php echo admin_url(); ?>ad-spaces"> <?php echo trans("ad_spaces"); ?></a>
                         </li>
                         <?php if (active_nebimv3()): ?>
                         <li class="nav-nebim-settings">

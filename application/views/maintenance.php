@@ -93,6 +93,13 @@
                 top: -60px;
             }
         }
+        .site-title img {
+          max-width: 300px;
+          padding: 10px 20px;
+          border-radius: 20px;
+          color: white;
+          background-color: rgba(255,255,255,0.3);
+        }
     </style>
 
 </head>
@@ -101,7 +108,7 @@
 <div class="maintenance">
     <div class="maintenance-inner">
         <div class="content">
-            <h1 class="site-title"><?php echo $this->general_settings->application_name; ?></h1>
+            <h1 class="site-title"><img src="<?php echo get_logo($this->general_settings); ?>"/></h1>
             <h2 class="title"><?php echo $this->general_settings->maintenance_mode_title; ?></h2>
             <p class="description"><?php echo $this->general_settings->maintenance_mode_description; ?></p>
         </div>

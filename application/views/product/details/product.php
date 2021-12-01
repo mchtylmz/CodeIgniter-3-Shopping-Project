@@ -7,8 +7,9 @@
                     <nav class="nav-breadcrumb" aria-label="breadcrumb">
                         <ol class="breadcrumb breadcrumb-products">
                             <li class="breadcrumb-item"><a href="<?php echo lang_base_url(); ?>"><?php echo trans("home"); ?></a></li>
-                            <?php if (!empty($parent_categories_tree)):
-                                foreach ($parent_categories_tree as $item):?>
+                            <?php if (!empty($parent_categories_tree)): ?>
+                            <li class="breadcrumb-item"><a href="<?php echo lang_base_url(); ?>products"><?php echo trans("all_products"); ?></a></li>
+                            <?php foreach ($parent_categories_tree as $item):?>
                                     <li class="breadcrumb-item"><a href="<?php echo generate_category_url($item); ?>"><?php echo category_name($item); ?></a></li>
                                 <?php endforeach;
                             endif; ?>

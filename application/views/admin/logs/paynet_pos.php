@@ -99,32 +99,15 @@
                                       <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                           <div class="modal-content modal-custom">
                                               <div class="modal-body" style="text-align:left !important">
-                                                <a class="btn btn-primary btn-block" data-toggle="collapse" href="#data<?=$pos->id?>" role="button" aria-expanded="false" aria-controls="data<?=$pos->id?>">
-                                        					Data
-                                        				</a>
-                                        				<div class="print collapse m-3" id="data<?=$pos->id?>">
-                                        					<?php foreach (json_decode($pos->data, true) as $key => $value): ?>
-                                                    <?=$key?> <pre><?php print_r($value); ?></pre>
-                                                  <?php endforeach; ?>
-                                        				</div>
-                                                <br>
-                                                <a class="btn btn-primary btn-block" data-toggle="collapse" href="#response<?=$pos->id?>" role="button" aria-expanded="false" aria-controls="response<?=$pos->id?>">
-                                        					Response
-                                        				</a>
-                                        				<div class="print collapse m-3" id="response<?=$pos->id?>">
-                                        					<?php foreach (json_decode($pos->response, true) as $key => $value): ?>
-                                                    <?=$key?> <pre><?php print_r($value); ?></pre>
-                                                  <?php endforeach; ?>
-                                        				</div>
-                                                <br>
-                                                <a class="btn btn-primary btn-block" data-toggle="collapse" href="#session<?=$pos->id?>" role="button" aria-expanded="false" aria-controls="session<?=$pos->id?>">
-                                        					SESSION
-                                        				</a>
-                                        				<div class="print collapse m-3" id="session<?=$pos->id?>">
-                                        					<?php foreach (json_decode($pos->session, true) as $key => $value): ?>
-                                                    <?=$key?> <pre><?php print_r($value); ?></pre>
-                                                  <?php endforeach; ?>
-                                        				</div>
+                                                
+                                                <h3>Data</h3>
+                                                <?=d($pos->data)?>
+                                                <hr>
+                                                <h3>Response</h3>
+                                                <?=d($pos->response)?>
+                                                <hr>
+                                                <h3>SESSION</h3>
+                                                <?=d($pos->session)?>
 
                                               </div>
                                               <div class="modal-footer">

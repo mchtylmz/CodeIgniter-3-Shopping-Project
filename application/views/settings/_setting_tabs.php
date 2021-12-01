@@ -7,11 +7,13 @@
                 <span><?php echo trans("update_profile"); ?></span>
             </a>
         </li>
+        <!--
         <li class="nav-item <?php echo ($active_tab == 'cover_image') ? 'active' : ''; ?>">
             <a class="nav-link" href="<?php echo generate_url("settings", "cover_image"); ?>">
                 <span><?php echo trans("cover_image"); ?></span>
             </a>
         </li>
+        -->
         <?php if ($this->is_sale_active): ?>
             <li class="nav-item <?php echo ($active_tab == 'shipping_address') ? 'active' : ''; ?>">
                 <a class="nav-link" href="<?php echo generate_url("settings", "shipping_address"); ?>">

@@ -33,6 +33,12 @@
                     <label><?php echo trans("name"); ?></label>
                     <input type="text" class="form-control" name="name" value="<?php echo $state->name; ?>" placeholder="<?php echo trans("name"); ?>" maxlength="200" required>
                 </div>
+                <?php if (active_nebimv3()): ?>
+                  <div class="form-group">
+                      <label><?php echo trans("nebim_code"); ?></label>
+                      <input type="text" class="form-control" name="nebim" placeholder="<?php echo trans("nebim_code"); ?>" value="<?php echo $state->nebim; ?>" maxlength="200" required>
+                  </div>
+                <?php endif; ?>
 
             </div>
 

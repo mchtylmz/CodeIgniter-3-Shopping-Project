@@ -87,7 +87,7 @@
                                       <br>
                                       <?php echo html_escape($user->email); ?>
                                     <?php endif; ?>
-                                    <?php if ($que->method == 'order_id' && $order = ger_order($que->order_id)): ?>
+                                    <?php if ($que->method == 'order_id' && $order = get_order($que->order_id)): ?>
                                       <a href="<?php echo admin_url(); ?>order-details/<?php echo html_escape($order->id); ?>" class="table-link">
                                         #<?php echo html_escape($order->order_number); ?>
                                       </a>
@@ -126,7 +126,7 @@
                                     } ?>
                                     <label class="label label-<?=$class ?? 'default'?>"><?=$status?></label>
                                 </td>
-                                <td><?php echo formatted_date($que->worked_at); ?></td>
+                                <td><?php echo $que->worked_at ? formatted_date($que->worked_at):' - '; ?></td>
                                 <td>
                                   <?php if ($que->status <= '2'): ?>
                                     <button class="btn btn-sm btn-success" type="button" onclick="runQueue('<?=$que->id?>')">
@@ -142,10 +142,10 @@
                                           <div class="modal-content modal-custom">
                                               <div class="modal-body" style="text-align:left !important">
                                                 <h5><?php echo trans("log_response"); ?></h5>
-                                                <pre><?php print_r(@json_decode($que->response, true)); ?></pre>
+                                                <?=d($que->response)?>
                                                 <hr>
                                                 <h5><?php echo trans("log_failed_msg"); ?></h5>
-                                                <pre><?php print_r(@json_decode($que->failed_msg, true)); ?></pre>
+                                                <?=d($que->failed_msg)?>
                                               </div>
                                               <div class="modal-footer">
               						                        <button type="button" class="btn btn-md btn-default" data-dismiss="modal">Kapat</button>
@@ -188,7 +188,7 @@
           $.get(url, function(data, status){
             swal({
                 text: data,
-                icon: "success",
+                icon: "info",
                 buttons: false
             });
             setTimeout(function() {

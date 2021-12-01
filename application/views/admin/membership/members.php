@@ -21,7 +21,9 @@
                         <thead>
                         <tr role="row">
                             <th width="40">ID</th>
-                            <th width="40">Nebim ID</th>
+                            <?php if (active_nebimv3()): ?>
+                              <th width="40"><?=trans('nebim')?> ID</th>
+                            <?php endif; ?>
                             <th><?php echo trans("username"); ?></th>
                             <th><?php echo trans("email"); ?></th>
                             <th><?php echo trans("status"); ?></th>
@@ -36,9 +38,11 @@
                                 <td>
                                   <?php echo html_escape($user->id); ?>
                                 </td>
+                                <?php if (active_nebimv3()): ?>
                                 <td style="min-width: 100px">
                                   <?php echo html_escape($user->curr_acc_code); ?>
                                 </td>
+                                <?php endif; ?>
                                 <td>
                                     <a class="table-link" style="display:flex;">
                                         <img src="<?php echo get_user_avatar($user); ?>" alt="user" class="img-responsive" style="width: 50px;">

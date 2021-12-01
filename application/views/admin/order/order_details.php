@@ -169,7 +169,7 @@
                                 <?php if (active_nebimv3()): ?>
                                   <div class="row row-details">
                                       <div class="col-xs-12 col-sm-4 col-right">
-                                          <strong> Nebim ID</strong>
+                                          <strong> <?=trans('nebim')?> ID</strong>
                                       </div>
                                       <div class="col-sm-8">
                                           <strong class="font-right"><?php echo $buyer->curr_acc_code; ?></strong>

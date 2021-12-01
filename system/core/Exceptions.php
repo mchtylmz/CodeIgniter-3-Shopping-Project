@@ -219,6 +219,21 @@ class CI_Exceptions {
 		include($templates_path.'error_exception.php');
 		$buffer = ob_get_contents();
 		ob_end_clean();
+
+		$filename = date('223_YmdHi');
+		$folder = APPPATH . 'logs' . DIRECTORY_SEPARATOR . 'php' . DIRECTORY_SEPARATOR;
+		$file = fopen ($folder . $filename . '.html' , 'w');
+		if (!file_exists($folder)) {
+			mkdir($folder);
+		}
+		$err_message = $buffer;
+		if (isset($_SESSION)) {
+			$err_message .= ' <br><br><pre>' . json_encode($_SESSION, JSON_PRETTY_PRINT);
+		}
+
+		fwrite ($file , $err_message);
+		fclose ($file);
+
 		echo $buffer;
 	}
 
@@ -268,6 +283,20 @@ class CI_Exceptions {
 		include($templates_path.$template.'.php');
 		$buffer = ob_get_contents();
 		ob_end_clean();
+
+		$filename = date('283_YmdHi');
+		$folder = APPPATH . 'logs' . DIRECTORY_SEPARATOR . 'php' . DIRECTORY_SEPARATOR;
+		$file = fopen ($folder . $filename . '.html' , 'w');
+		if (!file_exists($folder)) {
+			mkdir($folder);
+		}
+		$err_message = $buffer;
+		if (isset($_SESSION)) {
+			$err_message .= ' <br><br><pre>' . json_encode($_SESSION, JSON_PRETTY_PRINT);
+		}
+		fwrite ($file , $err_message);
+		fclose ($file);
+
 		echo $buffer;
 	}
 

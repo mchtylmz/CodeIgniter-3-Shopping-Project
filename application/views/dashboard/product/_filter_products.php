@@ -1,7 +1,7 @@
 <div class="row table-filter-container">
     <div class="col-sm-12">
         <?php echo form_open($page_url, ['method' => 'GET']); ?>
-        
+
         <div class="item-table-filter">
             <label><?php echo trans('category'); ?></label>
             <select id="categories" name="category" class="form-control custom-select" onchange="get_filter_subcategories_dashboard(this.value);">
@@ -33,6 +33,7 @@
             </div>
         </div>
 
+        <!--
         <div class="item-table-filter">
             <label><?php echo trans('stock'); ?></label>
             <select name="stock" class="form-control custom-select">
@@ -41,6 +42,7 @@
                 <option value="out_of_stock" <?= input_get("stock") == 'out_of_stock' ? 'selected' : ''; ?>><?php echo trans("out_of_stock"); ?></option>
             </select>
         </div>
+      -->
 
         <div class="item-table-filter">
             <label><?php echo trans("search"); ?></label>

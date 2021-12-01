@@ -25,9 +25,9 @@
                             <th><?php echo trans('product'); ?></th>
                             <th><?php echo trans('sku'); ?></th>
                             <th><?php echo trans('category'); ?></th>
-                            <?php if (!empty($promote_status)): ?>
+                            <?php /*if (!empty($promote_status)): ?>
                                 <th><?php echo trans('purchased_plan'); ?></th>
-                            <?php endif; ?>
+                            <?php endif; */?>
                             <th><?= $this->general_settings->classified_ads_system == 1 ? trans("stock") . "/" . trans("status") : trans("stock"); ?></th>
                             <th><?php echo trans('page_views'); ?></th>
                             <th><?php echo trans('date'); ?></th>
@@ -51,6 +51,16 @@
                                         <a href="<?php echo generate_product_url($item); ?>" target="_blank" class="table-product-title">
                                             <?php echo get_product_title($item); ?>
                                         </a>
+                                        <?php if (isset($item->variation_colors) && $vr_colors = explode('::', $item->variation_colors)): ?>
+                                        <div style="">
+                                          <?php foreach ($vr_colors as $key => $color):
+                                          	$option_name = get_variation_option_name($color, $this->selected_lang->id); ?>
+                                          	<small style="font-size:11px">
+                                              <?=$option_name?> <?=count($vr_colors) - 1 != $key ? ',':''?>
+                                            </small>
+                                          <?php endforeach; ?>
+                                        </div>
+                                        <?php endif; ?>
                                     </td>
                                     <td><?php echo $item->sku; ?></td>
                                     <td>
@@ -59,7 +69,7 @@
                                             echo html_escape($category->name);
                                         } ?>
                                     </td>
-                                    <?php if (!empty($promote_status)): ?>
+                                    <?php /*if (!empty($promote_status)): ?>
                                         <td>
                                             <?php if ($item->is_draft != 1):
                                                 if ($item->is_promoted == 1 && $item->promote_plan != "none"):
@@ -69,7 +79,7 @@
                                                 <?php endif;
                                             endif; ?>
                                         </td>
-                                    <?php endif; ?>
+                                    <?php endif; */?>
                                     <td class="white-space-nowrap"><?= get_product_stock_status($item); ?></td>
                                     <td><?php echo $item->pageviews; ?></td>
                                     <td><?php echo formatted_date($item->created_at); ?></td>

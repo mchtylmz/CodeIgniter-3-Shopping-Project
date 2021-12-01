@@ -33,6 +33,13 @@
                     </select>
                 </div>
 
+                <?php if (active_nebimv3()): ?>
+                  <div class="form-group">
+                      <label><?php echo trans("nebim_code"); ?></label>
+                      <input type="text" class="form-control" name="nebim" placeholder="<?php echo trans("nebim_code"); ?>" value="<?php echo $country->nebim; ?>" maxlength="200" required>
+                  </div>
+                <?php endif; ?>
+
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-4 col-xs-12">

@@ -75,6 +75,9 @@
                         <tr role="row">
                             <th width="20"><?php echo trans('id'); ?></th>
                             <th><?php echo trans('name'); ?></th>
+                            <?php if (active_nebimv3()): ?>
+                            <th><?php echo trans('nebim_code'); ?></th>
+                            <?php endif; ?>
                             <th><?php echo trans('country'); ?></th>
                             <th><?php echo trans('options'); ?></th>
                         </tr>
@@ -85,6 +88,9 @@
                             <tr>
                                 <td><?php echo html_escape($item->id); ?></td>
                                 <td><?php echo html_escape($item->name); ?></td>
+                                <?php if (active_nebimv3()): ?>
+                                <td><?php echo html_escape($item->nebim); ?></td>
+                                <?php endif; ?>
                                 <td>
                                     <?php echo html_escape($item->country_name); ?>
                                     <?php if ($item->country_status == 1): ?>

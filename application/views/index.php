@@ -1,4 +1,7 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php if (active_story()): ?>
+<div id="stories" class="container section-stories storiesWrapper" style="display:none"></div>
+<?php endif; ?>
 <div class="section-slider">
     <?php if (!empty($slider_items) && $this->general_settings->slider_status == 1):
         $this->load->view("partials/_main_slider");

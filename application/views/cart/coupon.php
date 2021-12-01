@@ -12,7 +12,7 @@
 	<!-- Kupon -->
 	<div class="col-sm-8 form-group" style="margin-bottom:0px">
 		<label><?=trans('coupon_code')?></label>
-		<input name="coupon" class="form-control form-input" type="text" placeholder="<?=trans('coupon_code2')?>.." value="<?=session_coupon('coupon')->code ?? session_coupon('get')?>" required>
+		<input name="coupon" class="form-control form-input" type="text" placeholder="<?=trans('coupon_code2')?>.." value="<?=input_get('coupon') ?? (session_coupon('coupon')->code ?? session_coupon('get'))?>" required>
 	</div>
 	<!-- Kupon -->
 	<!-- submit -->

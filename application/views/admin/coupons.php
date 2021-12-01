@@ -153,7 +153,7 @@
                                           <?=$coupon->type == 'percent' ? 'Yüzde':'Miktar'?> - <?php echo $coupon->discount; ?>
                                         </td>
                                         <td>
-                                          <?=$coupon->allow_count?> / <?=$coupon->use_count?>
+                                           <?=$coupon->use_count?> / <?=$coupon->allow_count?>
                                         </td>
                                         <td>
                                           <?php if ($coupon->status == 1): ?>
@@ -205,7 +205,7 @@ $('.input-daterange').datepicker({
   clearBtn: true,
   format: 'yyyy-mm-dd',
   language: 'tr',
-  startDate: '<?=date('Y-m-d')?>',
+  // startDate: '<?=date('Y-m-d')?>',
   disableTouchKeyboard: true,
   calendarWeeks: true
 });

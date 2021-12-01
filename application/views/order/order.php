@@ -12,7 +12,6 @@
                     </nav>
 
                     <!-- <h1 class="page-title"><?php echo $title; ?></h1> -->
-                    <a href="<?php echo lang_base_url(); ?>orders" class="btn btn-sm btn-danger btn-sale-options btn-view-invoice"><?php echo trans('back_orders'); ?></a>
                 </div>
             </div>
 
@@ -35,33 +34,51 @@
 
                     <div class="order-details-container">
                         <div class="order-head">
-                            <h2 class="title"><?php echo trans("order"); ?>:&nbsp;#<?php echo $order->order_number; ?></h2>
-                        </div>
+                            <div class="row justify-content-center row-title">
+                                <div class="col-12 col-sm-6">
+                                    <h1 class="page-title m-b-5"><?php echo trans("order"); ?>:&nbsp;#<?php echo $order->order_number; ?></h1>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <a href="<?= generate_url('orders'); ?>" class="btn btn-md btn-custom color-white float-right m-b-5">
+                                        <svg width="18" height="18" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" fill="#fff" class="mds-svg-icon">
+                                            <path d="M384 1408q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm0-512q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm1408 416v192q0 13-9.5 22.5t-22.5 9.5h-1216q-13 0-22.5-9.5t-9.5-22.5v-192q0-13 9.5-22.5t22.5-9.5h1216q13 0 22.5 9.5t9.5 22.5zm-1408-928q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm1408 416v192q0 13-9.5 22.5t-22.5 9.5h-1216q-13 0-22.5-9.5t-9.5-22.5v-192q0-13 9.5-22.5t22.5-9.5h1216q13 0 22.5 9.5t9.5 22.5zm0-512v192q0 13-9.5 22.5t-22.5 9.5h-1216q-13 0-22.5-9.5t-9.5-22.5v-192q0-13 9.5-22.5t22.5-9.5h1216q13 0 22.5 9.5t9.5 22.5z"/>
+                                        </svg>
+                                        <?= trans("orders"); ?>
+                                    </a>
+                                    <?php if ($order->status != 2):
+                                        if ($order->payment_status == 'payment_received'): ?>
+                                            <a href="<?php echo lang_base_url(); ?>invoice/<?php echo $order->order_number; ?>" target="_blank" class="btn btn-md btn-info color-white float-right m-b-5 m-r-5"><i class="icon-text-o"></i>&nbsp;<?php echo trans('view_invoice'); ?></a>
+                                        <?php else: ?>
+                                            <?php /*if ($order->payment_method != "Cash On Delivery" || ($order->payment_method == "Cash On Delivery" && date_difference_in_hours(date('Y-m-d H:i:s'), $order->created_at) <= 24)): ?>
+                                                <button type="button" class="btn btn-md btn-gray float-right m-b-5 m-r-5" onclick='cancel_order(<?= $order->id; ?>,"<?= trans("confirm_action"); ?>");'><i class="icon-times"></i>&nbsp;<?= trans("cancel_order"); ?></button>
+                                            <?php endif;*/
+                                        endif;
+                                    endif; ?>
+                                </div>
+                            </div>
+                      </div>
                         <div class="order-body">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="row order-row-item">
-                                        <div class="col-3">
+                                        <div class="col-4">
                                             <?php echo trans("status"); ?>
                                         </div>
-                                        <div class="col-9">
-                                            <b><?php
-                                            if ($order->status == 1):
-                															echo '<span class="text-success">'.trans("completed").'</label>';
-                														elseif ($order->status == 2):
-                															echo '<span class="text-danger">'.trans("cancelled").'</label>';
-                														else:
-                															echo '<span class="text-default">'.trans("order_processing").'</label>';
-                														endif;
-                                            ?></b>
-                                            <a href="<?php echo lang_base_url(); ?>invoice/<?php echo $order->order_number; ?>" target="_blank" class="btn btn-sm btn-info btn-sale-options btn-view-invoice"><i class="icon-text-o"></i>&nbsp;<?php echo trans('view_invoice'); ?></a>
+                                        <div class="col-8">
+                                            <?php if ($order->status == 1): ?>
+                                                <strong><?php echo trans("completed"); ?></strong>
+                                            <?php elseif ($order->status == 2): ?>
+                                                <strong><?php echo trans("cancelled"); ?></strong>
+                                            <?php else: ?>
+                                                <strong><?php echo trans("order_processing"); ?></strong>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                     <div class="row order-row-item">
-                                        <div class="col-3">
+                                        <div class="col-4">
                                             <?php echo trans("payment_status"); ?>
                                         </div>
-                                        <div class="col-9">
+                                        <div class="col-8">
                                             <?php echo trans($order->payment_status); ?>
                                             <?php if ($order->payment_method == "Bank Transfer" && $order->payment_status == "awaiting_payment"):
                                                 if (isset($last_bank_transfer)):?>
@@ -72,33 +89,45 @@
                                                         <button type="button" class="btn btn-sm btn-secondary color-white m-l-15" data-toggle="modal" data-target="#reportPaymentModal"><?php echo trans("report_bank_transfer"); ?></button>
                                                     <?php endif; ?>
                                                 <?php else: ?>
-                                                    <button type="button" class="btn btn-sm btn-secondary color-white m-l-15" data-toggle="modal" data-target="#reportPaymentModal"><?php echo trans("report_bank_transfer"); ?></button>
+                                                    <button type="button" class="btn btn-sm btn-secondary color-white m-l-15" data-toggle="modal" data-target="#reportPaymentModal">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16" class="mds-svg-icon">
+                                                            <path d="M1.92.506a.5.5 0 0 1 .434.14L3 1.293l.646-.647a.5.5 0 0 1 .708 0L5 1.293l.646-.647a.5.5 0 0 1 .708 0L7 1.293l.646-.647a.5.5 0 0 1 .708 0L9 1.293l.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .801.13l.5 1A.5.5 0 0 1 15 2v12a.5.5 0 0 1-.053.224l-.5 1a.5.5 0 0 1-.8.13L13 14.707l-.646.647a.5.5 0 0 1-.708 0L11 14.707l-.646.647a.5.5 0 0 1-.708 0L9 14.707l-.646.647a.5.5 0 0 1-.708 0L7 14.707l-.646.647a.5.5 0 0 1-.708 0L5 14.707l-.646.647a.5.5 0 0 1-.708 0L3 14.707l-.646.647a.5.5 0 0 1-.801-.13l-.5-1A.5.5 0 0 1 1 14V2a.5.5 0 0 1 .053-.224l.5-1a.5.5 0 0 1 .367-.27zm.217 1.338L2 2.118v11.764l.137.274.51-.51a.5.5 0 0 1 .707 0l.646.647.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.509.509.137-.274V2.118l-.137-.274-.51.51a.5.5 0 0 1-.707 0L12 1.707l-.646.647a.5.5 0 0 1-.708 0L10 1.707l-.646.647a.5.5 0 0 1-.708 0L8 1.707l-.646.647a.5.5 0 0 1-.708 0L6 1.707l-.646.647a.5.5 0 0 1-.708 0L4 1.707l-.646.647a.5.5 0 0 1-.708 0l-.509-.51z"/>
+                                                            <path d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm8-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z"/>
+                                                        </svg>
+                                                        <?php echo trans("report_bank_transfer"); ?>
+                                                    </button>
                                                 <?php endif; ?>
-                                                <button type="button" class="btn btn-sm btn-success color-white" data-toggle="modal" data-target="#bankAccountsModal"><?php echo trans("bank_accounts"); ?></button>
+                                                <button type="button" class="btn btn-sm btn-success color-white" data-toggle="modal" data-target="#bankAccountsModal">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16" class="mds-svg-icon">
+                                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                                    </svg>
+                                                    <?php echo trans("bank_accounts"); ?>
+                                                </button>
                                             <?php endif; ?>
                                         </div>
                                     </div>
                                     <div class="row order-row-item">
-                                        <div class="col-3">
+                                        <div class="col-4">
                                             <?php echo trans("payment_method"); ?>
                                         </div>
-                                        <div class="col-9">
+                                        <div class="col-8">
                                             <?= get_payment_method($order->payment_method); ?>
                                         </div>
                                     </div>
                                     <div class="row order-row-item">
-                                        <div class="col-3">
+                                        <div class="col-4">
                                             <?php echo trans("date"); ?>
                                         </div>
-                                        <div class="col-9">
+                                        <div class="col-8">
                                             <?php echo formatted_date($order->created_at); ?>
                                         </div>
                                     </div>
                                     <div class="row order-row-item">
-                                        <div class="col-3">
+                                        <div class="col-4">
                                             <?php echo trans("updated"); ?>
                                         </div>
-                                        <div class="col-9">
+                                        <div class="col-8">
                                             <?php echo time_ago($order->updated_at); ?>
                                         </div>
                                     </div>
@@ -270,12 +299,12 @@
                                         <table class="table table-orders">
                                             <thead>
                                             <tr>
-                                                <th scope="col"><?php echo trans("product"); ?></th>
-                                                <th scope="col"><?php echo trans("unit_price"); ?></th>
-                                                <th scope="col"><?php echo trans("quantity"); ?></th>
-                                                <th scope="col"><?php echo trans("total"); ?></th>
-                                                <th scope="col"><?php echo trans("status"); ?></th>
-                                                <th scope="col"><?php echo trans("updated"); ?></th>
+                                                <th scope="col" class="mobile-hidden"><?php echo trans("product"); ?></th>
+                                                <th scope="col" class="mobile-hidden"><?php echo trans("unit_price"); ?></th>
+                                                <th scope="col" class="mobile-hidden"><?php echo trans("quantity"); ?></th>
+                                                <th scope="col" class="mobile-hidden"><?php echo trans("total"); ?></th>
+                                                <th scope="col" class="mobile-hidden"><?php echo trans("status"); ?></th>
+                                                <th scope="col" class="mobile-hidden"><?php echo trans("updated"); ?></th>
                                                 <!-- <th scope="col"><?php echo trans("options"); ?></th> -->
                                             </tr>
                                             </thead>
@@ -312,7 +341,7 @@
                                                                       <?php endif; ?>
                                                                     <?php endif; ?>
                                                                 </p>
-                                                                <p class="m-b-15">
+                                                                <p class="m-b-0">
                                                                   <span><?php echo trans("sku"); ?>:</span>
                                                                   <strong class="font-600"><?php echo $item->product_sku; ?></strong>
                                                                 </p>
@@ -322,13 +351,13 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td style="width: 10%"><?php echo price_formatted($item->product_unit_price, $item->product_currency); ?></td>
-                                                    <td style="width: 10%"><?php echo $item->product_quantity; ?></td>
-                                                    <td style="width: 10%"><?php echo price_formatted($item->product_total_price, $item->product_currency); ?>  </td>
-                                                    <td style="width: 10%">
+                                                    <td style="width: 10%" class="mobile-hidden"><?php echo price_formatted($item->product_unit_price, $item->product_currency); ?></td>
+                                                    <td style="width: 10%" class="mobile-hidden"><?php echo $item->product_quantity; ?></td>
+                                                    <td style="width: 10%" class="mobile-hidden"><?php echo price_formatted($item->product_total_price, $item->product_currency); ?>  </td>
+                                                    <td style="width: 10%" class="mobile-hidden">
                                                         <strong class="no-wrap"><?php echo trans($item->order_status) ?></strong>
                                                     </td>
-                                                    <td style="width: 15%;">
+                                                    <td style="width: 15%;" class="mobile-hidden">
                                                         <?php if ($item->product_type == 'physical') {
                                                             echo time_ago($item->updated_at);
                                                         } ?>
@@ -387,7 +416,37 @@
                                                     </td>
                                                     */ ?>
                                                 </tr>
+                                                <tr class="tr-shipping tr-mobile-show">
+                                                    <td colspan="1">
+                                                        <div class="order-shipping-tracking-number">
+                                                          <div class="row shipping-row-item">
+                                                              <div class="col-4"><?php echo trans("status"); ?></div>
+                                                              <div class="col-8">
+                                                                  <strong class="no-wrap"><?php echo trans($item->order_status) ?></strong>
+                                                              </div>
+                                                          </div>
+                                                          <div class="row shipping-row-item">
+                                                              <div class="col-4"><?php echo trans("unit_price"); ?></div>
+                                                              <div class="col-8">
+                                                                  <?php echo price_formatted($item->product_unit_price, $item->product_currency); ?>
+                                                              </div>
+                                                          </div>
+                                                          <div class="row shipping-row-item">
+                                                              <div class="col-4"><?php echo trans("quantity"); ?></div>
+                                                              <div class="col-8">
+                                                                  <?php echo $item->product_quantity; ?>
+                                                              </div>
+                                                          </div>
+                                                          <div class="row shipping-row-item">
+                                                              <div class="col-4"><?php echo trans("total"); ?></div>
+                                                              <div class="col-8">
+                                                                  <?php echo price_formatted($item->product_total_price, $item->product_currency); ?>
+                                                              </div>
+                                                          </div>
 
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                                 <?php /* if ($item->product_type == "physical"): ?>
                                                 <tr class="tr-shipping">
                                                     <td colspan="4">

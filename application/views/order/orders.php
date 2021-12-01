@@ -35,10 +35,10 @@
 								<tr>
 									<th scope="col"><?php echo trans("order"); ?></th>
 									<th scope="col"><?php echo trans("total"); ?></th>
-									<th scope="col"><?php echo trans("payment"); ?></th>
+									<th scope="col" class="mobile-hidden"><?php echo trans("payment"); ?></th>
 									<th scope="col"><?php echo trans("status"); ?></th>
-									<th scope="col"><?php echo trans("date"); ?></th>
-									<th scope="col"><?php echo trans("options"); ?></th>
+									<th scope="col" class="mobile-hidden"><?php echo trans("date"); ?></th>
+									<th scope="col" class="mobile-hidden"><?php echo trans("options"); ?></th>
 								</tr>
 								</thead>
 								<tbody>
@@ -47,7 +47,7 @@
 										<tr>
 											<td>#<?php echo $order->order_number; ?></td>
 											<td><?php echo price_formatted($order->price_total, $order->price_currency); ?></td>
-											<td>
+											<td class="mobile-hidden">
 												<?php if ($order->payment_status == 'payment_received'):
 													echo trans("payment_received");
 												else:
@@ -73,8 +73,16 @@
 													endif; ?>
 												</strong>
 											</td>
-											<td><?php echo formatted_date($order->created_at); ?></td>
-											<td>
+											<td class="mobile-hidden"><?php echo formatted_date($order->created_at); ?></td>
+											<td class="mobile-hidden">
+												<a href="<?php echo generate_url("order_details") . "/" . $order->order_number; ?>" class="btn btn-sm btn-table-info"><?php echo trans("details"); ?></a>
+											</td>
+										</tr>
+										<tr class="tr-mobile-show">
+											<td colspan="2">
+												<?php echo formatted_date($order->created_at); ?>
+											</td>
+											<td colspan="1">
 												<a href="<?php echo generate_url("order_details") . "/" . $order->order_number; ?>" class="btn btn-sm btn-table-info"><?php echo trans("details"); ?></a>
 											</td>
 										</tr>

@@ -58,7 +58,7 @@
                                                                             <?php $logos = @explode(',', $gateway->logos);
                                                                             if (!empty($logos) && item_count($logos) > 0):
                                                                                 foreach ($logos as $logo): ?>
-                                                                                    <img src="<?php echo base_url(); ?>assets/img/payment/<?= html_escape(trim($logo)); ?>.svg" alt="<?= html_escape(trim($logo)); ?>">
+                                                                                    <img src="<?php echo base_url(); ?>assets/img/payment/<?= html_escape(trim($logo)); ?>.<?=$gateway->name_key == 'paynet' ? 'png':'svg'?>" alt="<?= html_escape(trim($logo)); ?>" style="height: 18px">
                                                                                 <?php endforeach;
                                                                             endif; ?>
                                                                         </label>
@@ -96,7 +96,7 @@
                                                     <label for="checkbox_terms" class="custom-control-label"><?php echo trans("terms_conditions_exp"); ?>&nbsp;
                                                         <?php $page_terms = get_page_by_default_name("terms_conditions", $this->selected_lang->id);
                                                         if (!empty($page_terms)): ?>
-                                                            <a href="<?= generate_url($page_terms->page_default_name); ?>" class="link-terms" target="_blank"><strong><?= html_escape($page_terms->title); ?></strong></a>
+                                                            <a href="<?= generate_url($page_terms->slug); ?>" class="link-terms" target="_blank"><strong><?= html_escape($page_terms->title); ?></strong></a>
                                                         <?php endif; ?>
                                                     </label>
                                                 </div>

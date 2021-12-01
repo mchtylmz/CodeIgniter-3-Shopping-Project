@@ -5,10 +5,19 @@
             <div class="col-12">
                 <div class="footer-top">
                     <div class="row">
-                        <div class="col-12 col-md-3 footer-widget">
+                        <div class="col-12 col-md-4 footer-widget">
                             <div class="row-custom">
                                 <div class="footer-logo">
-                                    <a href="<?php echo lang_base_url(); ?>"><img src="<?php echo get_logo($this->general_settings); ?>" alt="logo"></a>
+                                    <a href="<?php echo lang_base_url(); ?>"><img src="<?php echo get_logo($this->general_settings); ?>" alt="logo" style="max-height: 54px;"></a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <h4 class="footer-title"><?php echo trans("follow_us"); ?></h4>
+                                    <div class="footer-social-links">
+                                        <!--include social links-->
+                                        <?php $this->load->view('partials/_social_links', ['show_rss' => true]); ?>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row-custom">
@@ -17,7 +26,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-3 footer-widget">
+                        <div class="col-12 col-md-4 footer-widget">
                             <div class="nav-footer">
                                 <div class="row-custom">
                                     <h4 class="footer-title"><?php echo trans("footer_quick_links"); ?></h4>
@@ -30,7 +39,7 @@
                                                 if ($menu_link->location == 'quick_links'):
                                                     $item_link = generate_menu_item_url($menu_link);
                                                     if (!empty($menu_link->page_default_name)):
-                                                        $item_link = generate_url($menu_link->page_default_name);
+                                                        $item_link = generate_url($menu_link->slug);
                                                     endif; ?>
                                                     <li><a href="<?= $item_link; ?>"><?php echo html_escape($menu_link->title); ?></a></li>
                                                 <?php endif;
@@ -40,7 +49,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-3 footer-widget">
+                        <div class="col-12 col-md-4 footer-widget">
                             <div class="nav-footer">
                                 <div class="row-custom">
                                     <h4 class="footer-title"><?php echo trans("footer_information"); ?></h4>
@@ -52,7 +61,7 @@
                                                 if ($menu_link->location == 'information'):
                                                     $item_link = generate_menu_item_url($menu_link);
                                                     if (!empty($menu_link->page_default_name)):
-                                                        $item_link = generate_url($menu_link->page_default_name);
+                                                        $item_link = generate_url($menu_link->slug);
                                                     endif; ?>
                                                     <li><a href="<?= $item_link; ?>"><?php echo html_escape($menu_link->title); ?></a></li>
                                                 <?php endif;
@@ -69,6 +78,7 @@
                                 </div>
                             </div>
                         </div>
+                        <?php /* ?>
                         <div class="col-12 col-md-3 footer-widget">
                             <div class="row">
                                 <div class="col-12">
@@ -114,6 +124,7 @@
                                 </div>
                             </div>
                         </div>
+                        <?php */ ?>
                     </div>
                 </div>
             </div>
@@ -152,6 +163,67 @@
 <script src="<?= base_url(); ?>assets/js/plugins-1.8.js"></script>
 <script src="<?= base_url(); ?>assets/js/script-1.8.js?v=0.1<?=time()?>"></script>
 <script src="<?=base_url()?>assets/credit-card/jquery.creditCardValidator.js" charset="utf-8"></script>
+<?php if (active_story() && isset($home_stories) && $home_stories): ?>
+<script src="<?=base_url()?>assets/story/dist/zuck.min.js?v=0.2"></script>
+<script type="text/javascript">
+var timestamp=function(){var e=new Date;return new Date(e-9e5).getTime()/1e3};
+var home_stories = <?php echo json_encode($home_stories, JSON_PRETTY_PRINT);?>;
+var stories_data = [];
+if (sessionStorage.getItem('story') <= '<?=date('YmdHi', strtotime('-2 hours'))?>') {
+  sessionStorage.removeItem('zuck-stories-seenItems');
+  sessionStorage.removeItem('hoverZoomAdditionalInfos');
+}
+
+for (var index = 0; index < home_stories.length; index++) {
+  var story = home_stories[index];
+  stories_data.push(Zuck.buildTimelineItem(
+      'story_' + story.id,
+      '<?=base_url()?>' + story.avatar,
+      story.title,
+      '<?=base_url()?>' + story.link,
+      timestamp(),
+      [
+        [
+          'story_' + story.id,
+          "photo",
+          5,
+          '<?=base_url()?>' + story.image,
+          '<?=base_url()?>' + story.image,
+          '<?=base_url()?>' + story.link,
+          '',
+          false,
+          timestamp()
+        ]
+      ]
+    )
+  );
+}
+var stories = new Zuck('stories', {
+      skin: 'snapgram',
+      avatars: true,         // shows user photo instead of last story item preview
+      list: false,           // displays a timeline instead of carousel
+      openEffect: true,      // enables effect when opening story
+      cubeEffect: true,     // enables the 3d cube effect when sliding story
+      autoFullScreen: false, // enables fullscreen on mobile browsers
+      backButton: true,      // adds a back button to close the story viewer
+      backNative: true,     // uses window history to enable back button on browsers/android
+      previousTap: true,     // use 1/3 of the screen to navigate to previous item when tap the story
+      sessionStorage: true,    // set true to save "seen" position. Element must have a id to save properly.
+      paginationArrows: false,
+      stories: stories_data,
+      language: { // if you need to translate :)
+        keyboardTip: '<?=trans('story_press_next')?>',
+        visitLink: '<?=trans('link')?>'
+      },
+      callbacks:  {
+        onView (storyId) {
+          sessionStorage.setItem('story', '<?=date('YmdHi')?>');
+        }
+      }
+    });
+    $('#stories').show();
+</script>
+<?php endif; ?>
 <?php if (!empty($this->session->userdata('mc20bt99_send_email_data'))): ?>
 <script>$(document).ready(function () {var data = JSON.parse(<?= json_encode($this->session->userdata("mc20bt99_send_email_data"));?>);if (data) {data[mc20bt99_config.csfr_token_name] = $.cookie(mc20bt99_config.csfr_cookie_name);data["sys_lang_id"] = mc20bt99_config.sys_lang_id;$.ajax({type: "POST", url: "<?= base_url(); ?>mds-send-email-post", data: data, success: function (response) {}});}});</script>
 <?php endif;$this->session->unset_userdata('mc20bt99_send_email_data'); ?>
@@ -179,7 +251,6 @@ $(document).ajaxStop(function () {const player = new Plyr('#audio_player');});
 $(document).ready(function () {setTimeout(function () {$(".product-video-preview").css("opacity", "1");}, 300);setTimeout(function () {$(".product-audio-preview").css("opacity", "1");}, 300);});
 </script>
 <?php endif; ?>
-<?= $this->general_settings->google_analytics; ?>
 <?= $this->general_settings->custom_javascript_codes;  ?>
 
 </body>

@@ -34,21 +34,21 @@ if (!empty($product->has_variation) || $product->listing_type == "bidding"):?>
 <i class="icon-cart"></i>
 </a>
 <?php else: ?>
-<a href="javascript:void(0)" class="item-option btn-item-add-to-cart" data-toggle="tooltip" data-placement="left" data-product-id="<?php echo $product->id; ?>" data-reload="0" title="<?php echo trans("add_to_cart"); ?>">
+<a href="javascript:void(0)" id="btn_add_cart_<?= $item_unique_id; ?>" class="item-option btn-item-add-to-cart" data-id="<?= $item_unique_id; ?>" data-toggle="tooltip" data-placement="left" data-product-id="<?php echo $product->id; ?>" data-reload="0" title="<?php echo trans("add_to_cart"); ?>">
 <i class="icon-cart"></i>
 </a>
 <?php endif;
 endif; ?>
 </div>
+<?php if ($product->is_promoted && $this->general_settings->promoted_products == 1 && isset($promoted_badge) && $promoted_badge == true): ?>
+<span class="badge badge-dark badge-promoted"><?php echo trans("featured"); ?></span>
+<?php $is_promoted = true; endif; ?>
 <?php
 //  && !empty($discount_label)
 if (!empty($product->discount_rate)): ?>
-<span class="badge badge-discount">-<?= $product->discount_rate; ?>%</span>
+<span class="badge badge-discount <?=isset($is_promoted) && $is_promoted ? 'promoted':''?>">-<?= $product->discount_rate; ?>%</span>
 <?php endif; ?>
 </div>
-<?php if ($product->is_promoted && $this->general_settings->promoted_products == 1 && isset($promoted_badge) && $promoted_badge == true): ?>
-<span class="badge badge-dark badge-promoted"><?php echo trans("featured"); ?></span>
-<?php endif; ?>
 </div>
 <div class="row-custom item-details">
 <h3 class="product-title">
@@ -64,7 +64,7 @@ if (!empty($product->discount_rate)): ?>
 <?php foreach ($vr_colors as $key => $color):
 	$option_name = get_variation_option_name($color, $this->selected_lang->id); ?>
 	<label for="radio<?php echo $key; ?>" data-input-name="variation<?php echo $key; ?>" class="custom-control-label label-variation-color label-variation lb" data-toggle="tooltip" data-placement="top" title="<?php echo html_escape($option_name); ?>">
-			<span class="variation-color-box cb" style="background-color: red"></span>
+			<span class="variation-color-box cb" style="background-color: <?=random_color()?>"></span>
 	</label>
 <?php endforeach; ?>
 <?php endif; ?>

@@ -6,8 +6,9 @@
                 <nav class="nav-breadcrumb" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-products">
                         <li class="breadcrumb-item"><a href="<?php echo lang_base_url(); ?>"><?php echo trans("home"); ?></a></li>
-                        <?php if (!empty($parent_categories)):
-                            foreach ($parent_categories as $item):
+                        <?php if (!empty($parent_categories)): ?>
+                        <li class="breadcrumb-item"><a href="<?php echo lang_base_url(); ?>products"><?php echo trans("all_products"); ?></a></li>
+                        <?php foreach ($parent_categories as $item):
                                 if ($item->id == $category->id):?>
                                     <li class="breadcrumb-item active"><?php echo category_name($item); ?></li>
                                 <?php else: ?>
@@ -38,7 +39,7 @@
                     <?php $filter_sort = str_slug($this->input->get('sort', true)); ?>
                     <div class="sort-select">
                         <select id="select_sort_items" class="custom-select" data-current-url="<?= current_url(); ?>" data-query-string="<?= generate_filter_url($query_string_array, 'rmv_srt', ''); ?>" data-page="products">
-                            <option value="rand"<?= $filter_sort == 'rand' ? ' selected' : ''; ?>><?= trans("rand"); ?></option>
+                            <!--<option value="rand"<?= $filter_sort == 'rand' ? ' selected' : ''; ?>><?= trans("rand"); ?></option> -->
                             <!--<option value="az"<?= $filter_sort == 'az' ? ' selected' : ''; ?>><?= trans("name_az"); ?></option> -->
                             <!-- <option value="za"<?= $filter_sort == 'za' ? ' selected' : ''; ?>><?= trans("name_za"); ?></option> -->
                             <option value="most_popular"<?= $filter_sort == 'most_popular' ? ' selected' : ''; ?>><?= trans("most_popular"); ?></option>
@@ -56,7 +57,7 @@
 
         <div class="row">
             <?php $array_option_names = array(); ?>
-            <div class="col-12 col-md-3 col-sidebar-products">
+            <div class="col-12 col-lg-3 col-sidebar-products">
                 <div id="collapseFilters" class="product-filters">
                     <?php if (!empty($categories)): ?>
                         <div class="filter-item">
@@ -149,7 +150,7 @@
                 </div>
             </div>
 
-            <div class="col-12 col-md-9 col-content-products">
+            <div class="col-12 col-lg-9 col-content-products">
                 <div class="filter-reset-tag-container">
                     <?php $show_reset_link = false;
                     if (!empty($query_string_object_array)):
@@ -211,7 +212,7 @@
                 <div class="product-list-content">
                     <div class="row row-product">
                         <?php foreach ($products as $product): ?>
-                            <div class="col-6 col-sm-4 col-md-4 col-lg-3 col-product">
+                            <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-product">
                                 <?php $this->load->view('product/_product_item', ['product' => $product, 'promoted_badge' => true]); ?>
                             </div>
                         <?php endforeach; ?>

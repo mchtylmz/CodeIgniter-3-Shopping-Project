@@ -119,56 +119,49 @@
                                         }
 
                                         $is_order_has_physical_product = false;
-                                        if (!empty($invoice_items) && is_array($invoice_items)):
-                                            foreach ($invoice_items as $item):
-                                                $order_product_id = @$item['id'];
-                                                $seller = @$item['seller'];
-                                                if (!empty($order_product_id)):
-                                                    $order_product = $this->order_model->get_order_product($order_product_id);
-                                                    if (!empty($order_product)):
-                                                        if ($order_product->product_type == 'physical') {
-                                                            $is_order_has_physical_product = true;
-                                                        }
-                                                        $show_item = false;
-                                                        if ($show_all_products == true) {
-                                                            $show_item = true;
-                                                        } else {
-                                                            if ($order_product->seller_id == $this->auth_user->id) {
-                                                                $show_item = true;
-                                                            }
-                                                        }
-                                                        if ($show_item == true):
-                                                            if ($show_all_products == false):
-                                                                $sale_subtotal += $order_product->product_unit_price * $order_product->product_quantity;
-                                                                $sale_vat += $order_product->product_vat;
-                                                                $sale_shipping = $order_product->seller_shipping_cost;
-                                                                $sale_total += $order_product->product_total_price;
-                                                            endif; ?>
-                                                            <tr style="font-size: 15px;">
-                                                                <?php if (active_nebimv3()): ?>
-                                                                  <td style="text-align:center; width: 100px; ">
-                                                                    <img src="<?=generate_barcode($order_product->variation_option_barcodes)?>" alt="<?=$order_product->variation_option_barcodes?>">
-                                                                    <?php echo $order_product->variation_option_barcodes; ?>
-                                                                  </td>
-                                                                <?php else: ?>
-                                                                  <td style=""><?php echo html_escape($seller); ?></td>
-                                                                  <td style=""><?php echo $order_product->product_id; ?></td>
-                                                                <?php endif; ?>
-                                                                <td style=""><?php echo $order_product->product_title; ?></td>
-                                                                <td style=""><?php echo $order_product->product_quantity; ?></td>
-                                                                <td style="white-space: nowrap; "><?php echo price_formatted($order_product->product_unit_price, $order_product->product_currency); ?></td>
-                                                                <?php if ($this->general_settings->vat_status): ?>
-                                                                    <td style="white-space: nowrap; ">
-                                                                        <?php if (!empty($order_product->product_vat)): ?>
-                                                                            <?php echo price_formatted($order_product->product_vat, $order_product->product_currency); ?>&nbsp;(<?php echo $order_product->product_vat_rate; ?>%)
-                                                                        <?php endif; ?>
-                                                                    </td>
-                                                                <?php endif; ?>
-                                                                <td style="white-space: nowrap; "><?php echo price_formatted($order_product->product_total_price, $order_product->product_currency); ?></td>
-                                                            </tr>
-                                                        <?php endif;
-                                                    endif;
-                                                endif;
+                                        if (!empty($order_products) && is_array($order_products)):
+                                            foreach ($order_products as $order_product):
+                                              if ($order_product->product_type == 'physical') {
+                                                  $is_order_has_physical_product = true;
+                                              }
+                                              $show_item = false;
+                                              if ($show_all_products == true) {
+                                                  $show_item = true;
+                                              } else {
+                                                  if ($order_product->seller_id == $this->auth_user->id) {
+                                                      $show_item = true;
+                                                  }
+                                              }
+                                              if ($show_item == true):
+                                                  if ($show_all_products == false):
+                                                      $sale_subtotal += $order_product->product_unit_price * $order_product->product_quantity;
+                                                      $sale_vat += $order_product->product_vat;
+                                                      $sale_shipping = $order_product->seller_shipping_cost;
+                                                      $sale_total += $order_product->product_total_price;
+                                                  endif; ?>
+                                                  <tr style="font-size: 15px;">
+                                                      <?php if (active_nebimv3()): ?>
+                                                        <td style="text-align:center; width: 100px; ">
+                                                          <img src="<?=generate_barcode($order_product->variation_option_barcodes)?>" alt="<?=$order_product->variation_option_barcodes?>">
+                                                          <?php echo $order_product->variation_option_barcodes; ?>
+                                                        </td>
+                                                      <?php else: ?>
+                                                        <td style=""><?php echo html_escape($seller); ?></td>
+                                                        <td style=""><?php echo $order_product->product_id; ?></td>
+                                                      <?php endif; ?>
+                                                      <td style=""><?php echo $order_product->product_title; ?></td>
+                                                      <td style=""><?php echo $order_product->product_quantity; ?></td>
+                                                      <td style="white-space: nowrap; "><?php echo price_formatted($order_product->product_unit_price, $order_product->product_currency); ?></td>
+                                                      <?php if ($this->general_settings->vat_status): ?>
+                                                          <td style="white-space: nowrap; ">
+                                                              <?php if (!empty($order_product->product_vat)): ?>
+                                                                  <?php echo price_formatted($order_product->product_vat, $order_product->product_currency); ?>&nbsp;(<?php echo $order_product->product_vat_rate; ?>%)
+                                                              <?php endif; ?>
+                                                          </td>
+                                                      <?php endif; ?>
+                                                      <td style="white-space: nowrap; "><?php echo price_formatted($order_product->product_total_price, $order_product->product_currency); ?></td>
+                                                  </tr>
+                                              <?php endif;
                                             endforeach;
                                         endif; ?>
                                         </tbody>

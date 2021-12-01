@@ -63,6 +63,14 @@
             </select>
         </div>
       -->
+      <div class="item-table-filter" style="width: 80px; min-width: 80px;">
+          <label><?php echo trans("featured"); ?></label>
+          <select name="feature" class="form-control">
+              <option value=""><?php echo trans("all"); ?></option>
+              <option value="1" <?php echo ($this->input->get('feature', true) == '1') ? 'selected' : ''; ?>><?php echo trans("featured"); ?></option>
+              <option value="2" <?php echo ($this->input->get('feature', true) == '2') ? 'selected' : ''; ?>><?php echo trans("special_offers"); ?></option>
+          </select>
+      </div>
 
         <div class="item-table-filter">
             <label><?php echo trans("search"); ?></label>

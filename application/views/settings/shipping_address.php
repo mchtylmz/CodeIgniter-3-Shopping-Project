@@ -36,7 +36,8 @@
                             <?php if (!empty($shipping_addresses)):
                                 foreach ($shipping_addresses as $address):
                                     $country = get_country($address->country_id);
-                                    $state = get_state($address->state_id); ?>
+                                    $state = get_state($address->state_id);
+                                    $city = get_city($address->city); ?>
                                     <div class="col-12 col-md-4 m-b-30">
                                         <div class="shipping-address-box shadow-sm">
                                             <div class="dropdown dropdown-shipping-options">
@@ -56,8 +57,8 @@
                                             <p><?= html_escape($address->phone_number); ?></p>
                                             <p><?= html_escape($address->address); ?>&nbsp;<?= html_escape($address->zip_code); ?></p>
                                             <p>
-                                                <?php if (!empty($address->city)):
-                                                    echo html_escape($address->city) . "/";
+                                                <?php if (!empty($city->name)):
+                                                    echo html_escape($city->name) . "/";
                                                 endif;
                                                 if (!empty($state->name)):
                                                     echo html_escape($state->name) . "/";
@@ -145,11 +146,11 @@
                             <label class="control-label"><?php echo trans("state"); ?></label>
                             <select id="select_states_new_address" name="state_id" class="select2 select2-req form-control" data-placeholder="<?= trans("state"); ?>" onchange="get_cities(this.value,false,'new_address');" required>
                                 <option></option>
-                                <?php if (!empty($states)):
+                                <?php /*if (!empty($states)):
                                     foreach ($states as $item): ?>
                                         <option value="<?= $item->id; ?>"><?= html_escape($item->name); ?></option>
                                     <?php endforeach;
-                                endif; ?>
+                                endif; */?>
                             </select>
                         </div>
                     </div>

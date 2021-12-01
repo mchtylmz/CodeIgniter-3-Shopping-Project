@@ -59,6 +59,7 @@
                             <th><?php echo trans("log_data"); ?></th>
                             <th><?php echo trans("log_response"); ?></th>
                             <th><?php echo trans("update"); ?></th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -93,6 +94,27 @@
                                   <?php endif; ?>
                                 </td>
                                 <td><?php echo formatted_date($log->created_at); ?></td>
+                                <td>
+                                  <button class="btn btn-sm bg-purple" type="button" data-toggle="modal" data-target="#detail<?=$log->id?>">
+                                      <?=trans('queue_detail')?>
+              										</button>
+                                  <!-- Modal -->
+                                  <div class="modal fade" id="detail<?=$log->id?>" tabindex="-1" role="dialog" aria-hidden="true">
+                                      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                          <div class="modal-content modal-custom">
+                                              <div class="modal-body" style="text-align:left !important">
+                                                <?=d($log->data)?>
+                                                <br>
+                                                <?=d($log->response)?>
+                                              </div>
+                                              <div class="modal-footer">
+              						                        <button type="button" class="btn btn-md btn-default" data-dismiss="modal">Kapat</button>
+              						                    </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <!-- Modal -->
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                         </tbody>

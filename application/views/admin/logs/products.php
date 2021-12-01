@@ -86,7 +86,11 @@
                         <tbody>
                         <?php foreach ($nebim_products as $product): ?>
                             <tr>
-                                <td><?=$product->ModelKodu?></td>
+                                <td>
+                                  <a style="color:#222; text-decoration:underline" target="_blank" href="<?=base_url()?>products?search=<?=$product->ModelKodu?>">
+                                    <?=$product->ModelKodu?>
+                                  </a>
+                                </td>
                                 <td><?=$product->RenkAdi?></td>
                                 <td><?=$product->Beden?></td>
                                 <td><?=$product->Cinsiyet?></td>

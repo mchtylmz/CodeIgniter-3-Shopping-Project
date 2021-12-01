@@ -62,95 +62,27 @@ foreach ($this->languages as $language): ?>
     <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/font-icons/css/mds-icons.min.css"/>
     <?= !empty($this->fonts->site_font_url) ? $this->fonts->site_font_url : ''; ?>
     <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/bootstrap/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/style-1.8.min.css"/>
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/plugins-1.8.css"/>
-<?php $this->load->view("partials/_css_js_header"); ?>
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/style-1.9.min.css"/>
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/plugins-1.9.css"/>
 <?php if ($this->rtl == true): ?>
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/rtl-1.8.min.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/rtl-1.9.min.css">
 <?php endif; ?>
+<?php if (active_story()): ?>
+  <link rel="stylesheet" href="<?= base_url(); ?>assets/story/dist/zuck.min.css">
+  <link rel="stylesheet" href="<?= base_url(); ?>assets/story/dist/skins/snapgram.min.css">
+<?php endif; ?>
+<?php $this->load->view("partials/_css_js_header"); ?>
+<?= $this->general_settings->google_analytics; ?>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G3EPRBZNT1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-G3EPRBZNT1');
+</script>
 <?= $this->general_settings->custom_css_codes; ?>
-<style media="screen">
-  .nav-top .nav-top-left .logo a img {
-    max-width: 150px;
-    width: inherit;
-  }
-  .product-item .img-product,
-  .img-product-container,
-  .col-content-products .product-item .img-product,
-  .col-content-products .img-product-container {
-    height: 300px
-  }
-  .index-mobile-slider .slider-container, .index-mobile-slider .item {
-    height: 580px !important;
-  }
-  .login-modal {
-    max-width: 400px;
-  }
-  .new-profile .notification {
-    position: absolute;
-    right: 5px;
-    top: 0;
-    font-size: 12px;
-    background-color: #f15e4f;
-    width: 18px;
-    border-radius: 50%;
-    display: block;
-    height: 18px;
-    line-height: 18px;
-    text-align: center;
-    color: #fff;
-    font-weight: 600;
-  }
-  .nav-item-language .info {
-    position: absolute;
-    right: 5px;
-    top: 0px;
-    font-size: 14px;
-    background-color: #eee;
-    width: 18px;
-    border-radius: 50%;
-    display: block;
-    height: 18px;
-    line-height: 18px;
-    text-align: center;
-    color: #000;
-    font-weight: 600;
-  }
-  .lb {width: 12.5px; height: 12.5px;}
-  .lb .cb {border-radius: 50%;border:solid 1px #eee;}
-  .lb.custom-control-label::before, .lb.custom-control-label::after {display: none;}
-  .custom-control-variation .option-out-of-stock {
-    background: linear-gradient(to left top, transparent 47.75%, red 49.5%, red 50.5%, transparent 52.25%);
-    text-decoration: unset;
-  }
-  .index-products-slider-nav .prev, .index-products-slider-nav .next, .main-slider-nav {
-    opacity: 0.8;
-  }
-  .slick-dots {
-    display: flex;
-    justify-content: center;
-    margin: 0;
-    padding: 0 0 1rem 0;
-    list-style-type: none;
-  }
-  .slick-dots li {
-    margin: 0 0.25rem;
-  }
-  .slick-dots button {
-    display: block;
-    width: 0.75rem;
-    height: 0.75rem;
-    padding: 0;
-    border: none;
-    border-radius: 100%;
-    background-color: rgba(0,0,0,0.4);
-    text-indent: -9999px;
-    margin: 0px 3px;
-  }
-  .slick-dots li.slick-active button {
-    background-color: rgba(0,0,0,0.8);
-  }
-</style>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -179,38 +111,26 @@ foreach ($this->languages as $language): ?>
                                 <div class="row-align-items-center">
                                     <div class="top-search-bar<?= $this->general_settings->multi_vendor_system != 1 ? ' top-search-bar-single-vendor' : ''; ?>" style="width: calc(100% - 100px);">
                                         <?php echo form_open(generate_url('search'), ['id' => 'form_validate_search', 'class' => 'form_search_main', 'method' => 'get']); ?>
-                                        <?php if ($this->general_settings->multi_vendor_system == 1): ?>
-                                            <div class="left">
-                                                <div class="dropdown search-select">
-                                                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
-                                                        <?php if (isset($search_type)):
-                                                            echo trans("member");
-                                                        else:
-                                                            echo trans("product");
-                                                        endif; ?>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" data-value="product" href="javascript:void(0)"><?php echo trans("product"); ?></a>
-                                                        <a class="dropdown-item" data-value="member" href="javascript:void(0)"><?php echo trans("member"); ?></a>
-                                                    </div>
+                                        <div class="left">
+                                            <div class="dropdown search-select">
+                                                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"><?= !empty($input_search_category) ? category_name($input_search_category) : trans("all_categories"); ?></button>
+                                                <i class="icon-arrow-down search-select-caret"></i>
+                                                <input type="hidden" name="search_category_input" id="input_search_category" value="<?= !empty($input_search_category) ? $input_search_category->id : 'all'; ?>">
+                                                <div class="dropdown-menu search-categories">
+                                                    <a class="dropdown-item" data-value="all" href="javascript:void(0)"><?= trans("all_categories"); ?></a>
+                                                    <?php if (!empty($this->parent_categories)):
+                                                        foreach ($this->parent_categories as $search_cat):?>
+                                                            <a class="dropdown-item" data-value="<?= $search_cat->id; ?>" href="javascript:void(0)"><?= html_escape($search_cat->name); ?></a>
+                                                        <?php endforeach;
+                                                    endif; ?>
                                                 </div>
-                                                <?php if (isset($search_type)): ?>
-                                                    <input type="hidden" class="search_type_input" name="search_type" value="member">
-                                                <?php else: ?>
-                                                    <input type="hidden" class="search_type_input" name="search_type" value="product">
-                                                <?php endif; ?>
                                             </div>
-                                            <div class="right">
-                                                <input type="text" name="search" maxlength="300" pattern=".*\S+.*" id="input_search" class="form-control input-search" value="<?php echo (!empty($filter_search)) ? $filter_search : ''; ?>" placeholder="<?php echo trans("search_exp"); ?>" required autocomplete="off">
-                                                <button class="btn btn-default btn-search"><i class="icon-search"></i></button>
-                                                <div id="response_search_results" class="search-results-ajax"></div>
-                                            </div>
-                                        <?php else: ?>
-                                            <input type="text" name="search" maxlength="300" pattern=".*\S+.*" id="input_search" class="form-control input-search" value="<?php echo (!empty($filter_search)) ? $filter_search : ''; ?>" placeholder="<?php echo trans("search_products"); ?>" required autocomplete="off">
-                                            <input type="hidden" class="search_type_input" name="search_type" value="product">
+                                        </div>
+                                        <div class="right">
+                                            <input type="text" name="search" maxlength="300" pattern=".*\S+.*" id="input_search" class="form-control input-search" value="<?php echo (!empty($filter_search)) ? $filter_search : ''; ?>" placeholder="<?php echo trans("search_exp"); ?>" required autocomplete="off">
                                             <button class="btn btn-default btn-search"><i class="icon-search"></i></button>
                                             <div id="response_search_results" class="search-results-ajax"></div>
-                                        <?php endif; ?>
+                                        </div>
                                         <?php echo form_close(); ?>
                                     </div>
                                 </div>
@@ -234,10 +154,8 @@ foreach ($this->languages as $language): ?>
                                         <li class="nav-item nav-item-cart li-main-nav-right">
                                             <a href="<?php echo generate_url("cart"); ?>">
                                                 <i class="icon-cart"></i><!-- <span><?php echo trans("cart"); ?></span> -->
-                                                <?php $cart_product_count = get_cart_product_count();
-                                                if ($cart_product_count > 0): ?>
-                                                    <span class="notification"><?php echo $cart_product_count; ?></span>
-                                                <?php endif; ?>
+                                                <?php $cart_product_count = get_cart_product_count(); ?>
+                                                <span class="notification span_cart_product_count <?= $cart_product_count <= 0 ? 'visibility-hidden' : ''; ?>"><?php echo $cart_product_count; ?></span>
                                             </a>
                                         </li>
                                     <?php endif; ?>
@@ -280,7 +198,7 @@ foreach ($this->languages as $language): ?>
                                         </li>
                                         <?php */ ?>
                                         <li class="nav-item li-main-nav-right">
-                                          <a href="javascript:void(0)" data-toggle="modal" data-target="#loginModal" class="nav-link new-profile" style="padding-bottom: 0px; padding-top: 6px">
+                                          <a href="javascript:void(0)" data-toggle="modal" data-target="#loginModal" class="nav-link new-profile">
                                             <img src="<?php echo get_user_avatar($this->auth_user); ?>" alt="<?php echo get_shop_name($this->auth_user); ?>" style="width: 28px; border-radius: 50%;">
                                             <?php if ($unread_message_count > 0): ?>
                                             <span class="notification"><?php echo $unread_message_count; ?></span>
@@ -336,8 +254,8 @@ foreach ($this->languages as $language): ?>
                         </div>
                         <div class="mobile-cart<?= !$this->is_sale_active ? ' visibility-hidden' : ''; ?>">
                             <a href="<?php echo generate_url("cart"); ?>"><i class="icon-cart"></i>
-                                <?php $cart_product_count = get_cart_product_count(); ?>
-                                <span class="notification"><?php echo $cart_product_count; ?></span>
+                              <?php $cart_product_count = get_cart_product_count(); ?>
+                              <span class="notification span_cart_product_count <?= $cart_product_count <= 0 ? 'visibility-hidden' : ''; ?>"><?php echo $cart_product_count; ?></span>
                             </a>
                         </div>
                     </div>
@@ -345,38 +263,26 @@ foreach ($this->languages as $language): ?>
                 <div class="row">
                     <div class="top-search-bar mobile-search-form <?= $this->general_settings->multi_vendor_system != 1 ? ' top-search-bar-single-vendor' : ''; ?>">
                         <?php echo form_open(generate_url('search'), ['id' => 'form_validate_search_mobile', 'method' => 'get']); ?>
-                        <?php if ($this->general_settings->multi_vendor_system == 1): ?>
-                            <div class="left">
-                                <div class="dropdown search-select">
-                                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
-                                        <?php if (isset($search_type)): ?>
-                                            <?php echo trans("member"); ?>
-                                        <?php else: ?>
-                                            <?php echo trans("product"); ?>
-                                        <?php endif; ?>
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" data-value="product" href="javascript:void(0)"><?php echo trans("product"); ?></a>
-                                        <a class="dropdown-item" data-value="member" href="javascript:void(0)"><?php echo trans("member"); ?></a>
-                                    </div>
+                        <div class="left">
+                            <div class="dropdown search-select">
+                                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"><?= !empty($input_search_category) ? category_name($input_search_category) : trans("all_categories"); ?></button>
+                                <i class="icon-arrow-down search-select-caret"></i>
+                                <input type="hidden" name="search_category_input" id="input_search_category_mobile" value="<?= !empty($input_search_category) ? $input_search_category->id : 'all'; ?>">
+                                <div class="dropdown-menu search-categories">
+                                    <a class="dropdown-item" data-value="all" href="javascript:void(0)"><?= trans("all_categories"); ?></a>
+                                    <?php if (!empty($this->parent_categories)):
+                                        foreach ($this->parent_categories as $search_cat):?>
+                                            <a class="dropdown-item" data-value="<?= $search_cat->id; ?>" href="javascript:void(0)"><?= html_escape($search_cat->name); ?></a>
+                                        <?php endforeach;
+                                    endif; ?>
                                 </div>
-                                <?php if (isset($search_type)): ?>
-                                    <input type="hidden" id="search_type_input_mobile" class="search_type_input" name="search_type" value="member">
-                                <?php else: ?>
-                                    <input type="hidden" id="search_type_input_mobile" class="search_type_input" name="search_type" value="product">
-                                <?php endif; ?>
                             </div>
-                            <div class="right">
-                                <input type="text" id="input_search_mobile" name="search" maxlength="300" pattern=".*\S+.*" class="form-control input-search" value="<?php echo (!empty($filter_search)) ? $filter_search : ''; ?>" placeholder="<?php echo trans("search"); ?>" required>
-                                <button class="btn btn-default btn-search"><i class="icon-search"></i></button>
-                                <div id="response_search_results_mobile" class="search-results-ajax"></div>
-                            </div>
-                        <?php else: ?>
-                            <input type="hidden" id="search_type_input_mobile" class="search_type_input" name="search_type" value="product">
-                            <input type="text" id="input_search_mobile" name="search" maxlength="300" pattern=".*\S+.*" id="input_search" class="form-control input-search" value="<?php echo (!empty($filter_search)) ? $filter_search : ''; ?>" placeholder="<?php echo trans("search_products"); ?>" required autocomplete="off">
-                            <button class="btn btn-default btn-search btn-search-single-vendor-mobile"><i class="icon-search"></i></button>
+                        </div>
+                        <div class="right">
+                            <input type="text" id="input_search_mobile" name="search" maxlength="300" pattern=".*\S+.*" class="form-control input-search" value="<?php echo (!empty($filter_search)) ? $filter_search : ''; ?>" placeholder="<?php echo trans("search"); ?>" required autocomplete="off">
+                            <button class="btn btn-default btn-search"><i class="icon-search"></i></button>
                             <div id="response_search_results_mobile" class="search-results-ajax"></div>
-                        <?php endif; ?>
+                        </div>
                         <?php echo form_close(); ?>
                     </div>
                 </div>
@@ -462,7 +368,7 @@ foreach ($this->languages as $language): ?>
                     <?php endif; ?>
                     <?php if (is_user_vendor()): ?>
                     <div class="col-6 list-group account-menu">
-                      <a href="<?php echo admin_url(); ?>" class="list-group-item list-group-item-action border">
+                      <a href="<?php echo dashboard_url(); ?>" class="list-group-item list-group-item-action border">
                           <i class="icon-dashboard"></i>
                           <br>
                           <?php echo trans("dashboard"); ?>

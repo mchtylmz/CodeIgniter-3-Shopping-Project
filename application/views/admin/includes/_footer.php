@@ -76,6 +76,9 @@
     if ($('.tinyMCEsmall').length > 0) {
         init_tinymce('.tinyMCEsmall', 300);
     }
+    if ($('.tinyMCExsmall').length > 0) {
+        init_tinymce('.tinyMCExsmall', 180);
+    }
     $(document).ready(function () {
         $('.data_table').DataTable({
             "order": [[0, "desc"]],

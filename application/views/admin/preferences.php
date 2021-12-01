@@ -165,6 +165,39 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12">
+                            <label><?= trans("queue_system"); ?></label>
+                            <medium><?php echo "(" . trans('queue_system_information') . ")"; ?></medium>
+                        </div>
+                        <div class="col-sm-6 col-xs-12 col-option">
+                            <input type="radio" id="queue_status_1" name="queue_status" value="1" class="square-purple" <?php echo ($this->general_settings->queue_status == "1") ? 'checked' : ''; ?>>
+                            <label for="queue_status_1" class="cursor-pointer"><?php echo trans("enable"); ?></label>
+                        </div>
+                        <div class="col-sm-6 col-xs-12 col-option">
+                            <input type="radio" id="queue_status_2" name="queue_status" value="0" class="square-purple" <?php echo ($this->general_settings->queue_status != "1") ? 'checked' : ''; ?>>
+                            <label for="queue_status_2" class="cursor-pointer"><?php echo trans("disable"); ?></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12">
+                            <label><?= trans("homepage_story"); ?></label>
+                        </div>
+                        <div class="col-sm-6 col-xs-12 col-option">
+                            <input type="radio" id="home_story_1" name="home_story" value="1" class="square-purple" <?php echo ($this->general_settings->home_story == "1") ? 'checked' : ''; ?>>
+                            <label for="home_story_1" class="cursor-pointer"><?php echo trans("enable"); ?></label>
+                        </div>
+                        <div class="col-sm-6 col-xs-12 col-option">
+                            <input type="radio" id="home_story_2" name="home_story" value="0" class="square-purple" <?php echo ($this->general_settings->home_story != "1") ? 'checked' : ''; ?>>
+                            <label for="home_story_2" class="cursor-pointer"><?php echo trans("disable"); ?></label>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <!-- /.box-body -->
             <div class="box-footer">

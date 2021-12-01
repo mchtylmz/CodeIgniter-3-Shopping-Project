@@ -48,7 +48,7 @@
                         <tr role="row">
                             <th scope="col"><?php echo trans("sale"); ?></th>
                             <?php if (active_nebimv3()): ?>
-                              <th scope="col">Nebim</th>
+                              <th scope="col"><?=trans('nebim')?> ID</th>
                             <?php endif; ?>
                             <th scope="col"><?php echo trans("products"); ?></th>
                             <th scope="col"><?php echo trans("total"); ?></th>
