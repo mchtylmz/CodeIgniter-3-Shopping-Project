@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php  ?>
 
 <div id="video_upload_result">
     <?php $this->load->view('dashboard/product/_video_upload_response'); ?>

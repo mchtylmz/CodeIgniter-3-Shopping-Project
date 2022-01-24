@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php  ?>
 
 <table role="presentation" border="0" cellpadding="0" cellspacing="0" style="margin-top: 10px;">
     <tr>

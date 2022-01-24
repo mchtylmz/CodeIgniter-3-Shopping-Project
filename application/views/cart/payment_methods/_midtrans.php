@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed');
+<?php 
 
 if (!empty($payment_gateway) && $payment_gateway->name_key == "midtrans"):
     require_once(APPPATH . 'third_party/midtrans/vendor/autoload.php');

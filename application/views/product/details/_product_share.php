@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php  ?>
 
 <div class="row-custom product-share">
     <label><?php echo trans("share"); ?>:</label>

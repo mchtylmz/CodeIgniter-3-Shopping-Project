@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <script src="<?php echo base_url(); ?>assets/admin/vendor/sortable/Sortable.js"></script>
 <?php function print_sub_categories($parent_id)
 {

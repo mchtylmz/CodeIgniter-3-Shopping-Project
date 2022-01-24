@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed');
+<?php
 $total_amount = $total_amount * 100;
 if (filter_var($total_amount, FILTER_VALIDATE_INT) === false) {
     $total_amount = intval($total_amount);

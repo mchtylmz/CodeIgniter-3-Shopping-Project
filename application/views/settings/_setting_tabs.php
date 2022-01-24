@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 
 <div class="profile-tabs">
     <ul class="nav">

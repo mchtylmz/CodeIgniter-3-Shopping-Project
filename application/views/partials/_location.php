@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <?php if (!empty($countries)): ?>
     <div class="row">
         <div class="col-12 col-sm-4 m-b-15">

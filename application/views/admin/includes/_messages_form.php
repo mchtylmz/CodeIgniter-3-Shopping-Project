@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php  ?>
 
     <!--print error messages-->
 <?php if ($this->session->flashdata('errors_form')): ?>

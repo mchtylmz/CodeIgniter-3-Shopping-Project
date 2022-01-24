@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php  ?>
 <?php if (!empty($product)):
     $digital_file = $this->file_model->get_product_digital_file($product->id);
     if (!empty($digital_file)):?>

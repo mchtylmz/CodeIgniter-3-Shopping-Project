@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <div class="top-bar">
 <div class="container">
 <div class="row">

@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');?>
+<?php ?>
 <div class="box box-primary">
   <div class="box-header">
     <h3 style="font-size: 18px; font-weight: 600; margin-top:0;"><?php echo trans('lastest_10_notifications'); ?></h3>

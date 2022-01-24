@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <?php if ($cart_payment_method->payment_option == "bank_transfer"): ?>
     <!--PROMOTE SALES-->
     <?php if ($mc20bt99_payment_type == 'promote'): ?>

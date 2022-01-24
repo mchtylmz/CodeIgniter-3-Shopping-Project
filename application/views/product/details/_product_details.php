@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <div class="row">
     <div class="col-12">
         <?php if ($product->product_type == 'digital'):

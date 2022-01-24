@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <form id="form_add_product_variation_option" novalidate>
     <input type="hidden" name="variation_id" value="<?php echo $variation->id; ?>">
     <div class="modal-header">

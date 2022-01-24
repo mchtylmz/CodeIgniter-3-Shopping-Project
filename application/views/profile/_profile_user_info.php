@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <!--user profile info-->
 <div class="row-custom">
     <div class="profile-details">

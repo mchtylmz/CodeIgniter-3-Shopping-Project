@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <div id="promoted_posts">
     <h3 class="title"><?php echo trans("featured_products"); ?></h3>
     <p class="title-exp"><?php echo trans("featured_products_exp"); ?></p>

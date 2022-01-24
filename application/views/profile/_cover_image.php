@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <?php if (!empty($user->cover_image)):
     if ($user->cover_image_type == 'boxed'):?>
         <div class="container">

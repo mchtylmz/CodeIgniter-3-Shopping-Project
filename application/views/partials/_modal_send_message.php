@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <!-- Send Message Modal -->
 <?php if ($this->auth_check): ?>
     <div class="modal fade" id="messageModal" tabindex="-1" role="dialog">

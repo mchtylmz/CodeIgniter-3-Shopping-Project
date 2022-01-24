@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <?php if ($product->is_sold == 1): ?>
     <strong class="lbl-price lbl-price-sold">
         <?= price_formatted($price, $product->currency); ?>

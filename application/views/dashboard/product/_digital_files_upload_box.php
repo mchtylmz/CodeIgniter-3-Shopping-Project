@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <?php $exts = str_replace('"', '', $this->product_settings->digital_allowed_file_extensions);
 $exts = str_replace(',', ", ", $exts);
 $exts = strtoupper($exts); ?>

@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 
 <?php if (!empty($featured_categories)): ?>
     <div class="featured-categories">

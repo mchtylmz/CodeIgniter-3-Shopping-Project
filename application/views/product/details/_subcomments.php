@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <?php $subcomments = get_subcomments($parent_comment->id); ?>
 <?php if (!empty($subcomments)): ?>
     <div class="row">

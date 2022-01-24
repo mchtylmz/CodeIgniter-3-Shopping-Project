@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <input type="hidden" name="variation_id" value="<?php echo $variation->id; ?>">
 <input type="hidden" name="product_id" value="<?php echo $variation->product_id; ?>">
 <div class="modal-header">

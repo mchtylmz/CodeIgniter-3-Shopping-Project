@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed');
+<?php
 if (!empty($payment_gateway) && $payment_gateway->name_key == "paypal"): ?>
     <script src="https://www.paypal.com/sdk/js?client-id=<?= $payment_gateway->public_key; ?>&currency=<?= $currency; ?>"></script>
     <div class="row">

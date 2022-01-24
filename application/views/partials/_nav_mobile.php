@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <div id="navMobile" class="nav-mobile">
     <div class="nav-mobile-sc">
         <div class="nav-mobile-inner pt-2">

@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <?php $menu_subcategory_display_limit = 6;
 if ($this->general_settings->selected_navigation == 1): ?>
 <div class="container">

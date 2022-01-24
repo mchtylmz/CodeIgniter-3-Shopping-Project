@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php  ?>
 <!-- Wrapper -->
 <div id="wrapper">
 	<div class="container">

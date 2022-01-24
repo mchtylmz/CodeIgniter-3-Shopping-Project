@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 
 <?php if (!empty($special_offers)):
     if (item_count($special_offers) > 4): ?>

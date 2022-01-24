@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <?php if (active_story()): ?>
 <div id="stories" class="container section-stories storiesWrapper" style="display:none"></div>
 <?php endif; ?>

@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php  ?>
 <?php if (!empty($product)):
     $video = $this->file_model->get_product_video($product->id);
     if (!empty($video)):?>

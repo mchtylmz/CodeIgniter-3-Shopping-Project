@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <?php $this->load->view("profile/_cover_image"); ?>
     <div id="wrapper">
         <div class="container">

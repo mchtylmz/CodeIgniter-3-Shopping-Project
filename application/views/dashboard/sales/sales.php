@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <style media="screen">
   td {vertical-align:middle !important;}
 </style>

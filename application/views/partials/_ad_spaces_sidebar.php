@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php  ?>
 <!--print sidebar banner-->
 <?php if (!empty($ad_space)):
     $ad_codes = get_ad_codes($ad_space);

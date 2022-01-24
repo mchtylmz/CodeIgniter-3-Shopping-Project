@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php  ?>
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendor/amplitudejs/app.min.css"/>
 
 <div class="product-audio-preview">

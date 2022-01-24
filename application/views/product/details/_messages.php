@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php  ?>
 
 <?php if ($this->session->flashdata('product_details_success')): ?>
 	<div class="row-custom m-b-15">

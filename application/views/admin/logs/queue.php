@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php  ?>
 <style media="screen">
   tr, td:not(.text-left), th:not(.text-left) {
     text-align: center;

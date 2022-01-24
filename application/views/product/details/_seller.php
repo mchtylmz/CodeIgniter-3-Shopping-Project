@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php  ?>
 <div class="widget-seller">
 	<h4 class="sidebar-title"><?php echo trans("seller"); ?></h4>
 

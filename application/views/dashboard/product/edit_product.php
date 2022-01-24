@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <?php if ($product->is_draft == 1): ?>
     <div class="row">
         <div class="col-sm-12">

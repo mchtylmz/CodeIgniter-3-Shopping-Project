@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php  ?>
 
 <form id="form_add_subcomment_<?php echo $parent_comment->id; ?>">
     <?php if (!$this->auth_check): ?>

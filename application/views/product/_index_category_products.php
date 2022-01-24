@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 
 <?php if (!empty($index_categories)):
     $categories_products_array = get_index_categories_products($this, $index_categories);

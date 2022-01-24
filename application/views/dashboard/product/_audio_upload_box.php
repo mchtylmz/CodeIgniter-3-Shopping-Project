@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php  ?>
 
 <div id="audio_upload_result">
     <?php $this->load->view('dashboard/product/_audio_upload_response'); ?>

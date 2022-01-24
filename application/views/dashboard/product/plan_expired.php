@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <div class="row">
     <div class="col-sm-8 col-sm-offset-2 m-t-30">
         <div class="alert alert-danger alert-large">

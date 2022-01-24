@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
     <div class="reviews-container">
         <div class="row">
             <div class="col-12">

@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+
 if (strpos($message, 'The action you have requested is not allowed.') !== false) {
     header('Location: ' . $_SERVER['HTTP_REFERER']);
     exit();

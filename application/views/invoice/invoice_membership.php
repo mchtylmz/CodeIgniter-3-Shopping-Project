@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <!DOCTYPE html>
 <html lang="<?php echo $this->selected_lang->short_form ?>">
 <head>

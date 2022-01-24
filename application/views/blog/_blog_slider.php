@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php  ?>
 
 <div class="blog-slider-container">
     <div id="blog-slider" class="blog-slider">

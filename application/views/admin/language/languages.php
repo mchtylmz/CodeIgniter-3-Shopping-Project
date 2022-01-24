@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <?php $ed_langs = array();
 $ed_langs[] = array("short" => "ar", "name" => "Arabic");
 $ed_langs[] = array("short" => "hy", "name" => "Armenian");

@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <div class="row">
     <div class="col-md-12 col-lg-8">
         <div class="box box-primary">

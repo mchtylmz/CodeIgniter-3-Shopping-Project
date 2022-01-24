@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php  ?>
 <div class="row">
     <div class="col-12">
         <form id="form_add_blog_comment">

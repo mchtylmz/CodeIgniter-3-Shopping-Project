@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <script src="<?php echo base_url(); ?>assets/admin/vendor/chart/chart.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/admin/vendor/chart/utils.js"></script>
 <script src="<?php echo base_url(); ?>assets/admin/vendor/chart/analyser.js"></script>

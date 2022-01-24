@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php  ?>
 <div class="modal-header">
     <h5 class="modal-title"><?php echo trans("options"); ?>&nbsp;(<?php echo html_escape(get_variation_label($variation->label_names, $this->selected_lang->id)); ?>)</h5>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">

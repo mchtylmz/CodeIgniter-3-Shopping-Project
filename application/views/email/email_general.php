@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php  ?>
 <?php $this->load->view('email/_header', ['title' => html_escape($subject)]); ?>
 <table role="presentation" class="main">
 	<tr>

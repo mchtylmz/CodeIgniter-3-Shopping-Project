@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <div class="dm-uploader-container">
     <div id="drag-and-drop-zone" class="dm-uploader text-center">
         <p class="dm-upload-icon">

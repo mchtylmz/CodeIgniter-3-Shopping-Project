@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <?php $this->load->view('email/_header', ['title' => trans("you_have_new_order")]); ?>
 <table role="presentation" class="main">
     <?php if (!empty($order)): ?>

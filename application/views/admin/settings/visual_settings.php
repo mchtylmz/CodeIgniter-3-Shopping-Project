@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/vendor/bootstrap-colorpicker/bootstrap-colorpicker.min.css">
 <script src="<?php echo base_url(); ?>assets/admin/vendor/bootstrap-colorpicker/bootstrap-colorpicker.min.js"></script>
 

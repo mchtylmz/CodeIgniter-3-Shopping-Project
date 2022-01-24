@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php  ?>
 <?php if (!empty($product_variations)): ?>
     <div class="row">
         <div class="col-sm-12">

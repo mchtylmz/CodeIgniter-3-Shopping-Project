@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <?php $has_methods = false;
 $show_button = true;
 if (!empty($shipping_methods)) {

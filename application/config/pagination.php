@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+
 
 $config['num_links'] = 2;
 $config['use_page_numbers'] = TRUE;

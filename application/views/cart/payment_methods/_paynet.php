@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed');
+<?php
 if (!empty($payment_gateway) && $payment_gateway->name_key == "paynet"):
   require_once APPPATH . "third_party/paynet/PaynetClass.php";
   $paynet_total_amount = number_format($total_amount, 2, ',', '.');

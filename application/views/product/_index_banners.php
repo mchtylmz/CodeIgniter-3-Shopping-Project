@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <?php if (!empty($index_banners_array) && !empty($banner_location) && !empty($index_banners_array[$banner_location])): ?>
     <div class="col-12 section section-index-bn">
         <div class="row">

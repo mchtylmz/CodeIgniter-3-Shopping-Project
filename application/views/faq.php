@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php  ?>
 <?php
 $groups = faq_group();
 $page_content = json_decode($page->page_content, true);

@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php  ?>
 <div class="rating">
     <i class="<?php echo ($review >= 1) ? 'fa fa-star' : 'fa fa-star-o'; ?>"></i>
     <i class="<?php echo ($review >= 2) ? 'fa fa-star' : 'fa fa-star-o'; ?>"></i>

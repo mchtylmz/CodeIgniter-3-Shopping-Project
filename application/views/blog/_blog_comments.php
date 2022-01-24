@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php  ?>
 <!--print blog comments-->
 <input type="hidden" value="<?php echo $comment_limit; ?>" id="blog_comment_limit">
 

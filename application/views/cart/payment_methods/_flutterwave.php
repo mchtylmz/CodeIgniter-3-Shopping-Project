@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed');
+<?php
 
 if (!empty($payment_gateway) && $payment_gateway->name_key == "flutterwave"):
     $customer = get_cart_customer_data(); ?>

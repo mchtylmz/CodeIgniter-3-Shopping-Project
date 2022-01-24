@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <?php if ($product->listing_type == 'sell_on_site' || $product->listing_type == 'license_key'): ?>
     <div class="form-box form-box-price">
         <div class="form-box-head">

@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 
 <?php if (!empty($option_unique_id) && !empty($selected_option)): ?>
     <div id="row_shipping_method_<?= $option_unique_id; ?>" class="row">

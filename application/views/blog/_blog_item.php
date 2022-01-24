@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <div class="blog-item">
     <div class="blog-item-img">
         <a href="<?php echo generate_url("blog") . "/" . $item->category_slug . "/" . $item->slug; ?>">

@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 
 <?php if (!empty($this->general_settings->facebook_app_id)): ?>
     <a href="<?php echo base_url(); ?>connect-with-facebook" class="btn btn-social btn-social-facebook">

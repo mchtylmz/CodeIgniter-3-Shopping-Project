@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php  ?>
 <div class="row" style="margin-bottom: 15px;">
     <div class="col-sm-12">
         <h3 style="font-size: 18px; font-weight: 600;"><?php echo trans('nebim_settings'); ?></h3>

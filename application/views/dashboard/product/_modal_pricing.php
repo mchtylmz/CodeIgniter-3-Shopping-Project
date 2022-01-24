@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 
 <div id="modalPricing" class="modal fade modal-pricing-table" role="dialog">
     <div class="modal-dialog modal-lg">

@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <?php if (!empty($custom_fields)):
     foreach ($custom_fields as $custom_field):
         if (!empty($custom_field)):

@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <div class="modal-license-key-list">
     <div class="table-responsive">
         <?php if (!empty($license_keys)): ?>

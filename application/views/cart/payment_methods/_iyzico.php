@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed');
+<?php
 if (!empty($payment_gateway) && $payment_gateway->name_key == "iyzico"):
     require_once(APPPATH . 'third_party/iyzipay/vendor/autoload.php');
     require_once(APPPATH . 'third_party/iyzipay/vendor/iyzico/iyzipay-php/IyzipayBootstrap.php');

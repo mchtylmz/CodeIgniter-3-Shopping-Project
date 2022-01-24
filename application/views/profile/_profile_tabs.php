@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <ul class="nav nav-tabs nav-tabs-horizontal nav-tabs-profile" role="tablist">
     <?php if (is_multi_vendor_active()):
         if ($user->role == 'admin' || $user->role == 'vendor'): ?>

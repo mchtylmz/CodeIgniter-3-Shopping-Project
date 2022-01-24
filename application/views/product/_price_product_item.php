@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <?php if ($product->is_free_product == 1): ?>
 <span class="price-free"><?php echo trans("free"); ?></span>
 <?php elseif ($product->listing_type == 'bidding'): ?>

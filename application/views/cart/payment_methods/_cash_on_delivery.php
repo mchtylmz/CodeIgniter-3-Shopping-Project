@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php  ?>
 <?php if ($cart_payment_method->payment_option == "cash_on_delivery"): ?>
 	<?php if ($mc20bt99_payment_type != 'promote'): ?>
 		<!--PRODUCT SALES-->

@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 <?php $this->load->view('email/_header', ['title' => trans("confirm_your_email")]); ?>
 <table role="presentation" class="main">
     <tr>

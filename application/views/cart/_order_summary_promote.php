@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php  ?>
 
 <div class="col-sm-12 col-lg-4 order-summary-container">
     <h2 class="cart-section-title"><?php echo trans("order_summary"); ?> (1)</h2>
