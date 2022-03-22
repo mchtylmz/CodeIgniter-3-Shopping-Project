@@ -42,7 +42,7 @@
                                     <?php $show_all_products = true;
                                     $prefix = "";
                                     $np = input_get('np');
-                                    if ($this->auth_user->role != "admin" && $order->buyer_id != $this->auth_user->id) {
+                                    if ($this->auth_user->role_id != 1 && $order->buyer_id != $this->auth_user->id) {
                                         $show_all_products = false;
                                         $prefix = "VN";
                                     }
@@ -201,7 +201,7 @@
                                             </div>
                                         </div>
                                     <?php endif; ?>
-                                    <?php if ($order->coupon_code && $order->coupon_discount): ?>
+                                    <?php /*if ($order->coupon_code && $order->coupon_discount): ?>
                                         <div class="row mb-2">
                                             <div class="col-6 col-left">
                                                 <?php echo trans("discount"); ?>
@@ -210,7 +210,17 @@
                                                 <?=$order->coupon_code?> (<strong class="font-600"><?php echo price_formatted($order->coupon_discount, $order->price_currency); ?></strong>)
                                             </div>
                                         </div>
-                                    <?php endif; ?>
+                                    <?php endif; */?>
+									<?php if ($show_all_products == true && $order->coupon_seller_id == $this->auth_user->id && $order->coupon_discount > 0): ?>
+										<div class="row mb-2">
+											<div class="col-6 col-left">
+												<?php echo trans("discount"); ?> [<?=$order->coupon_code?>]
+											</div>
+											<div class="col-6 col-right">
+												<strong class="font-600">-<?php echo price_formatted($order->coupon_discount, $order->price_currency); ?></strong>
+											</div>
+										</div>
+									<?php endif; ?>
                                     <div class="row mb-2">
                                         <div class="col-6 col-left">
                                             <?php echo trans("total"); ?>

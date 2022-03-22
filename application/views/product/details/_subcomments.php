@@ -34,7 +34,7 @@
                                 <div class="row-custom">
                                     <span class="date"><?php echo time_ago($subcomment->created_at); ?></span>
                                     <?php if ($this->auth_check):
-                                        if ($subcomment->user_id == $this->auth_user->id || $this->auth_user->role == "admin"): ?>
+                                        if ($subcomment->user_id == $this->auth_user->id || is_admin()): ?>
                                             <a href="javascript:void(0)" class="btn-delete-comment" onclick="delete_comment('<?php echo $subcomment->id; ?>','<?php echo $subcomment->product_id; ?>','<?php echo trans("confirm_comment"); ?>');">&nbsp;<i class="icon-trash"></i>&nbsp;<?php echo trans("delete"); ?></a>
                                         <?php endif;
                                     endif; ?>

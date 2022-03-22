@@ -19,9 +19,15 @@
                 <!-- include message block -->
                 <?php $this->load->view('admin/includes/_messages'); ?>
 
-                <div class="form-group">
-                    <label class="label label-success"><?php echo $user->role; ?></label>
-                </div>
+				<?php $role = get_role($user->role_id); ?>
+				<?php if (!empty($role)):
+					$role_name = @parse_serialized_name_array($role->role_name, $this->selected_lang->id, true);
+					if (!empty($role_name)):?>
+						<div class="form-group">
+							<label class="label label-success"><?= html_escape($role_name); ?></label>
+						</div>
+					<?php endif;
+				endif; ?>
 
                 <div class="form-group">
                     <div class="row">
@@ -164,10 +170,6 @@
                 </div>
                 */ ?>
 
-                <?php if ($user->role == 'admin'): ?>
-                  <hr>
-
-                <?php endif; ?>
 
                 <hr>
                 <div class="form-group">

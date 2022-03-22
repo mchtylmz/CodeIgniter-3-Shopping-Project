@@ -566,6 +566,16 @@
                     </div>
                 </div>
             <?php endif; ?>
+			<?php if ($order->coupon_discount > 0): ?>
+				<div class="row row-details">
+					<div class="col-xs-12 col-sm-6 col-left">
+						<strong><?php echo trans("coupon"); ?>&nbsp;&nbsp;[<?= html_escape($order->coupon_code); ?>]</strong>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-right text-right">
+						<strong class="font-right">-&nbsp;<?php echo price_formatted($order->coupon_discount, $order->price_currency); ?></strong>
+					</div>
+				</div>
+			<?php endif; ?>
             <hr>
             <div class="row row-details">
                 <div class="col-xs-12 col-sm-6 col-right">

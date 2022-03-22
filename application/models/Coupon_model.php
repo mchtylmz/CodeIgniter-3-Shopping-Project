@@ -112,9 +112,10 @@ class Coupon_model extends CI_Model
 	public function get_selected_products_array()
 	{
 		$array = array();
-		$product_ids = $this->input->post('product_id', true);
-		foreach ($product_ids as $key => $value) {
-			array_push($array, $value);
+		if ($product_ids = $this->input->post('product_id', true)) {
+			foreach ($product_ids as $key => $value) {
+				array_push($array, $value);
+			}
 		}
 		return $array;
 	}

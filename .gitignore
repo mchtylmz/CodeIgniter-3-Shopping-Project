@@ -2,8 +2,6 @@
 
 #-------------------------
 application/controllers/*
-application/helpers/*
-application/models/*
 application/models/Coupon_model_v1.php
 !application/models/Dynamic_model
 #-------------------------

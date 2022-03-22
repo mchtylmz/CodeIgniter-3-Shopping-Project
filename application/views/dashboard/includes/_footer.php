@@ -2,8 +2,15 @@
 </section>
 <!-- /.content -->
 </div>
-
 </div>
+<style>
+	#video_upload_result .dm-uploaded-files li .media-body, #audio_upload_result .dm-uploaded-files li .media-body, #digital_files_upload_result .dm-uploaded-files li .media-body{
+		position: relative;
+	}
+	.li-dm-media-preview {
+		max-height: 510px;
+	}
+</style>
 <!-- ./wrapper -->
 <!-- jQuery UI 1.11.4 -->
 <script src="<?php echo base_url(); ?>assets/admin/js/jquery-ui.min.js"></script>
@@ -26,12 +33,12 @@
 <!-- Tagsinput js -->
 <script src="<?php echo base_url(); ?>assets/admin/vendor/tagsinput/jquery.tagsinput.min.js"></script>
 <!-- Plugins JS-->
-<script src="<?php echo base_url(); ?>assets/admin/js/plugins-1.8.js"></script>
+<script src="<?php echo base_url(); ?>assets/admin/js/plugins-2.0.js"></script>
 
 <script src="<?php echo base_url(); ?>assets/admin/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 <!-- Custom js -->
-<script src="<?php echo base_url(); ?>assets/admin/js/main-1.8.js"></script>
-<script src="<?php echo base_url(); ?>assets/admin/js/dashboard-1.8.js"></script>
+<script src="<?php echo base_url(); ?>assets/admin/js/main-2.0.js"></script>
+<script src="<?php echo base_url(); ?>assets/admin/js/dashboard-2.0.js"></script>
 <!--tinyMCE-->
 <script src="<?php echo base_url(); ?>assets/vendor/tinymce/jquery.tinymce.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/vendor/tinymce/tinymce.min.js"></script>

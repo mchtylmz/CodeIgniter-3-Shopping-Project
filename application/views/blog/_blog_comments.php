@@ -15,7 +15,7 @@
                 <p>
                     <span class="date"><?php echo time_ago($comment->created_at); ?></span>
                     <?php if ($this->auth_check):
-                        if ($comment->user_id == $this->auth_user->id || $this->auth_user->role == "admin"): ?>
+                        if ($comment->user_id == $this->auth_user->id || is_admin()): ?>
                             <a href="javascript:void(0)" class="btn-delete-comment" onclick="delete_blog_comment('<?php echo $comment->id; ?>','<?php echo $comment_post_id; ?>','<?php echo trans("confirm_comment"); ?>');">&nbsp;<i class="icon-trash"></i>&nbsp;<?php echo trans("delete"); ?></a>
                         <?php endif;
                     endif; ?>

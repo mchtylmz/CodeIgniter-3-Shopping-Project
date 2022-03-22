@@ -4,9 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title><?= xss_clean($title); ?> - <?= xss_clean($this->settings->site_title); ?></title>
-    <meta name="description" content="<?= xss_clean($description); ?>"/>
-    <meta name="keywords" content="<?= xss_clean($keywords); ?>"/>
+    <title><?= xss_clean($title ?? ''); ?> - <?= xss_clean($this->settings->site_title); ?></title>
+    <meta name="description" content="<?= xss_clean($description ?? ''); ?>"/>
+    <meta name="keywords" content="<?= xss_clean($keywords ?? ''); ?>"/>
     <meta name="author" content="<?= xss_clean($this->general_settings->application_name); ?>"/>
     <link rel="shortcut icon" type="image/png" href="<?= get_favicon($this->general_settings); ?>"/>
     <meta property="og:locale" content="tr-TR"/>
@@ -14,9 +14,9 @@
 <?php if (isset($show_og_tags)): ?>
     <meta property="og:type" content="<?= !empty($og_type) ? $og_type : 'website'; ?>"/>
     <meta property="og:title" content="<?= !empty($og_title) ? $og_title : 'index'; ?>"/>
-    <meta property="og:description" content="<?= $og_description; ?>"/>
-    <meta property="og:url" content="<?= $og_url; ?>"/>
-    <meta property="og:image" content="<?= $og_image; ?>"/>
+    <meta property="og:description" content="<?= $og_description ?? ''; ?>"/>
+    <meta property="og:url" content="<?= $og_url ?? lang_base_url(); ?>"/>
+    <meta property="og:image" content="<?= $og_image ?? ''; ?>"/>
     <meta property="og:image:width" content="<?= !empty($og_width) ? $og_width : 250; ?>"/>
     <meta property="og:image:height" content="<?= !empty($og_height) ? $og_height : 250; ?>"/>
     <meta property="article:author" content="<?= !empty($og_author) ? $og_author : ''; ?>"/>
@@ -28,8 +28,8 @@
     <meta property="article:modified_time" content="<?= !empty($og_modified_time) ? $og_modified_time : ''; ?>"/>
     <meta name="twitter:card" content="summary_large_image"/>
     <meta name="twitter:site" content="@<?= xss_clean($this->general_settings->application_name); ?>"/>
-    <meta name="twitter:creator" content="@<?= xss_clean($og_creator); ?>"/>
-    <meta name="twitter:title" content="<?= xss_clean($og_title); ?>"/>
+    <meta name="twitter:creator" content="@<?= xss_clean($og_creator ?? ''); ?>"/>
+    <meta name="twitter:title" content="<?= xss_clean($og_title ?? ''); ?>"/>
     <meta name="twitter:description" content="<?= xss_clean($og_description); ?>"/>
     <meta name="twitter:image" content="<?= $og_image; ?>"/>
     <?php else: ?>
@@ -62,16 +62,15 @@ foreach ($this->languages as $language): ?>
     <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/font-icons/css/mds-icons.min.css"/>
     <?= !empty($this->fonts->site_font_url) ? $this->fonts->site_font_url : ''; ?>
     <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/bootstrap/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/style-1.9.min.css"/>
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/plugins-1.9.css"/>
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/style-2.0.min.css"/>
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/plugins-2.0.css"/>
 <?php if ($this->rtl == true): ?>
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/rtl-1.9.min.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/rtl-2.0.min.css">
 <?php endif; ?>
 <?php if (active_story()): ?>
   <link rel="stylesheet" href="<?= base_url(); ?>assets/story/dist/zuck.min.css">
   <link rel="stylesheet" href="<?= base_url(); ?>assets/story/dist/skins/snapgram.min.css">
 <?php endif; ?>
-<?php $this->load->view("partials/_css_js_header"); ?>
 <?= $this->general_settings->google_analytics; ?>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-G3EPRBZNT1"></script>
@@ -90,6 +89,7 @@ foreach ($this->languages as $language): ?>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <?= $this->general_settings->google_adsense_code; ?>
+	<?php $this->load->view("partials/_css_js_header"); ?>
 </head>
 <body>
 <header id="header">
@@ -200,7 +200,7 @@ foreach ($this->languages as $language): ?>
                                         <li class="nav-item li-main-nav-right">
                                           <a href="javascript:void(0)" data-toggle="modal" data-target="#loginModal" class="nav-link new-profile">
                                             <img src="<?php echo get_user_avatar($this->auth_user); ?>" alt="<?php echo get_shop_name($this->auth_user); ?>" style="width: 28px; border-radius: 50%;">
-                                            <?php if ($unread_message_count > 0): ?>
+                                            <?php if (intval($unread_message_count ?? 0) > 0): ?>
                                             <span class="notification"><?php echo $unread_message_count; ?></span>
                                             <?php endif; ?>
                                           </a>
@@ -252,7 +252,7 @@ foreach ($this->languages as $language): ?>
                         <div class="mobile-search">
                             <a class="search-icon"><i class="icon-search"></i></a>
                         </div>
-                        <div class="mobile-cart<?= !$this->is_sale_active ? ' visibility-hidden' : ''; ?>">
+                        <div class="mobile-cart<?= !$this->is_sale_active ? ' visibility-hidden hidden' : ''; ?>">
                             <a href="<?php echo generate_url("cart"); ?>"><i class="icon-cart"></i>
                               <?php $cart_product_count = get_cart_product_count(); ?>
                               <span class="notification span_cart_product_count <?= $cart_product_count <= 0 ? 'visibility-hidden' : ''; ?>"><?php echo $cart_product_count; ?></span>
@@ -357,7 +357,7 @@ foreach ($this->languages as $language): ?>
                     .account-menu a i {font-size: 1.5rem;}
                   </style>
                   <div class="row justify-content-center" style="padding: 10px;">
-                    <?php if ($this->auth_user->role == "admin"): ?>
+                    <?php if (is_admin()): ?>
                     <div class="col-6 list-group account-menu">
                       <a href="<?php echo admin_url(); ?>" class="list-group-item list-group-item-action border">
                         <i class="icon-admin"></i>
@@ -366,7 +366,7 @@ foreach ($this->languages as $language): ?>
                       </a>
                     </div>
                     <?php endif; ?>
-                    <?php if (is_user_vendor()): ?>
+                    <?php if (is_vendor()): ?>
                     <div class="col-6 list-group account-menu">
                       <a href="<?php echo dashboard_url(); ?>" class="list-group-item list-group-item-action border">
                           <i class="icon-dashboard"></i>

@@ -4,7 +4,7 @@
     <h2 class="cart-section-title"><?php echo trans("order_summary"); ?> (<?php echo get_cart_product_count(); ?>)</h2>
     <div class="right">
         <div class="row-custom m-b-15">
-            <?php $this->load->view('cart/coupon'); ?>
+            <?php $this->load->view('cart/coupon', ['cart_total' => $cart_total]); ?>
         </div>
         <?php $is_physical = false; ?>
         <div class="cart-order-details">
@@ -81,6 +81,7 @@
                 <strong><?php echo trans("shipping"); ?><span class="float-right"><?= price_decimal($cart_total->shipping_cost, $cart_total->currency); ?></span></strong>
             </div>
         <?php endif; ?>
+
         <div class="row-custom">
             <p class="line-seperator"></p>
         </div>

@@ -33,11 +33,16 @@ if (!empty($product->has_variation) || $product->listing_type == "bidding"):?>
 <a href="<?= generate_product_url($product); ?>" class="item-option" data-toggle="tooltip" data-placement="left" data-product-id="<?php echo $product->id; ?>" data-reload="0" title="<?php echo trans("view_options"); ?>">
 <i class="icon-cart"></i>
 </a>
-<?php else: ?>
-<a href="javascript:void(0)" id="btn_add_cart_<?= $item_unique_id; ?>" class="item-option btn-item-add-to-cart" data-id="<?= $item_unique_id; ?>" data-toggle="tooltip" data-placement="left" data-product-id="<?php echo $product->id; ?>" data-reload="0" title="<?php echo trans("add_to_cart"); ?>">
-<i class="icon-cart"></i>
-</a>
-<?php endif;
+<?php else:
+	$item_unique_id = uniqid();
+	if ($product->stock > 0):?>
+		<a href="javascript:void(0)" id="btn_add_cart_<?= $item_unique_id; ?>" class="item-option btn-item-add-to-cart"
+		   data-id="<?= $item_unique_id; ?>" data-toggle="tooltip" data-placement="left"
+		   data-product-id="<?php echo $product->id; ?>" data-reload="0" title="<?php echo trans("add_to_cart"); ?>">
+			<i class="icon-cart"></i>
+		</a>
+	<?php endif;
+	endif;
 endif; ?>
 </div>
 <?php if ($product->is_promoted && $this->general_settings->promoted_products == 1 && isset($promoted_badge) && $promoted_badge == true): ?>

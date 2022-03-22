@@ -99,6 +99,12 @@
                                     <td style="width: 70%"><?php echo trans("shipping"); ?></td>
                                     <td style="width: 30%;padding-right: 15px;font-weight: 600;"><?php echo price_formatted($order->price_shipping, $order->price_currency); ?></td>
                                 </tr>
+								<?php if ($order->coupon_discount > 0): ?>
+									<tr>
+										<td style="width: 70%"><?php echo trans("coupon"); ?>&nbsp;&nbsp;[<?= html_escape($order->coupon_code); ?>]</td>
+										<td style="width: 30%;padding-right: 15px;font-weight: 600;">-<?php echo price_formatted($order->coupon_discount, $order->price_currency); ?></td>
+									</tr>
+								<?php endif; ?>
                                 <tr>
                                     <?php $price_second_currency = "";
                                     $transaction = $this->transaction_model->get_transaction_by_order_id($order->id);

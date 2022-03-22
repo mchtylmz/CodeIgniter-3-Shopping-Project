@@ -3,6 +3,9 @@
 <div id="wrapper">
     <div class="container">
         <div class="row">
+			<div class="col-sm-12">
+				<?php $this->load->view("partials/_user_profile_menu", ['active' => 'profile']); ?>
+			</div>
             <div class="col-12">
                 <nav class="nav-breadcrumb" aria-label="breadcrumb">
                     <ol class="breadcrumb">

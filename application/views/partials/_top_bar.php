@@ -74,7 +74,7 @@ endforeach; ?>
 <i class="icon-arrow-down"></i>
 </a>
 <ul class="dropdown-menu">
-<?php if ($this->auth_user->role == "admin"): ?>
+<?php if (is_admin()): ?>
 <li>
 <a href="<?php echo admin_url(); ?>">
 <i class="icon-admin"></i>
@@ -82,7 +82,7 @@ endforeach; ?>
 </a>
 </li>
 <?php endif; ?>
-<?php if (is_user_vendor()): ?>
+<?php if (is_vendor()): ?>
 <li>
 <a href="<?= dashboard_url(); ?>">
 <i class="icon-dashboard"></i>

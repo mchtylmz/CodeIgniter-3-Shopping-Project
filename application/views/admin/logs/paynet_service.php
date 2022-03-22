@@ -36,7 +36,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php /*foreach ($paynet_pos as $pos): ?>
+                        <?php /*foreach ($results as $row): ?>
                             <tr>
                                 <td><?=$pos->bank_code ? $pos->bank_code:'0'?></td>
                                 <td>

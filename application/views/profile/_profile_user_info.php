@@ -10,7 +10,7 @@
                 <h1 class="username">
                     <a href="<?php echo generate_profile_url($user->slug); ?>"> <?php echo get_shop_name($user); ?></a>
                 </h1>
-                <?php if ($user->role == 'vendor' || $user->role == 'admin'): ?>
+                <?php if (is_vendor()): ?>
                     <i class="icon-verified icon-verified-member"></i>
                 <?php endif; ?>
             </div>
@@ -19,7 +19,7 @@
                     <span class="last-seen <?php echo (is_user_online($user->last_seen)) ? 'last-seen-online' : ''; ?>"> <i class="icon-circle"></i> <?php echo trans("last_seen"); ?>&nbsp;<?php echo time_ago($user->last_seen); ?></span>
                 </p>
             </div>
-            <?php if ($user->role == 'admin' || $user->role == 'vendor'): ?>
+            <?php if (is_vendor()): ?>
                 <div class="row-custom">
                     <p class="description">
                         <?php echo html_escape($user->about_me); ?>
@@ -29,7 +29,7 @@
 
             <div class="row-custom user-contact">
                 <span class="info"><?php echo trans("member_since"); ?>&nbsp;<?php echo helper_date_format($user->created_at, false); ?></span>
-                <?php if ($user->role == "admin" || $this->general_settings->hide_vendor_contact_information != 1):
+                <?php if (is_admin() || $this->general_settings->hide_vendor_contact_information != 1):
                     if (!empty($user->phone_number) && $user->show_phone == 1): ?>
                         <span class="info"><i class="icon-phone"></i>
                         <a href="javascript:void(0)" id="show_phone_number"><?php echo trans("show"); ?></a>

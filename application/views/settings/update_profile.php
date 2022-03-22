@@ -3,6 +3,9 @@
 <div id="wrapper">
     <div class="container">
         <div class="row">
+			<div class="col-sm-12">
+				<?php $this->load->view("partials/_user_profile_menu", ['active' => 'profile']); ?>
+			</div>
             <div class="col-12">
                 <nav class="nav-breadcrumb" aria-label="breadcrumb">
                     <ol class="breadcrumb">
@@ -103,7 +106,7 @@
                                 </div>
                             </div>
                         </div>
-                        <?php if ($this->auth_user->role == "admin" || $this->general_settings->hide_vendor_contact_information != 1): ?>
+                        <?php if (is_admin() || $this->general_settings->hide_vendor_contact_information != 1): ?>
                             <div class="form-group m-t-0">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" name="show_email" value="1" id="checkbox_show_email" class="custom-control-input" <?php echo ($this->auth_user->show_email == 1) ? 'checked' : ''; ?>>

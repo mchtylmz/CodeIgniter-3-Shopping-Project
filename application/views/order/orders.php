@@ -3,6 +3,10 @@
 <div id="wrapper">
 	<div class="container">
 		<div class="row">
+			<div class="col-sm-12">
+				<?php $this->load->view("partials/_user_profile_menu", ['active' => 'orders']); ?>
+			</div>
+
 			<div class="col-12">
 				<nav class="nav-breadcrumb" aria-label="breadcrumb">
 					<ol class="breadcrumb">
@@ -10,12 +14,12 @@
 						<li class="breadcrumb-item active" aria-current="page"><?php echo $title; ?></li>
 					</ol>
 				</nav>
-
 				<h1 class="page-title"><?php echo $title; ?></h1>
 			</div>
 		</div>
 
 		<div class="row">
+
 			<!--
 			<div class="col-sm-12 col-md-3">
 				<div class="row-custom">

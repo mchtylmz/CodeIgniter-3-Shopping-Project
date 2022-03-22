@@ -81,7 +81,7 @@
                         <h3 class="box-title"><?= trans("membership_plan"); ?></h3>
                     </div>
                 </div>
-                <?php if ($this->auth_user->role == "admin"): ?>
+                <?php if (is_admin()): ?>
                     <div class="box-body">
                         <div class="alert alert-info alert-large">
                             <?= trans("warning_membership_admin_role"); ?>

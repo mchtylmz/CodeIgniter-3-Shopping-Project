@@ -40,7 +40,7 @@
                                         <span class="date"><?php echo time_ago($comment->created_at); ?></span>
                                         <a href="javascript:void(0)" class="btn-reply" onclick="show_comment_box('<?php echo $comment->id; ?>');"><i class="icon-reply"></i> <?php echo trans('reply'); ?></a>
                                         <?php if ($this->auth_check):
-                                            if ($comment->user_id == $this->auth_user->id || $this->auth_user->role == "admin"): ?>
+                                            if ($comment->user_id == $this->auth_user->id || is_admin()): ?>
                                                 <a href="javascript:void(0)" class="btn-delete-comment" onclick="delete_comment('<?php echo $comment->id; ?>','<?php echo $product->id; ?>','<?php echo trans("confirm_comment"); ?>');">&nbsp;<i class="icon-trash"></i>&nbsp;<?php echo trans("delete"); ?></a>
                                             <?php endif;
                                         endif; ?>

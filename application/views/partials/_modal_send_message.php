@@ -29,7 +29,7 @@
                                                     <a href="<?php echo generate_profile_url($user->slug); ?>">
                                                       <h4 style="margin-bottom:0"><?php echo get_shop_name($user); ?></h4>
                                                     </a>
-                                                    <?php if ($user->role == "admin" || $this->general_settings->hide_vendor_contact_information != 1):
+                                                    <?php if (is_admin() || $this->general_settings->hide_vendor_contact_information != 1):
                                                         if (!empty($user->phone_number) && $user->show_phone == 1): ?>
                                                             <p class="info">
                                                                 <a href="tel:<?php echo html_escape($user->phone_number); ?>" id="phone_number"><?php echo html_escape($user->phone_number); ?></a>

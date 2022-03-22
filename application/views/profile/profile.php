@@ -25,7 +25,7 @@
             <div class="col-12">
                 <?php $this->load->view("profile/_profile_tabs"); ?>
             </div>
-            <?php if ($user->role == "admin" || $user->role == "vendor"): ?>
+            <?php if (is_vendor($user) && is_multi_vendor_active()): ?>
                 <div class="col-12">
                     <div class="profile-tab-content">
                         <div class="row">

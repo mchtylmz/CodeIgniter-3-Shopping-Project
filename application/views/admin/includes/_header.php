@@ -25,29 +25,29 @@
 
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/vendor/pace/pace.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/vendor/magnific-popup/magnific-popup.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/plugins-1.8.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/plugins-2.0.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/_all-skins.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/main-1.8.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/main-2.0.css">
     <!-- RTL -->
     <script>var directionality = "ltr";</script>
     <?php if (!empty($this->control_panel_lang)):
     if ($this->control_panel_lang->text_direction == 'rtl'):?>
-    <link href="<?php echo base_url(); ?>assets/admin/css/rtl.css" rel="stylesheet"/>
+    <link href="<?php echo base_url(); ?>assets/admin/css/rtl.css?v=2.0" rel="stylesheet"/>
         <script>directionality = "rtl";</script>
     <?php endif;
     else:
     if ($this->selected_lang->text_direction == "rtl"): ?>
-    <link href="<?php echo base_url(); ?>assets/admin/css/rtl.css" rel="stylesheet"/>
+    <link href="<?php echo base_url(); ?>assets/admin/css/rtl.css?v=2.0" rel="stylesheet"/>
         <script>directionality = "rtl";</script>
     <?php endif;
     endif; ?>
 
-    <!-- jQuery 3 -->
+    <!-- jQuery -->
     <script src="<?php echo base_url(); ?>assets/admin/js/jquery.min.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -108,9 +108,11 @@
                             </a>
 
                             <ul class="dropdown-menu  pull-right" role="menu" aria-labelledby="user-options">
-                                <li>
-                                    <a href="<?php echo dashboard_url(); ?>"><i class="fa fa-th-large"></i> <?php echo trans("dashboard"); ?></a>
-                                </li>
+								<?php if (is_vendor()): ?>
+									<li>
+										<a href="<?php echo dashboard_url(); ?>"><i class="fa fa-th-large"></i> <?php echo trans("dashboard"); ?></a>
+									</li>
+								<?php endif; ?>
                                 <li>
                                     <a href="<?php echo generate_profile_url($this->auth_user->slug); ?>"><i class="fa fa-user"></i> <?php echo trans("profile"); ?></a>
                                 </li>
@@ -677,6 +679,11 @@
         else:
         echo '.nav-home > a{color: #fff !important;}';
         endif;?>
+		<?php if (!empty($show_mt) && $show_mt): ?>
+		li-mt {
+			display: block !important;
+		}
+		<?php endif; ?>
     </style>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">

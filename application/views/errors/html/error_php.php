@@ -110,7 +110,7 @@ $install_path = $root . "install";
     <div class="wrapper">
         <div class="center">
             <h1 class="title">Modesy</h1>
-            <p class="version">Version 1.8.2</p>
+            <p class="version">Version 2.0</p>
             <a href="<?php echo $install_path; ?>" class="button">Install</a>
         </div>
     </div>

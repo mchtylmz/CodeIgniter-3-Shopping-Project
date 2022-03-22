@@ -101,7 +101,7 @@
                             <div class="col-sm-12 col-lg-4">
                                 <div class="right">
                                     <div class="row-custom m-b-15">
-                                        <?php $this->load->view('cart/coupon'); ?>
+                                        <?php $this->load->view('cart/coupon', ['cart_total' => $cart_total ?? null]); ?>
                                     </div>
                                     <div class="row-custom m-b-15">
                                         <strong><?php echo trans("subtotal"); ?><span class="float-right"><?= price_decimal($cart_total->subtotal, $cart_total->currency); ?></span></strong>

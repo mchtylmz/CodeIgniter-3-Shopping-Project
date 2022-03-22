@@ -494,7 +494,7 @@
                                                 </div>
                                             </div>
                                         <?php endif; ?>
-                                        <?php if (!empty($order->coupon_code) && !empty($order->coupon_discount)): ?>
+                                        <?php /*if (!empty($order->coupon_code) && !empty($order->coupon_discount)): ?>
                                             <div class="row">
                                                 <div class="col-6 col-left">
                                                     <?php echo trans("discount"); ?>
@@ -503,7 +503,17 @@
                                                     <strong class="font-600"><?=$order->coupon_code?> (<?php echo price_formatted($order->coupon_discount, $order->price_currency); ?>)</strong>
                                                 </div>
                                             </div>
-                                        <?php endif; ?>
+                                        <?php endif; */?>
+										<?php if ($order->coupon_discount > 0): ?>
+											<div class="row">
+												<div class="col-6 col-left">
+													<?php echo trans("coupon"); ?>&nbsp;&nbsp;[<?= html_escape($order->coupon_code); ?>]
+												</div>
+												<div class="col-6 col-right">
+													<strong class="font-600">-&nbsp;<?php echo price_formatted($order->coupon_discount, $order->price_currency); ?></strong>
+												</div>
+											</div>
+										<?php endif; ?>
                                         <?php if ($is_order_has_physical_product): ?>
                                             <div class="row">
                                                 <div class="col-6 col-left">

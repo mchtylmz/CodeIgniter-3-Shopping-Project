@@ -1,10 +1,11 @@
 <?php
 if (!empty($payment_gateway) && $payment_gateway->name_key == "paynet"):
   require_once APPPATH . "third_party/paynet/PaynetClass.php";
-  $paynet_total_amount = number_format($total_amount, 2, ',', '.');
+  // $paynet_total_amount = number_format($total_amount, 2, ',', '.');
+  $paynet_total_amount = PaynetTools::FormatWithDecimalSeperator($total_amount ?? 0);
   $customer = get_cart_customer_data();
   $conversation_id = generate_short_unique_id();
-  $callback_url = base_url() . "paynet-post?pos=paynet&payment_type=sale&lang=" . $this->selected_lang->short_form . "&conversation_id=" . $conversation_id;
+  $callback_url = lang_base_url() . "paynet-post?pos=paynet&payment_type=sale&lang=" . $this->selected_lang->short_form . "&conversation_id=" . $conversation_id;
   $script_url = 'https://pj.paynet.com.tr/public/js/paynet-custom.js';
   if ($payment_gateway->environment == 'sandbox') {
     $script_url = 'https://pts-pj.paynet.com.tr/public/js/paynet-custom.js';
@@ -37,7 +38,7 @@ if (!empty($payment_gateway) && $payment_gateway->name_key == "paynet"):
     text-shadow: 0 0 0 #000;
   }
   .card-number {
-    background-image: url('<?=base_url()?>assets/img/payment/card.png');
+    background-image: url('<?=lang_base_url()?>assets/img/payment/card.png');
     background-size: auto 50%;
     background-position: 99%;
     background-repeat: no-repeat;
@@ -51,13 +52,13 @@ if (!empty($payment_gateway) && $payment_gateway->name_key == "paynet"):
     box-sizing: border-box !important;
   }
   .visa {
-    background-image: url('<?=base_url()?>assets/img/payment/visa.png') !important;
+    background-image: url('<?=lang_base_url()?>assets/img/payment/visa.png') !important;
   }
   .mastercard {
-    background-image: url('<?=base_url()?>assets/img/payment/mastercard.png') !important;
+    background-image: url('<?=lang_base_url()?>assets/img/payment/mastercard.png') !important;
   }
   .amex {
-    background-image: url('<?=base_url()?>assets/img/payment/amex.svg') !important;
+    background-image: url('<?=lang_base_url()?>assets/img/payment/amex.svg') !important;
   }
   .instalments th {text-align: left !important;}
   .instalments td {padding-left: 5px;text-align: left !important; }
@@ -128,7 +129,7 @@ if (!empty($payment_gateway) && $payment_gateway->name_key == "paynet"):
                 <div class="col-lg-5 col-md-5 col-sm-5 col-5 mobile-2">
                   <select class="form-control auth-form-input" style="height: 42.5px !important" data-paynet="exp-year" name="year" autocomplete="off" id="exp-year" required>
                     <option value="" hidden><?=trans('card_year')?></option>
-                    <?php for ($i = 0; $i < 12; $i++) {
+                    <?php for ($i = 0; $i < 20; $i++) {
                       echo '<option value="'.date('y', strtotime('+'.$i.' years')).'">'.date('Y', strtotime('+'.$i.' years')).'</option>';
                     } ?>
                   </select>
@@ -187,7 +188,10 @@ if (!empty($payment_gateway) && $payment_gateway->name_key == "paynet"):
             icon: "warning",
             buttons: [null, mc20bt99_config.sweetalert_ok]
         });
-      }
+		$('#confirm-button').removeAttr('disabled readonly')
+      } else {
+		  $('#confirm-button').attr('disabled', 'disabled').css('opacity', '0.75');
+	  }
   });
   Paynet.events.onCreateToken(function (valid) {
       if (!valid.ok) {
@@ -196,8 +200,10 @@ if (!empty($payment_gateway) && $payment_gateway->name_key == "paynet"):
             icon: "warning",
             buttons: [null, mc20bt99_config.sweetalert_ok]
         });
-        $('#confirm-button').attr('disabled', 'disabled').css('opacity', '0.75');
-      }
+		  $('#confirm-button').removeAttr('disabled readonly')
+      } else {
+		  $('#confirm-button').attr('disabled', 'disabled').css('opacity', '0.75');
+	  }
   });
   $("#card_number").on("change paste keyup keypress keydown",function() {
     var input = document.getElementById('card_number');
@@ -221,10 +227,7 @@ if (!empty($payment_gateway) && $payment_gateway->name_key == "paynet"):
     }
   });
 
-  ///müşteri kartın ilk 6 hanesini girdiğinde oran
-///bilgisini göstermek için kullanılır.
 Paynet.events.onCheckBin(function (d) {
-
      $('.installment-table').html('');
      try {
        d.bank.installments.sort(function (current, next) {
@@ -232,10 +235,8 @@ Paynet.events.onCheckBin(function (d) {
              if (current.instalment < next.instalment) return -1;
              return 0;
        });
-
        $('#bank_logo').attr('src', d.bank.logoUrl);
        $('.bank_logo').show();
-       ///seçtiği kart bilgilerine göre oran gösterilir
        for (var i = 0; i < d.bank.installments.length; i++) {
          var input = '<tr>'
                    + '<td><div class="custom-control custom-radio">'
@@ -256,13 +257,10 @@ Paynet.events.onCheckBin(function (d) {
         $('#instalments-div').hide();
      }
 });
-///müşterinin seçtiği oranı belirleme
 $(document).on("click", "input[name=installment]:radio",function () {
     $('#installmentKey').val($(this).val());
 });
 
-  //3D Ödeme seçeneği butonuna tıklandığında, formun post edileceği adresi değiştirir
-  //  $("#checkout-form").attr("action", "DemoTransactionV2TdsInitial.php");
   $("#instalments-div").on("click", "input", function(){
     var selectedInstalment = $(this).val();
     $("#instalment").val(selectedInstalment);
@@ -299,8 +297,5 @@ $(document).on("click", "input[name=installment]:radio",function () {
     var isOnlyDigit = /^\d+$/.test(cardBin);
     return cardBin.length == 6 && isOnlyDigit;
   }
-
   </script>
-
-
 <?php endif;  // $show_paynet ?>

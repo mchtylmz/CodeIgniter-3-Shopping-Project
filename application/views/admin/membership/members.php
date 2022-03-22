@@ -24,7 +24,7 @@
                             <?php if (active_nebimv3()): ?>
                               <th width="40"><?=trans('nebim')?> ID</th>
                             <?php endif; ?>
-                            <th><?php echo trans("username"); ?></th>
+                            <th><?php echo trans("user"); ?></th>
                             <th><?php echo trans("email"); ?></th>
                             <th><?php echo trans("status"); ?></th>
                             <th><?php echo str_replace(":", "", trans("last_seen")); ?></th>
@@ -44,10 +44,12 @@
                                 </td>
                                 <?php endif; ?>
                                 <td>
-                                    <a class="table-link" style="display:flex;">
-                                        <img src="<?php echo get_user_avatar($user); ?>" alt="user" class="img-responsive" style="width: 50px;">
-                                        <span style="margin-left: 10px;"><?php echo html_escape($user->username); ?></span>
-                                    </a>
+									<div class="img-table-user">
+										<a href="<?php echo generate_profile_url($user->slug); ?>" target="_blank" class="table-link">
+											<img src="<?php echo get_user_avatar($user); ?>" alt="user" class="img-responsive" style="height: 50px;width: 50px;">
+										</a>
+									</div>
+									<a href="<?php echo generate_profile_url($user->slug); ?>" target="_blank" class="table-link"><?php echo html_escape($user->username); ?></a>
                                 </td>
                                 <td>
                                     <?php echo html_escape($user->email);
@@ -77,6 +79,11 @@
                                           <li>
                                               <a href="<?php echo admin_url(); ?>orders?user=<?php echo $user->id; ?>"><i class="fa fa-shopping-cart option-icon"></i><?php echo trans('user_orders'); ?></a>
                                           </li>
+											<li>
+												<button type="button" class="btn-list-button btn-change-role" data-toggle="modal" data-target="#modalRole<?= $user->id; ?>">
+													<i class="fa fa-user option-icon"></i><?php echo trans('change_user_role'); ?>
+												</button>
+											</li>
                                             <li>
                                                 <?php if ($user->email_status != 1): ?>
                                                     <a href="javascript:void(0)" onclick="confirm_user_email(<?php echo $user->id; ?>);"><i class="fa fa-check option-icon"></i><?php echo trans('confirm_user_email'); ?></a>
@@ -116,3 +123,40 @@
         </div>
     </div>
 </div>
+
+<?php if (!empty($users)):
+	foreach ($users as $user): ?>
+		<div id="modalRole<?= $user->id; ?>" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title"><?php echo trans('change_user_role'); ?></h4>
+					</div>
+					<?php echo form_open('membership_controller/change_user_role_post'); ?>
+					<div class="modal-body">
+						<div class="form-group">
+							<div class="row">
+								<input type="hidden" name="user_id" value="<?= $user->id; ?>">
+								<?php if (!empty($roles)):
+									foreach ($roles as $item):
+										$role_name = @parse_serialized_name_array($item->role_name, $this->selected_lang->id, true); ?>
+										<div class="col-sm-6 m-b-15">
+											<input type="radio" name="role_id" value="<?= $item->id; ?>" id="role_<?= $item->id; ?>" class="square-purple" <?= $user->role_id == $item->id ? 'checked' : ''; ?> required>&nbsp;&nbsp;
+											<label for="role_<?= $item->id; ?>" class="option-label cursor-pointer"><?= html_escape($role_name); ?></label>
+										</div>
+									<?php endforeach;
+								endif; ?>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-success"><?php echo trans('save_changes'); ?></button>
+						<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo trans('close'); ?></button>
+					</div>
+					<?php echo form_close(); ?>
+				</div>
+			</div>
+		</div>
+	<?php endforeach;
+endif; ?>

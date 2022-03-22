@@ -160,8 +160,8 @@
 <a href="javascript:void(0)" class="scrollup"><i class="icon-arrow-up"></i></a>
 <script src="<?= base_url(); ?>assets/js/jquery-3.5.1.min.js"></script>
 <script src="<?= base_url(); ?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="<?= base_url(); ?>assets/js/plugins-1.8.js"></script>
-<script src="<?= base_url(); ?>assets/js/script-1.8.js?v=0.1<?=time()?>"></script>
+<script src="<?= base_url(); ?>assets/js/plugins-2.0.js"></script>
+<script src="<?= base_url(); ?>assets/js/script-2.0.js?v=0.1<?=time()?>"></script>
 <script src="<?=base_url()?>assets/credit-card/jquery.creditCardValidator.js" charset="utf-8"></script>
 <?php if (active_story() && isset($home_stories) && $home_stories): ?>
 <script src="<?=base_url()?>assets/story/dist/zuck.min.js?v=0.2"></script>

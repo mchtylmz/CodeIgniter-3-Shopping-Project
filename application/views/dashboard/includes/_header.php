@@ -23,7 +23,7 @@
 
     <link rel="stylesheet" href="<?= base_url(); ?>assets/admin/vendor/pace/pace.min.css">
     <link rel="stylesheet" href="<?= base_url(); ?>assets/admin/vendor/magnific-popup/magnific-popup.css">
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/admin/css/plugins-1.8.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/admin/css/plugins-2.0.css">
 
     <!-- Theme style -->
     <link rel="stylesheet" href="<?= base_url(); ?>assets/admin/css/AdminLTE.min.css">
@@ -33,9 +33,10 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendor/file-uploader/css/styles.css"/>
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendor/file-manager/file-manager.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/admin/css/main-1.8.css">
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/admin/css/dashboard-1.8.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/admin/css/main-2.0.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/admin/css/dashboard-2.0.css">
     <style>body, h1, h2, h3, h4, h5, h6 {
+        <?php echo $this->fonts->dashboard_font_family; ?>
         <?php echo $this->fonts->dashboard_font_family; ?>
         }
     </style>
@@ -99,7 +100,7 @@
                             </a>
 
                             <ul class="dropdown-menu  pull-right" role="menu" aria-labelledby="user-options">
-                                <?php if ($this->auth_user->role == "admin"): ?>
+                                <?php if (is_admin()): ?>
                                     <li>
                                         <a href="<?php echo admin_url(); ?>"><i class="icon-admin"></i> <?php echo trans("admin_panel"); ?></a>
                                     </li>
@@ -156,7 +157,7 @@
                         </a>
                     </li>
                     <?php /*
-                    <?php if ($this->auth_user->role == "admin" || ($this->auth_user->role != "admin" && $this->general_settings->vendor_bulk_product_upload == 1)): ?>
+                    <?php if (is_admin() || ($this->auth_user->role != "admin" && $this->general_settings->vendor_bulk_product_upload == 1)): ?>
                         <li class="nav-bulk-product-upload">
                             <a href="<?= generate_dash_url("bulk_product_upload"); ?>">
                                 <i class="fa fa-cloud-upload"></i>
@@ -263,7 +264,14 @@
                             </li>
                         <?php endif; ?>
                     <?php endif; ?>
-
+					<?php if ($this->is_sale_active): ?>
+						<li class="nav-refund-requests">
+							<a href="<?= generate_dash_url("coupons"); ?>">
+								<i class="fa fa-ticket"></i>
+								<span><?php echo trans("coupons"); ?></span>
+							</a>
+						</li>
+					<?php endif; ?>
                     <?php if (!active_nebimv3() || $this->auth_user->id == 1): ?>
                       <li class="header"><?php echo trans("settings"); ?></li>
                       <li class="nav-shop-settings">

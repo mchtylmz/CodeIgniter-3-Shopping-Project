@@ -2,6 +2,7 @@
 <?php $this->load->view("profile/_cover_image"); ?>
     <div id="wrapper">
         <div class="container">
+			<?php /*
             <?php if (empty($user->cover_image)): ?>
                 <div class="row">
                     <div class="col-12">
@@ -18,15 +19,15 @@
                 <div class="col-12">
                     <div class="profile-page-top">
                         <!-- load profile details -->
-                        <?php $this->load->view("profile/_profile_user_info"); ?>
+                        <?php $this->load->view("profile/_profile_user_info", ['active' => 'wishlist']); ?>
                     </div>
                 </div>
             </div>
-
+			*/ ?>
             <div class="row">
-                <div class="col-12">
-                    <?php $this->load->view("profile/_profile_tabs"); ?>
-                </div>
+				<div class="col-sm-12">
+					<?php $this->load->view("partials/_user_profile_menu", ['active' => 'wishlist']); ?>
+				</div>
                 <div class="col-12">
                     <div class="profile-tab-content">
                         <div class="row row-product-items row-product">

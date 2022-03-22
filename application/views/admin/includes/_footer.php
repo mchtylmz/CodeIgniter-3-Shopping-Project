@@ -5,7 +5,7 @@
 <!-- /.content-wrapper -->
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
-        <b style="font-weight: 600;">Version</b> 1.8.2
+        <b style="font-weight: 600;">Version</b> 2.0
     </div>
     <strong style="font-weight: 600;"><?php echo html_escape($this->settings->copyright); ?></strong>
 </footer>
@@ -35,11 +35,11 @@
 <!-- Tagsinput js -->
 <script src="<?php echo base_url(); ?>assets/admin/vendor/tagsinput/jquery.tagsinput.min.js"></script>
 <!-- Plugins JS-->
-<script src="<?php echo base_url(); ?>assets/admin/js/plugins-1.8.js"></script>
+<script src="<?php echo base_url(); ?>assets/admin/js/plugins-2.0.js"></script>
 
 <script src="<?php echo base_url(); ?>assets/admin/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 <!-- Custom js -->
-<script src="<?php echo base_url(); ?>assets/admin/js/main-1.8.js"></script>
+<script src="<?php echo base_url(); ?>assets/admin/js/main-2.0.js"></script>
 <!--tinyMCE-->
 <script src="<?php echo base_url(); ?>assets/vendor/tinymce/jquery.tinymce.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/vendor/tinymce/tinymce.min.js"></script>
